@@ -610,7 +610,7 @@ body{
 #listings{padding:0 22px 22px!important;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 #listings>div{margin-bottom:0!important;border-radius:20px!important;background:rgba(255,255,255,.045)!important;border-color:rgba(255,255,255,.075)!important;}
 #listings>div>div:first-child{height:160px!important;}
-#listings .mkt-contact{display:none!important;}
+#listings .mkt-contact{display:inline-flex!important;}
 #m-sell{padding:0 22px 22px!important;}
 .photo-zone,#sell-zone{border-radius:22px!important;background:rgba(255,255,255,.035)!important;border-color:rgba(246,197,139,.24)!important;}
 .save-btn,.empty-btn{
@@ -808,6 +808,31 @@ body{
   .card-actions>div:first-child{bottom:-50px;grid-template-columns:62px 84px;gap:32px!important;}
   .card-btn-nope{width:62px;height:62px;}
   .card-btn-like{width:84px;height:84px;}
+}
+
+/* Market mobile fix */
+#listings{align-content:start;}
+#listings .mkt-card{cursor:pointer;min-height:0;transition:transform .12s ease,border-color .12s ease,box-shadow .12s ease;}
+#listings .mkt-card:active{transform:scale(.985);}
+#listings .mkt-contact{display:inline-flex!important;align-items:center;justify-content:center;min-height:34px;}
+@media(max-width:480px){
+  #v-market{padding-bottom:112px;}
+  #v-market>div:first-child{padding:18px 20px 0!important;}
+  #v-market h2{font-size:31px!important;margin-bottom:14px!important;}
+  #mkt-cats{padding:0 20px 12px!important;gap:8px!important;}
+  #listings{padding:0 20px 24px!important;grid-template-columns:1fr 1fr!important;gap:12px!important;}
+  #listings .mkt-card{border-radius:22px!important;overflow:hidden!important;background:rgba(255,255,255,.055)!important;border:1px solid rgba(255,255,255,.08)!important;box-shadow:0 16px 40px rgba(0,0,0,.28)!important;}
+  #listings .mkt-img{height:126px!important;background:linear-gradient(180deg,#1a1a1a,#121212)!important;}
+  #listings .mkt-img span{font-size:54px!important;}
+  #listings .mkt-body{padding:12px 12px 13px!important;}
+  #listings .mkt-title{font-size:25px!important;line-height:1!important;margin-bottom:6px!important;}
+  #listings .mkt-price{font-size:22px!important;margin-bottom:8px!important;}
+  #listings .mkt-tags{margin-bottom:8px!important;display:flex!important;gap:5px!important;flex-wrap:wrap!important;}
+  #listings .mkt-tag{font-size:11px!important;line-height:1.1!important;padding:5px 8px!important;border-radius:9px!important;}
+  #listings .mkt-desc{font-size:13px!important;line-height:1.35!important;color:rgba(255,255,255,.62)!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;min-height:35px!important;}
+  #listings .mkt-footer{padding-top:10px!important;margin-top:10px!important;gap:8px!important;align-items:center!important;}
+  #listings .mkt-owner{font-size:12px!important;color:rgba(255,255,255,.48)!important;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  #listings .mkt-contact{font-size:12px!important;padding:8px 10px!important;border-radius:12px!important;white-space:nowrap!important;}
 }
 </style>
 </head>
@@ -1195,6 +1220,31 @@ body{
   border-radius:8px;
 }
 
+
+/* Market mobile fix */
+#listings{align-content:start;}
+#listings .mkt-card{cursor:pointer;min-height:0;transition:transform .12s ease,border-color .12s ease,box-shadow .12s ease;}
+#listings .mkt-card:active{transform:scale(.985);}
+#listings .mkt-contact{display:inline-flex!important;align-items:center;justify-content:center;min-height:34px;}
+@media(max-width:480px){
+  #v-market{padding-bottom:112px;}
+  #v-market>div:first-child{padding:18px 20px 0!important;}
+  #v-market h2{font-size:31px!important;margin-bottom:14px!important;}
+  #mkt-cats{padding:0 20px 12px!important;gap:8px!important;}
+  #listings{padding:0 20px 24px!important;grid-template-columns:1fr 1fr!important;gap:12px!important;}
+  #listings .mkt-card{border-radius:22px!important;overflow:hidden!important;background:rgba(255,255,255,.055)!important;border:1px solid rgba(255,255,255,.08)!important;box-shadow:0 16px 40px rgba(0,0,0,.28)!important;}
+  #listings .mkt-img{height:126px!important;background:linear-gradient(180deg,#1a1a1a,#121212)!important;}
+  #listings .mkt-img span{font-size:54px!important;}
+  #listings .mkt-body{padding:12px 12px 13px!important;}
+  #listings .mkt-title{font-size:25px!important;line-height:1!important;margin-bottom:6px!important;}
+  #listings .mkt-price{font-size:22px!important;margin-bottom:8px!important;}
+  #listings .mkt-tags{margin-bottom:8px!important;display:flex!important;gap:5px!important;flex-wrap:wrap!important;}
+  #listings .mkt-tag{font-size:11px!important;line-height:1.1!important;padding:5px 8px!important;border-radius:9px!important;}
+  #listings .mkt-desc{font-size:13px!important;line-height:1.35!important;color:rgba(255,255,255,.62)!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;min-height:35px!important;}
+  #listings .mkt-footer{padding-top:10px!important;margin-top:10px!important;gap:8px!important;align-items:center!important;}
+  #listings .mkt-owner{font-size:12px!important;color:rgba(255,255,255,.48)!important;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  #listings .mkt-contact{font-size:12px!important;padding:8px 10px!important;border-radius:12px!important;white-space:nowrap!important;}
+}
 </style>
 
 
@@ -1499,16 +1549,24 @@ function openDetail(a, fromMatches) {
   }
   pdImg.style.background = "linear-gradient(135deg,"+a.color+"22,#1a1a1a)";
   el("pd-name").textContent = a.name;
-  el("pd-age").textContent = a.age+" | "+(a.gender==="Hona"?"♀":"♂");
-  el("pd-bio").textContent = a.bio;
-  el("pd-owner-nm").textContent = a.owner;
-  el("pd-owner-loc").textContent = a.location;
-  el("pd-tags").innerHTML = [a.species,a.breed,a.gender,a.location].map(function(t){ return '<span class="pd-tag">'+t+'</span>'; }).join("");
+  if (a.market) {
+    el("pd-age").textContent = (a.price || 0).toLocaleString("sv") + " kr · " + a.age;
+    el("pd-bio").textContent = a.bio;
+    el("pd-owner-nm").textContent = a.owner;
+    el("pd-owner-loc").textContent = a.location;
+    el("pd-tags").innerHTML = [a.species,a.breed,a.age,a.location].filter(Boolean).map(function(t){ return '<span class="pd-tag">'+t+'</span>'; }).join("");
+  } else {
+    el("pd-age").textContent = a.age+" | "+(a.gender==="Hona"?"♀":"♂");
+    el("pd-bio").textContent = a.bio;
+    el("pd-owner-nm").textContent = a.owner;
+    el("pd-owner-loc").textContent = a.location;
+    el("pd-tags").innerHTML = [a.species,a.breed,a.gender,a.location].map(function(t){ return '<span class="pd-tag">'+t+'</span>'; }).join("");
+  }
 
   var sec=el("pd-sec"), pri=el("pd-pri");
   if (fromMatches) {
     sec.textContent="← Tillbaka"; sec.onclick=function(){ closeDetail(); };
-    pri.textContent="💬 Chatt"; pri.onclick=function(){ closeDetail(); openChat(a); };
+    pri.textContent=a.market?"Skriv till säljaren":"💬 Chatt"; pri.onclick=function(){ closeDetail(); openChat(a); };
   } else {
     sec.textContent="✕ Nope"; sec.onclick=function(){ closeDetail(); doSwipe("left"); };
     pri.textContent="♥ Gilla"; pri.onclick=function(){ closeDetail(); doSwipe("right"); };
@@ -1818,65 +1876,97 @@ function switchMkt(tab) {
   if (tab === "buy") renderListings();
 }
 
+function marketAnimal(l) {
+  return {
+    id: "mkt-" + l.id,
+    name: l.name,
+    species: l.species,
+    breed: l.breed,
+    age: l.age,
+    city: l.city,
+    location: l.city,
+    price: l.price,
+    bio: l.desc || "",
+    owner: l.owner,
+    photo: l.photo,
+    emoji: l.emoji || "🐾",
+    gender: "Annons",
+    market: true,
+    color: "#e8b87a"
+  };
+}
+
+function contactSeller(l) {
+  var a = marketAnimal(l);
+  openChat(a);
+}
+
+function openListing(l) {
+  openDetail(marketAnimal(l), true);
+}
+
 function renderListings() {
   var box = el("listings");
   if (!box) return;
   var list = mktCat === "Alla" ? MKT_LISTINGS : MKT_LISTINGS.filter(function(l) { return l.species === mktCat; });
   if (!list.length) {
-    box.innerHTML = "<div style='text-align:center;padding:40px;color:#555;font-size:14px'>Inga annonser i den här kategorin.</div>";
+    box.innerHTML = "<div style='grid-column:1/-1;text-align:center;padding:40px;color:#777;font-size:14px'>Inga annonser i den här kategorin.</div>";
     return;
   }
   box.innerHTML = "";
   for (var i = 0; i < list.length; i++) {
-    var l = list[i];
-    var card = document.createElement("div");
-    card.style.cssText = "background:#161616;border-radius:16px;border:1px solid #252525;overflow:hidden;margin-bottom:14px";
+    (function(l){
+      var card = document.createElement("div");
+      card.className = "mkt-card";
+      card.style.cssText = "background:#161616;border-radius:16px;border:1px solid #252525;overflow:hidden;margin-bottom:14px";
+      card.setAttribute("role","button");
+      card.setAttribute("tabindex","0");
 
-    // Image
-    var imgDiv = document.createElement("div");
-    imgDiv.style.cssText = "height:200px;background:#1a1a1a;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center";
-    if (l.photo) {
-      var img = document.createElement("img");
-      img.src = l.photo;
-      img.style.cssText = "position:absolute;inset:0;width:100%;height:100%;object-fit:cover";
-      imgDiv.appendChild(img);
-    } else {
-      var em = document.createElement("span");
-      em.style.cssText = "font-size:72px;line-height:1;position:relative;z-index:1";
-      em.textContent = l.emoji;
-      imgDiv.appendChild(em);
-    }
-    var badgeL = document.createElement("div");
-    badgeL.style.cssText = "position:absolute;top:12px;left:12px;background:rgba(0,0,0,.65);backdrop-filter:blur(8px);border-radius:12px;padding:4px 12px;font-size:11px;font-weight:600;color:white";
-    badgeL.textContent = l.city;
-    var badgeR = document.createElement("div");
-    badgeR.style.cssText = "position:absolute;top:12px;right:12px;background:rgba(0,0,0,.65);backdrop-filter:blur(8px);border-radius:12px;padding:4px 12px;font-size:11px;font-weight:700;color:#e8b87a";
-    badgeR.textContent = l.species;
-    imgDiv.appendChild(badgeL);
-    imgDiv.appendChild(badgeR);
-    card.appendChild(imgDiv);
+      var imgDiv = document.createElement("div");
+      imgDiv.className = "mkt-img";
+      imgDiv.style.cssText = "height:200px;background:#1a1a1a;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center";
+      if (l.photo) {
+        var img = document.createElement("img");
+        img.src = l.photo;
+        img.style.cssText = "position:absolute;inset:0;width:100%;height:100%;object-fit:cover";
+        imgDiv.appendChild(img);
+      } else {
+        var em = document.createElement("span");
+        em.style.cssText = "font-size:72px;line-height:1;position:relative;z-index:1";
+        em.textContent = l.emoji;
+        imgDiv.appendChild(em);
+      }
+      var badgeL = document.createElement("div");
+      badgeL.style.cssText = "position:absolute;top:12px;left:12px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);border-radius:12px;padding:4px 12px;font-size:11px;font-weight:700;color:white";
+      badgeL.textContent = l.city;
+      var badgeR = document.createElement("div");
+      badgeR.style.cssText = "position:absolute;top:12px;right:12px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);border-radius:12px;padding:4px 12px;font-size:11px;font-weight:800;color:#e8b87a";
+      badgeR.textContent = l.species;
+      imgDiv.appendChild(badgeL);
+      imgDiv.appendChild(badgeR);
+      card.appendChild(imgDiv);
 
-    // Body
-    var body = document.createElement("div");
-    body.style.cssText = "padding:14px 16px 16px";
-    body.innerHTML =
-      "<div style='font-family:Playfair Display,serif;font-size:20px;font-weight:700;color:white;margin-bottom:4px'>" + l.name + "</div>" +
-      "<div style='font-size:20px;font-weight:800;color:#e8b87a;margin-bottom:10px'>" + l.price.toLocaleString("sv") + " kr</div>" +
-      "<div style='margin-bottom:10px'><span style='display:inline-block;font-size:11px;background:#222;color:#888;border-radius:6px;padding:3px 8px;font-weight:600;margin-right:6px'>" + l.breed + "</span><span style='display:inline-block;font-size:11px;background:#222;color:#888;border-radius:6px;padding:3px 8px;font-weight:600'>" + l.age + "</span></div>" +
-      "<div style='font-size:13px;color:rgba(255,255,255,.45);line-height:1.6;margin-bottom:12px'>" + l.desc + "</div>" +
-      "<div style='border-top:1px solid #222;padding-top:12px;display:flex;align-items:center;justify-content:space-between'>" +
-        "<span style='font-size:12px;color:#555'>" + l.owner + "</span>" +
-        "<button data-owner='" + l.owner + "' class='mkt-contact' style='border:none;background:#e8b87a;color:#0a0a0a;border-radius:10px;padding:8px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif'>Kontakta</button>" +
-      "</div>";
-    card.appendChild(body);
-    box.appendChild(card);
+      var body = document.createElement("div");
+      body.className = "mkt-body";
+      body.style.cssText = "padding:14px 16px 16px";
+      body.innerHTML =
+        "<div class='mkt-title' style='font-family:Playfair Display,serif;font-size:20px;font-weight:700;color:white;margin-bottom:4px'>" + l.name + "</div>" +
+        "<div class='mkt-price' style='font-size:20px;font-weight:800;color:#e8b87a;margin-bottom:10px'>" + l.price.toLocaleString("sv") + " kr</div>" +
+        "<div class='mkt-tags' style='margin-bottom:10px'><span class='mkt-tag' style='display:inline-block;font-size:11px;background:#222;color:#aaa;border-radius:8px;padding:4px 8px;font-weight:700;margin-right:6px'>" + l.breed + "</span><span class='mkt-tag' style='display:inline-block;font-size:11px;background:#222;color:#aaa;border-radius:8px;padding:4px 8px;font-weight:700'>" + l.age + "</span></div>" +
+        "<div class='mkt-desc' style='font-size:13px;color:rgba(255,255,255,.52);line-height:1.55;margin-bottom:12px'>" + l.desc + "</div>" +
+        "<div class='mkt-footer' style='border-top:1px solid #222;padding-top:12px;display:flex;align-items:center;justify-content:space-between'>" +
+          "<span class='mkt-owner' style='font-size:12px;color:#777'>" + l.owner + "</span>" +
+          "<button type='button' data-id='" + l.id + "' class='mkt-contact' style='border:none;background:#e8b87a;color:#0a0a0a;border-radius:10px;padding:8px 13px;font-size:13px;font-weight:800;cursor:pointer;font-family:Inter,sans-serif'>Skriv</button>" +
+        "</div>";
+      card.appendChild(body);
+
+      card.addEventListener("click", function(){ openListing(l); });
+      card.addEventListener("keydown", function(e){ if(e.key === "Enter") openListing(l); });
+      var contact = card.querySelector(".mkt-contact");
+      if (contact) contact.addEventListener("click", function(e){ e.stopPropagation(); contactSeller(l); });
+      box.appendChild(card);
+    })(list[i]);
   }
-
-  box.querySelectorAll(".mkt-contact").forEach(function(btn) {
-    btn.addEventListener("click", function() {
-      alert("Kontaktar " + this.getAttribute("data-owner") + " – chatt kommer med Firebase!");
-    });
-  });
 }
 
 function postListing() {
