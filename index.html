@@ -592,11 +592,11 @@ body{font-family:'Inter',sans-serif;color:var(--text);display:flex;flex-directio
 </div>
 
 
-<!-- ONBOARDING -->
-<div id="onboarding" style="position:fixed;inset:0;z-index:1000;background:#0a0a0a;display:flex;flex-direction:column;">
+<!-- ONBOARDING removed -->
+<div id="onboarding" style="display:none!important;">
 
   <!-- Slides -->
-  <div id="ob-slides" style="flex:1;overflow:hidden;position:relative;">
+  <div id="ob-slides" style="flex:1;overflow-y:auto;overflow-x:hidden;position:relative;-webkit-overflow-scrolling:touch;">
 
     <!-- Slide 1 - Welcome -->
     <div class="ob-slide active" id="ob-1">
@@ -690,7 +690,7 @@ body{font-family:'Inter',sans-serif;color:var(--text);display:flex;flex-directio
 </div>
 
 <style>
-.ob-slide{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:flex-start;padding:40px 28px 24px;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.ob-slide{position:relative;min-height:100%;display:none;flex-direction:column;align-items:center;justify-content:flex-start;padding:40px 28px 24px;overflow:visible;}
 .ob-slide.active{display:flex;}
 .ob-bg{position:absolute;inset:0;pointer-events:none;}
 .ob-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;width:100%;min-height:100%;}
@@ -704,6 +704,14 @@ body{font-family:'Inter',sans-serif;color:var(--text);display:flex;flex-directio
 .ob-tip span{font-size:16px;font-weight:800;flex-shrink:0;}
 .ob-dot{width:8px;height:8px;border-radius:50%;background:#2a2a2a;transition:all .3s;}
 .ob-dot.active{width:24px;border-radius:4px;background:#e8b87a;}
+@media(max-height:720px){
+  .ob-slide{padding-top:22px;padding-bottom:22px;}
+  .ob-content{justify-content:flex-start;min-height:auto;}
+  .ob-logo,.ob-icon-big{margin-bottom:14px;}
+  .ob-title{font-size:28px;margin-bottom:10px;}
+  .ob-sub{font-size:14px;margin-bottom:14px;line-height:1.55;}
+  .ob-emoji-row{font-size:26px;margin-top:0;}
+}
 
 /* Match celebration animation */
 @keyframes matchPop {
@@ -1220,7 +1228,8 @@ function obGo(page) {
 }
 
 function obDone() {
-  el("onboarding").style.display = "none";
+  var onboarding = el("onboarding");
+  if(onboarding) onboarding.style.display = "none";
 }
 
 function obSetup() {
