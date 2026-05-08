@@ -465,6 +465,7 @@ body{
 .premium-filter-btn{
   width:58px;display:flex;align-items:center;justify-content:center;color:#f6c58b;
 }
+.premium-filter-top{width:58px;height:58px;min-height:58px;border-radius:50%;padding:0;flex-shrink:0;}
 .ftag{
   min-height:44px;border-radius:999px;padding:0 20px;
   background:rgba(255,255,255,.055);color:rgba(255,255,255,.72);
@@ -502,7 +503,7 @@ body{
   background:rgba(10,10,10,.68);
   color:#f6c58b;
 }
-.badge-loc{top:18px;left:18px;color:#f6c58b;}
+.badge-loc{display:none!important;}
 .badge-sp{display:none;}
 .card-info{padding:18px 22px 22px;}
 .card-name{font-size:48px;line-height:1;color:#fff;text-shadow:0 3px 18px rgba(0,0,0,.55);}
@@ -631,13 +632,14 @@ body{
   .hdr{padding:calc(env(safe-area-inset-top,0px) + 13px) 24px 10px;}
   .logo{font-size:30px;}
   .logo svg{width:31px;height:31px;}
-  .hdr-icon{width:50px;height:50px;border-radius:25px;}
+  .hdr-icon{display:none;}
   .filter-row{padding:10px 20px 12px;gap:10px;}
   .ftag{min-height:42px;padding:0 18px;font-size:14px;}
   .premium-loc-row{padding:0 20px 10px;gap:12px;}
   .premium-loc-pill{min-height:52px;padding:0 18px;font-size:16px;min-width:0;}
   .premium-loc-pill span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .premium-filter-btn{width:58px;min-width:58px;min-height:52px;}
+  .premium-filter-top{width:58px;min-width:58px;height:58px;min-height:58px;}
   #v-swipe{padding:0 18px;min-height:0;overflow:visible;}
   .card-area{
     flex:0 0 min(55dvh,475px);
@@ -650,7 +652,7 @@ body{
   }
   .card{overflow:visible;border-radius:31px;}
   .card-img,.card-grad{border-radius:31px;overflow:hidden;}
-  .badge-loc{top:20px;left:20px;font-size:15px;padding:8px 14px;}
+  .badge-loc{display:none!important;}
   .card-front::after{right:26px;top:32px;width:56px;height:56px;font-size:34px;}
   .card-info{padding:0 24px 26px;}
   .card-name{font-size:44px;}
@@ -724,14 +726,12 @@ body{
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.72 12.06a.5.5 0 0 0 .56 0C12.95 21.5 20 15.4 20 10a8 8 0 0 0-8-8z"/></svg>
       <span id="dist-lbl">50 km</span>
     </button>
-    <div class="hdr-icon" id="filter-open-btn">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-linecap="round">
-        <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="12" y1="18" x2="20" y2="18"/>
-        <circle cx="4" cy="6" r="2.2" fill="rgba(255,255,255,.6)" stroke="none"/>
-        <circle cx="8" cy="12" r="2.2" fill="rgba(255,255,255,.6)" stroke="none"/>
-        <circle cx="12" cy="18" r="2.2" fill="rgba(255,255,255,.6)" stroke="none"/>
+    <button class="premium-filter-btn premium-filter-top" id="premium-filter-btn" type="button" aria-label="Filter" onclick="var p=document.getElementById('dist-panel');if(p)p.classList.add('open');">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="17" x2="20" y2="17"/>
+        <circle cx="9" cy="7" r="2.5"/><circle cx="15" cy="17" r="2.5"/>
       </svg>
-    </div>
+    </button>
   </div>
 </div>
 
@@ -745,20 +745,6 @@ body{
   <button class="ftag" data-f="Jakthund">Jakthund</button>
   <button class="ftag" data-f="Katt">Katt</button>
   <button class="ftag" data-f="Häst">Häst</button>
-</div>
-
-<div class="premium-loc-row">
-  <button class="premium-loc-pill" id="premium-dist-btn" type="button" onclick="var p=document.getElementById('dist-panel');if(p)p.classList.add('open');">
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.72 12.06a.5.5 0 0 0 .56 0C12.95 21.5 20 15.4 20 10a8 8 0 0 0-8-8z"/></svg>
-    <span id="premium-loc-label">Stockholm, Sverige</span>
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-  </button>
-  <button class="premium-filter-btn" id="premium-filter-btn" type="button" aria-label="Filter" onclick="var p=document.getElementById('dist-panel');if(p)p.classList.add('open');">
-    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-      <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="17" x2="20" y2="17"/>
-      <circle cx="9" cy="7" r="2.5"/><circle cx="15" cy="17" r="2.5"/>
-    </svg>
-  </button>
 </div>
 
 <!-- CONTENT -->
