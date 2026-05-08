@@ -701,93 +701,114 @@ body{
   .nav{padding-top:8px;padding-bottom:9px;}
 }
 
-/* Final premium polish */
+/* Final premium Tinder polish */
 .hdr{padding-top:calc(env(safe-area-inset-top,0px) + 16px);padding-bottom:8px;}
 .filter-row{padding-top:8px;padding-bottom:8px;}
+#v-swipe{justify-content:flex-start;}
 .card-area{
-  flex:0 0 clamp(470px,64dvh,650px);
-  height:clamp(470px,64dvh,650px);
+  flex:0 0 clamp(470px,66dvh,690px);
+  height:clamp(470px,66dvh,690px);
   margin-bottom:88px;
+  padding-top:4px;
 }
 .card{
   border-radius:34px;
-  border-color:rgba(246,197,139,.48);
-  box-shadow:0 26px 80px rgba(0,0,0,.76),0 0 0 1px rgba(255,255,255,.035),0 0 34px rgba(246,197,139,.16);
+  border-color:rgba(246,197,139,.5);
+  background:#0b0b0b;
+  box-shadow:0 30px 90px rgba(0,0,0,.82),0 0 0 1px rgba(255,255,255,.035),0 0 38px rgba(246,197,139,.18);
 }
 .card-img,.card-grad{border-radius:34px;}
+.card-img img{filter:saturate(1.05) contrast(1.03);}
 .card-grad{
   background:
-    linear-gradient(to top,rgba(3,3,3,.98) 0%,rgba(3,3,3,.74) 24%,rgba(3,3,3,.2) 56%,rgba(0,0,0,.02) 100%),
+    linear-gradient(to top,rgba(2,2,2,.98) 0%,rgba(2,2,2,.78) 23%,rgba(3,3,3,.34) 47%,rgba(0,0,0,.04) 100%),
     radial-gradient(circle at 50% 18%,rgba(255,218,166,.08),transparent 38%);
 }
 .card-front::after{
-  right:24px;top:28px;width:64px;height:64px;font-size:38px;
-  border-color:rgba(246,197,139,.34);
-  box-shadow:0 18px 42px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.1),0 0 24px rgba(246,197,139,.12);
+  right:24px;top:28px;width:66px;height:66px;font-size:39px;
+  border-color:rgba(246,197,139,.36);
+  background:rgba(14,14,14,.74);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:0 18px 42px rgba(0,0,0,.54),inset 0 1px 0 rgba(255,255,255,.1),0 0 24px rgba(246,197,139,.13);
 }
-.card-info{padding:0 26px 32px;}
-.card-name{font-size:54px;letter-spacing:-1.3px;}
-.card-age,.card-gender-sym,.card-sep{font-size:18px;}
-.card-sub{font-size:18px;line-height:1.35;max-width:330px;color:rgba(255,255,255,.82);}
+.card-info{padding:0 28px 36px;}
+.card-name{font-size:58px;letter-spacing:0;line-height:.95;}
+.card-age,.card-gender-sym,.card-sep{font-size:19px;}
+.card-sub{font-size:18px;line-height:1.36;max-width:350px;color:rgba(255,255,255,.84);}
 .card-profile-btn{
-  padding:14px 22px;border-radius:999px;
-  background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.045));
+  padding:14px 23px;border-radius:999px;
+  background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.05));
   border-color:rgba(255,255,255,.14);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 12px 30px rgba(0,0,0,.34);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 12px 30px rgba(0,0,0,.36);
 }
 .card-actions>div:first-child{
-  bottom:-68px;
-  grid-template-columns:76px 104px;
+  bottom:-58px;
+  grid-template-columns:76px 106px;
   gap:42px!important;
+  padding:0 10px;
+}
+.card-btn{
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
 }
 .card-btn-nope{width:76px;height:76px;}
 .card-btn-like{
-  width:104px;height:104px;
-  background:radial-gradient(circle at 32% 24%,#fff0cc 0%,#ffd098 34%,#d28a45 100%);
-  box-shadow:0 24px 54px rgba(237,168,93,.46),inset 0 2px 0 rgba(255,255,255,.38),0 0 32px rgba(246,197,139,.2);
+  width:106px;height:106px;
+  background:radial-gradient(circle at 32% 24%,#fff3d6 0%,#ffd198 34%,#d58c46 100%);
+  box-shadow:0 26px 60px rgba(237,168,93,.48),inset 0 2px 0 rgba(255,255,255,.4),0 0 34px rgba(246,197,139,.22);
 }
 .card-btn svg{width:26px;height:26px;}
-.card-btn-like svg{width:32px;height:32px;}
+.card-btn-like svg{width:34px;height:34px;}
 
 @media(max-width:480px){
   .hdr{padding:calc(env(safe-area-inset-top,0px) + 10px) 24px 8px;}
   .filter-row{padding:8px 20px 8px;}
-  .ftag{min-height:40px;}
+  .ftag{min-height:42px;padding:0 19px;font-size:15px;}
   #v-swipe{padding:0 18px;}
   .card-area{
-    flex:0 0 min(65dvh,590px);
-    height:min(65dvh,590px);
-    min-height:510px;
-    padding-top:6px;
-    margin-bottom:86px;
+    flex:0 0 min(63dvh,570px);
+    height:min(63dvh,570px);
+    min-height:500px;
+    padding-top:4px;
+    margin-bottom:88px;
   }
   .card,.card-img,.card-grad{border-radius:34px;}
-  .card-info{padding:0 26px 32px;}
-  .card-name{font-size:54px;}
-  .card-sub{font-size:18px;line-height:1.34;max-width:330px;-webkit-line-clamp:2;}
+  .card-info{padding:0 28px 34px;}
+  .card-name{font-size:56px;}
+  .card-age,.card-gender-sym,.card-sep{font-size:18px;}
+  .card-sub{font-size:17px;line-height:1.34;max-width:330px;-webkit-line-clamp:2;}
   .card-actions>div:first-child{
-    bottom:-66px;
-    grid-template-columns:74px 102px;
-    gap:42px!important;
+    bottom:-60px;
+    grid-template-columns:72px 100px;
+    gap:40px!important;
   }
-  .card-btn-nope{width:74px;height:74px;}
-  .card-btn-like{width:102px;height:102px;}
+  .card-btn-nope{width:72px;height:72px;}
+  .card-btn-like{width:100px;height:100px;}
   .nav{bottom:max(4px,env(safe-area-inset-bottom,0px));}
 }
 @media(max-height:760px) and (max-width:480px){
+  .hdr{padding-top:calc(env(safe-area-inset-top,0px) + 8px);}
+  .filter-row{padding-top:6px;padding-bottom:7px;}
   .card-area{
-    flex-basis:min(61dvh,530px);
-    height:min(61dvh,530px);
-    min-height:455px;
-    margin-bottom:80px;
+    flex-basis:min(58dvh,500px);
+    height:min(58dvh,500px);
+    min-height:430px;
+    margin-bottom:82px;
   }
-  .card-name{font-size:48px;}
+  .card-name{font-size:50px;}
   .card-sub{font-size:16px;}
-  .card-actions>div:first-child{bottom:-60px;grid-template-columns:68px 92px;gap:38px!important;}
+  .card-actions>div:first-child{bottom:-56px;grid-template-columns:68px 92px;gap:36px!important;}
   .card-btn-nope{width:68px;height:68px;}
   .card-btn-like{width:92px;height:92px;}
+  .nav{padding-top:8px;padding-bottom:9px;}
 }
-
+@media(max-height:690px) and (max-width:480px){
+  .card-area{flex-basis:min(54dvh,450px);height:min(54dvh,450px);min-height:380px;margin-bottom:74px;}
+  .card-name{font-size:44px;}
+  .card-sub{font-size:15px;}
+  .card-actions>div:first-child{bottom:-50px;grid-template-columns:62px 84px;gap:32px!important;}
+  .card-btn-nope{width:62px;height:62px;}
+  .card-btn-like{width:84px;height:84px;}
+}
 </style>
 </head>
 <body>
@@ -1884,7 +1905,7 @@ function postListing() {
 // ─── INIT ────────────────────────────────────────────────────────────────────
 showView("swipe");
 obSetup();
-if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(function(){});
+if ("serviceWorker" in navigator) { navigator.serviceWorker.getRegistrations().then(function(regs){ regs.forEach(function(reg){ reg.unregister(); }); }).catch(function(){}); } if ("caches" in window) { caches.keys().then(function(keys){ keys.forEach(function(key){ caches.delete(key); }); }).catch(function(){}); }
 </script>
 
 </body>
