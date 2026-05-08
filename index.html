@@ -834,6 +834,157 @@ body{
   #listings .mkt-owner{font-size:12px!important;color:rgba(255,255,255,.48)!important;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   #listings .mkt-contact{font-size:12px!important;padding:8px 10px!important;border-radius:12px!important;white-space:nowrap!important;}
 }
+
+/* Market listing action polish */
+#market-sheet{position:fixed;inset:0;z-index:900;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.76);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
+#market-sheet.open{display:flex;}
+.market-sheet-card{width:100%;max-width:430px;max-height:92dvh;overflow:auto;background:linear-gradient(180deg,#181818,#0c0c0c);border:1px solid rgba(232,184,122,.18);border-radius:30px 30px 0 0;box-shadow:0 -24px 80px rgba(0,0,0,.7);}
+.market-sheet-img{height:280px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#151515;font-size:86px;}
+.market-sheet-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.market-sheet-img:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(12,12,12,.95),rgba(12,12,12,.1) 58%,transparent);}
+.market-sheet-body{padding:22px 22px calc(env(safe-area-inset-bottom,0px) + 24px);}
+.market-sheet-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:12px;}
+.market-sheet-title{font-family:'Playfair Display',serif;font-size:38px;line-height:1;font-weight:900;color:#fff;}
+.market-sheet-price{font-size:28px;font-weight:900;color:#e8b87a;white-space:nowrap;}
+.market-sheet-tags{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 16px;}
+.market-sheet-tag{border-radius:999px;background:rgba(232,184,122,.12);color:#f1c58f;border:1px solid rgba(232,184,122,.18);padding:7px 12px;font-size:12px;font-weight:800;}
+.market-sheet-desc{font-size:15px;line-height:1.6;color:rgba(255,255,255,.72);margin-bottom:18px;}
+.market-sheet-owner{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.045);border-radius:18px;padding:14px;margin-bottom:16px;}
+.market-sheet-actions{display:grid;grid-template-columns:1fr 1.4fr;gap:12px;}
+.market-sheet-close,.market-sheet-chat{border:none;border-radius:17px;padding:15px 12px;font-family:'Inter',sans-serif;font-size:15px;font-weight:900;cursor:pointer;}
+.market-sheet-close{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.1);}
+.market-sheet-chat{background:linear-gradient(135deg,#ffd8a6,#d8914c);color:#15100b;box-shadow:0 18px 38px rgba(237,168,93,.3);}
+.mkt-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
+.mkt-info,.mkt-contact{min-height:38px!important;border-radius:13px!important;font-size:12px!important;font-weight:900!important;font-family:'Inter',sans-serif!important;cursor:pointer!important;}
+.mkt-info{border:1px solid rgba(255,255,255,.1)!important;background:rgba(255,255,255,.07)!important;color:#fff!important;}
+</style>
+
+<style id="petmatch-final-design-v2">
+/* Final design pass: premium Tinder-style app */
+html,body{background:#050505!important;}
+body{background:radial-gradient(circle at 50% -10%,rgba(232,184,122,.14),transparent 34%),linear-gradient(180deg,#080808 0%,#050505 100%)!important;}
+.hdr{border-bottom:0!important;background:linear-gradient(180deg,rgba(10,10,10,.98),rgba(10,10,10,.78) 72%,rgba(10,10,10,0))!important;padding-left:24px!important;padding-right:24px!important;}
+.logo{font-size:32px!important;gap:13px!important;text-shadow:0 0 24px rgba(232,184,122,.2);}
+.logo svg{width:38px!important;height:38px!important;}
+.hdr-btn{display:none!important;}
+.premium-filter-top{width:62px!important;height:62px!important;min-width:62px!important;min-height:62px!important;border-radius:50%!important;background:linear-gradient(145deg,rgba(255,255,255,.105),rgba(255,255,255,.035))!important;border:1px solid rgba(255,255,255,.09)!important;box-shadow:0 18px 42px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08)!important;}
+.filter-row{border-bottom:0!important;background:transparent!important;padding:10px 22px 14px!important;gap:12px!important;}
+.ftag{min-height:48px!important;padding:0 22px!important;border:1px solid rgba(255,255,255,.07)!important;background:rgba(255,255,255,.055)!important;border-radius:999px!important;color:rgba(255,255,255,.72)!important;font-size:15px!important;font-weight:850!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;}
+.ftag.on{background:linear-gradient(135deg,#ffd7a0,#e9ad64)!important;color:#130d08!important;border-color:transparent!important;box-shadow:0 14px 32px rgba(232,184,122,.28)!important;}
+.content{overflow:visible!important;}
+#v-swipe{padding:0 18px!important;overflow:visible!important;justify-content:flex-start!important;}
+.card-area{flex:0 0 clamp(500px,68dvh,700px)!important;height:clamp(500px,68dvh,700px)!important;max-height:none!important;margin-bottom:92px!important;padding-top:4px!important;overflow:visible!important;}
+.card{border-radius:36px!important;background:#0d0d0d!important;border:1px solid rgba(232,184,122,.42)!important;box-shadow:0 30px 90px rgba(0,0,0,.82),0 0 0 1px rgba(255,255,255,.035),0 0 48px rgba(232,184,122,.14)!important;overflow:visible!important;}
+.card-img,.card-grad{border-radius:36px!important;overflow:hidden!important;}
+.card-img{font-size:126px!important;background:radial-gradient(circle at 50% 38%,rgba(232,184,122,.18),rgba(255,255,255,.035) 34%,rgba(8,8,8,.95) 72%)!important;}
+.card-img img{filter:saturate(1.08) contrast(1.04)!important;}
+.card-grad{background:linear-gradient(to top,rgba(3,3,3,.99) 0%,rgba(3,3,3,.8) 24%,rgba(3,3,3,.28) 50%,rgba(0,0,0,.03) 100%)!important;}
+.card-front::after{right:26px!important;top:30px!important;width:68px!important;height:68px!important;font-size:40px!important;background:rgba(13,13,13,.72)!important;border:1px solid rgba(232,184,122,.36)!important;backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important;box-shadow:0 18px 42px rgba(0,0,0,.5),0 0 24px rgba(232,184,122,.12)!important;}
+.card-info{padding:0 28px 38px!important;}
+.card-name{font-size:60px!important;line-height:.94!important;letter-spacing:0!important;text-shadow:0 5px 28px rgba(0,0,0,.7)!important;}
+.card-age,.card-gender-sym,.card-sep{font-size:19px!important;color:rgba(255,255,255,.86)!important;}
+.card-sub{font-size:18px!important;line-height:1.36!important;color:rgba(255,255,255,.82)!important;max-width:360px!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
+.card-profile-btn{padding:15px 24px!important;border-radius:999px!important;background:linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.05))!important;border:1px solid rgba(255,255,255,.14)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 16px 34px rgba(0,0,0,.36)!important;font-size:15px!important;font-weight:850!important;}
+.card-actions>div:first-child{bottom:-60px!important;grid-template-columns:76px 108px!important;gap:44px!important;z-index:35!important;}
+.card-btn-nope{width:76px!important;height:76px!important;background:rgba(18,18,18,.76)!important;border:1px solid rgba(255,255,255,.11)!important;backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important;box-shadow:0 20px 44px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08)!important;}
+.card-btn-like{width:108px!important;height:108px!important;border:none!important;background:radial-gradient(circle at 32% 24%,#fff4d8 0%,#ffd29a 36%,#d68c45 100%)!important;box-shadow:0 28px 66px rgba(237,168,93,.5),inset 0 2px 0 rgba(255,255,255,.42),0 0 36px rgba(232,184,122,.24)!important;}
+.card-btn-like svg{width:35px!important;height:35px!important;}
+.card-btn-nope svg{width:28px!important;height:28px!important;}
+.nav{left:20px!important;right:20px!important;bottom:max(8px,env(safe-area-inset-bottom,0px))!important;max-width:390px!important;border-radius:31px!important;background:rgba(18,18,18,.78)!important;border:1px solid rgba(255,255,255,.08)!important;box-shadow:0 22px 60px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.055)!important;backdrop-filter:blur(24px)!important;-webkit-backdrop-filter:blur(24px)!important;}
+.nbtn{font-size:11px!important;font-weight:800!important;color:rgba(255,255,255,.48)!important;}
+.nbtn.on{color:#f5c58d!important;}
+.nbtn.on::after{height:4px!important;width:24px!important;border-radius:999px!important;background:#f5c58d!important;box-shadow:0 0 16px rgba(245,197,141,.58)!important;}
+#v-market{background:transparent!important;padding-bottom:118px!important;overflow:hidden!important;}
+#v-market>div:first-child{padding:22px 22px 0!important;}
+#v-market h2{font-size:34px!important;line-height:1!important;margin-bottom:18px!important;color:#fff!important;letter-spacing:0!important;}
+#v-market>div:first-child>div{border-radius:22px!important;padding:5px!important;background:rgba(255,255,255,.045)!important;border:1px solid rgba(255,255,255,.08)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important;}
+#mt-buy,#mt-sell{min-height:48px!important;border-radius:17px!important;font-size:15px!important;font-weight:900!important;}
+#mkt-cats{padding:0 22px 14px!important;gap:10px!important;}
+#mkt-cats button{min-height:42px!important;padding:0 18px!important;border-radius:999px!important;font-size:14px!important;font-weight:850!important;}
+#listings{padding:0 22px 26px!important;display:grid!important;grid-template-columns:1fr!important;gap:16px!important;align-content:start!important;}
+#listings .mkt-card{border-radius:26px!important;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035))!important;border:1px solid rgba(255,255,255,.09)!important;box-shadow:0 20px 50px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.05)!important;overflow:hidden!important;}
+#listings .mkt-img{height:220px!important;background:radial-gradient(circle at 50% 40%,rgba(232,184,122,.16),rgba(255,255,255,.04) 35%,rgba(15,15,15,1) 74%)!important;}
+#listings .mkt-img span{font-size:84px!important;}
+#listings .mkt-body{padding:18px 18px 19px!important;}
+#listings .mkt-title{font-size:34px!important;line-height:.98!important;margin-bottom:8px!important;}
+#listings .mkt-price{font-size:30px!important;line-height:1!important;color:#f3c489!important;margin-bottom:13px!important;}
+#listings .mkt-tags{display:flex!important;gap:7px!important;flex-wrap:wrap!important;margin-bottom:12px!important;}
+#listings .mkt-tag{font-size:12px!important;padding:7px 10px!important;border-radius:999px!important;background:rgba(255,255,255,.09)!important;color:rgba(255,255,255,.75)!important;}
+#listings .mkt-desc{font-size:15px!important;line-height:1.48!important;color:rgba(255,255,255,.7)!important;min-height:0!important;-webkit-line-clamp:2!important;}
+#listings .mkt-footer{margin-top:14px!important;padding-top:14px!important;border-top:1px solid rgba(255,255,255,.07)!important;}
+#listings .mkt-owner{font-size:13px!important;color:rgba(255,255,255,.52)!important;font-weight:750!important;}
+#listings .mkt-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important;margin-top:14px!important;}
+#listings .mkt-info,#listings .mkt-contact{min-height:46px!important;border-radius:16px!important;font-size:14px!important;font-weight:900!important;}
+#listings .mkt-info{background:rgba(255,255,255,.075)!important;color:#fff!important;border:1px solid rgba(255,255,255,.1)!important;}
+#listings .mkt-contact{background:linear-gradient(135deg,#ffd8a6,#d8914c)!important;color:#15100b!important;box-shadow:0 14px 30px rgba(237,168,93,.25)!important;}
+#v-profile{padding:22px 22px 126px!important;}
+#v-profile h2{font-size:34px!important;line-height:1!important;margin-bottom:18px!important;color:#fff!important;}
+.pcard{border-radius:26px!important;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035))!important;border:1px solid rgba(255,255,255,.09)!important;box-shadow:0 20px 48px rgba(0,0,0,.34)!important;}
+.finput,.photo-zone,#sell-zone{border-radius:18px!important;background:rgba(0,0,0,.28)!important;border-color:rgba(255,255,255,.1)!important;}
+.save-btn{min-height:52px!important;border-radius:18px!important;font-weight:900!important;}
+.pd-sheet{border-radius:32px 32px 0 0!important;background:linear-gradient(180deg,#181818,#0b0b0b)!important;border:1px solid rgba(232,184,122,.16)!important;}
+.pd-img{height:420px!important;border-radius:32px 32px 0 0!important;}
+.pd-body{padding:22px 22px calc(env(safe-area-inset-bottom,0px) + 28px)!important;}
+.pd-tag{border-radius:999px!important;background:rgba(232,184,122,.12)!important;color:#f1c58f!important;border-color:rgba(232,184,122,.18)!important;font-weight:850!important;}
+.pd-owner{border-radius:20px!important;background:rgba(255,255,255,.045)!important;border-color:rgba(255,255,255,.08)!important;}
+.pd-btn-sec,.pd-btn-pri{border-radius:18px!important;min-height:52px!important;font-weight:900!important;}
+@media(max-width:480px){
+  .card-area{flex:0 0 min(64dvh,590px)!important;height:min(64dvh,590px)!important;min-height:500px!important;margin-bottom:92px!important;}
+  .card-name{font-size:58px!important;}
+  .card-sub{font-size:17px!important;}
+}
+@media(max-height:760px) and (max-width:480px){
+  .logo{font-size:28px!important;}
+  .filter-row{padding-top:6px!important;padding-bottom:10px!important;}
+  .ftag{min-height:42px!important;font-size:14px!important;padding:0 18px!important;}
+  .card-area{flex-basis:min(57dvh,510px)!important;height:min(57dvh,510px)!important;min-height:420px!important;margin-bottom:82px!important;}
+  .card-name{font-size:50px!important;}
+  .card-actions>div:first-child{bottom:-56px!important;grid-template-columns:68px 94px!important;gap:36px!important;}
+  .card-btn-nope{width:68px!important;height:68px!important;}
+  .card-btn-like{width:94px!important;height:94px!important;}
+}
+</style>
+
+<style id="petmatch-match-animation-v1">
+/* Big Tinder-style match animation */
+#ov-match{
+  z-index:1200!important;
+  background:
+    radial-gradient(circle at 50% 22%,rgba(255,215,166,.28),transparent 30%),
+    radial-gradient(circle at 20% 78%,rgba(255,80,116,.24),transparent 30%),
+    linear-gradient(155deg,#110707 0%,#0a0a0a 42%,#221307 100%)!important;
+  overflow:hidden!important;
+}
+#ov-match:before,#ov-match:after{content:"";position:absolute;border-radius:50%;pointer-events:none;filter:blur(3px);}
+#ov-match:before{width:440px;height:440px;left:50%;top:18%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(232,184,122,.22),transparent 62%);animation:matchGlow 2.4s ease-in-out infinite;}
+#ov-match:after{inset:0;background:linear-gradient(transparent,rgba(0,0,0,.42));}
+#ov-match.open .match-inner{animation:matchCardIn .72s cubic-bezier(.16,1,.3,1) both!important;position:relative;z-index:2;}
+#ov-match.open .match-photos{animation:matchPhotosIn .76s .12s cubic-bezier(.16,1,.3,1) both!important;}
+#ov-match.open .match-title{animation:matchTitleIn .8s .18s cubic-bezier(.16,1,.3,1) both!important;}
+.match-inner{max-width:410px!important;padding:0 24px!important;}
+.match-photos{height:150px!important;align-items:center!important;justify-content:center!important;gap:0!important;margin-bottom:20px!important;position:relative!important;}
+.match-photo{width:128px!important;height:128px!important;border-radius:36px!important;border:2px solid rgba(255,216,166,.75)!important;background:rgba(255,255,255,.07)!important;box-shadow:0 22px 60px rgba(0,0,0,.5),0 0 32px rgba(232,184,122,.28)!important;font-size:58px!important;}
+.match-photo:first-child{transform:rotate(-10deg) translateX(16px)!important;z-index:1;}
+.match-photo:last-child{transform:rotate(10deg) translateX(-16px)!important;z-index:2;}
+.match-title{font-family:'Playfair Display',serif!important;font-size:62px!important;line-height:.86!important;font-style:italic!important;font-weight:900!important;color:#fff!important;text-shadow:0 8px 34px rgba(0,0,0,.56),0 0 34px rgba(232,184,122,.25)!important;margin-bottom:14px!important;}
+.match-title span{display:block;color:#f3c489!important;}
+.match-sub{font-size:16px!important;line-height:1.45!important;color:rgba(255,255,255,.76)!important;margin-bottom:26px!important;}
+.match-inp-row{background:rgba(255,255,255,.11)!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:20px!important;padding:14px 16px!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)!important;}
+.match-inp{font-size:15px!important;font-weight:650!important;}
+.match-send{color:#f3c489!important;font-size:14px!important;}
+.match-qrs{gap:9px!important;margin-bottom:24px!important;}
+.match-qr{border-radius:999px!important;background:rgba(255,255,255,.08)!important;border:1px solid rgba(255,255,255,.12)!important;color:#fff!important;font-weight:800!important;padding:9px 14px!important;}
+.match-btn-pri{border-radius:18px!important;background:linear-gradient(135deg,#ffd8a6,#d8914c)!important;color:#15100b!important;min-height:54px!important;font-weight:950!important;box-shadow:0 18px 44px rgba(237,168,93,.32)!important;}
+.match-btn-sec{color:rgba(255,255,255,.58)!important;font-weight:800!important;padding:12px!important;}
+.heart-burst{font-size:32px!important;text-shadow:0 8px 24px rgba(0,0,0,.4);animation:heartFloatBig 1.55s ease-out forwards!important;z-index:3!important;}
+.match-confetti{position:absolute;width:9px;height:18px;border-radius:999px;background:#f3c489;z-index:3;animation:matchConfetti 1.3s ease-out forwards;}
+@keyframes matchGlow{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(.95)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}}
+@keyframes matchCardIn{0%{opacity:0;transform:translateY(40px) scale(.92)}60%{opacity:1;transform:translateY(-8px) scale(1.03)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes matchPhotosIn{0%{opacity:0;transform:scale(.72) rotate(-4deg)}70%{opacity:1;transform:scale(1.08) rotate(2deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes matchTitleIn{0%{opacity:0;transform:scale(.8) translateY(20px)}70%{opacity:1;transform:scale(1.06) translateY(-5px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes heartFloatBig{0%{opacity:0;transform:translateY(20px) scale(.6) rotate(0)}20%{opacity:1}100%{opacity:0;transform:translateY(-180px) scale(1.35) rotate(24deg)}}
+@keyframes matchConfetti{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:0;transform:translateY(170px) rotate(280deg)}}
+@media(max-width:480px){.match-title{font-size:58px!important}.match-photo{width:120px!important;height:120px!important}.match-photos{height:142px!important}}
 </style>
 </head>
 <body>
@@ -1016,6 +1167,27 @@ body{
     <svg viewBox="0 0 24 24"><path d="M6 7h12l1 14H5L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
     <span>Köp/Sälj</span>
   </button>
+</div>
+<!-- MATCH OVERLAY -->
+<div id="ov-match" aria-hidden="true">
+  <div class="match-inner">
+    <div class="match-photos">
+      <div class="match-photo" id="mo-me">🐾</div>
+      <div class="match-photo" id="mo-photo">🐾</div>
+    </div>
+    <div class="match-title">Det är <span>en match!</span></div>
+    <div class="match-sub" id="mo-sub">Ni gillar varandra. Skriv första meddelandet nu.</div>
+    <div class="match-inp-row">
+      <input class="match-inp" id="mo-inp" placeholder="Skriv ett meddelande..." />
+      <button class="match-send" id="mo-send" type="button">Skicka</button>
+    </div>
+    <div class="match-qrs">
+      <button class="match-qr" type="button" data-msg="Hej! Vad fin profil!">Hej 👋</button>
+      <button class="match-qr" type="button" data-msg="Vill du boka en träff?">Boka träff?</button>
+    </div>
+    <button class="match-btn-pri" id="mo-profile" type="button">Visa profilen</button>
+    <button class="match-btn-sec" id="mo-skip" type="button">Fortsätt swipa</button>
+  </div>
 </div>
 
 <!-- DISTANCE / LOCATION PANEL -->
@@ -1245,6 +1417,29 @@ body{
   #listings .mkt-owner{font-size:12px!important;color:rgba(255,255,255,.48)!important;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   #listings .mkt-contact{font-size:12px!important;padding:8px 10px!important;border-radius:12px!important;white-space:nowrap!important;}
 }
+
+/* Market listing action polish */
+#market-sheet{position:fixed;inset:0;z-index:900;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.76);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
+#market-sheet.open{display:flex;}
+.market-sheet-card{width:100%;max-width:430px;max-height:92dvh;overflow:auto;background:linear-gradient(180deg,#181818,#0c0c0c);border:1px solid rgba(232,184,122,.18);border-radius:30px 30px 0 0;box-shadow:0 -24px 80px rgba(0,0,0,.7);}
+.market-sheet-img{height:280px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#151515;font-size:86px;}
+.market-sheet-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.market-sheet-img:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(12,12,12,.95),rgba(12,12,12,.1) 58%,transparent);}
+.market-sheet-body{padding:22px 22px calc(env(safe-area-inset-bottom,0px) + 24px);}
+.market-sheet-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:12px;}
+.market-sheet-title{font-family:'Playfair Display',serif;font-size:38px;line-height:1;font-weight:900;color:#fff;}
+.market-sheet-price{font-size:28px;font-weight:900;color:#e8b87a;white-space:nowrap;}
+.market-sheet-tags{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 16px;}
+.market-sheet-tag{border-radius:999px;background:rgba(232,184,122,.12);color:#f1c58f;border:1px solid rgba(232,184,122,.18);padding:7px 12px;font-size:12px;font-weight:800;}
+.market-sheet-desc{font-size:15px;line-height:1.6;color:rgba(255,255,255,.72);margin-bottom:18px;}
+.market-sheet-owner{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.045);border-radius:18px;padding:14px;margin-bottom:16px;}
+.market-sheet-actions{display:grid;grid-template-columns:1fr 1.4fr;gap:12px;}
+.market-sheet-close,.market-sheet-chat{border:none;border-radius:17px;padding:15px 12px;font-family:'Inter',sans-serif;font-size:15px;font-weight:900;cursor:pointer;}
+.market-sheet-close{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.1);}
+.market-sheet-chat{background:linear-gradient(135deg,#ffd8a6,#d8914c);color:#15100b;box-shadow:0 18px 38px rgba(237,168,93,.3);}
+.mkt-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
+.mkt-info,.mkt-contact{min-height:38px!important;border-radius:13px!important;font-size:12px!important;font-weight:900!important;font-family:'Inter',sans-serif!important;cursor:pointer!important;}
+.mkt-info{border:1px solid rgba(255,255,255,.1)!important;background:rgba(255,255,255,.07)!important;color:#fff!important;}
 </style>
 
 
@@ -1397,7 +1592,7 @@ function doSwipe(dir) {
 
   setTimeout(function() {
     var already = S.matches.find(function(m){ return m.id===a.id; });
-    if (dir==="right" && !already && Math.random()>0.4) {
+    if (dir==="right" && !already) {
       S.matches.push(a);
       S.pendingMatch = a;
       showMatchOverlay(a);
@@ -1593,13 +1788,35 @@ function burstHearts() {
   });
 }
 
+function burstConfetti() {
+  var ov = el("ov-match");
+  if (!ov) return;
+  for (var i = 0; i < 22; i++) {
+    var c = document.createElement("span");
+    c.className = "match-confetti";
+    c.style.left = (8 + Math.random() * 84) + "%";
+    c.style.top = (-8 - Math.random() * 18) + "%";
+    c.style.background = ["#f3c489", "#ffffff", "#ff6b8a", "#e8b87a"][i % 4];
+    c.style.animationDelay = (Math.random() * 0.35) + "s";
+    c.style.transform = "rotate(" + (Math.random() * 140) + "deg)";
+    ov.appendChild(c);
+    setTimeout((function(x){ return function(){ x.remove(); }; })(c), 1700);
+  }
+}
 function showMatchOverlay(a) {
+  var mine = el("mo-me");
   var mph = el("mo-photo");
-  mph.style.background = "linear-gradient(135deg,"+a.color+"44,#1a4a1a)";
+  if (mine) mine.innerHTML = S.myPhoto ? '<img src="'+S.myPhoto+'"/>' : "🐾";
+  mph.style.background = "linear-gradient(135deg,"+a.color+"44,#181818)";
   mph.innerHTML = a.photo ? '<img src="'+a.photo+'"/>' : a.emoji;
-  el("mo-sub").textContent = "Du och "+a.owner+" har matchat!";
+  var title = document.querySelector("#ov-match .match-title");
+  if (title) title.innerHTML = "Det är <span>en match!</span>";
+  el("mo-sub").textContent = "Du och "+a.owner+" gillar varandra. Skriv första meddelandet nu.";
   el("mo-inp").value = "";
-  el("ov-match").classList.add("open"); setTimeout(burstHearts, 300);
+  var ov = el("ov-match");
+  ov.classList.add("open");
+  setTimeout(burstHearts, 180);
+  setTimeout(burstConfetti, 260);
 }
 function closeMatch() {
   el("ov-match").classList.remove("open");
@@ -1896,13 +2113,56 @@ function marketAnimal(l) {
   };
 }
 
+function findListing(id) {
+  id = String(id);
+  for (var i = 0; i < MKT_LISTINGS.length; i++) {
+    if (String(MKT_LISTINGS[i].id) === id) return MKT_LISTINGS[i];
+  }
+  return null;
+}
+
 function contactSeller(l) {
   var a = marketAnimal(l);
+  closeMarketSheet();
   openChat(a);
 }
 
+function contactSellerById(id) {
+  var l = findListing(id);
+  if (l) contactSeller(l);
+}
+
+function closeMarketSheet() {
+  var old = el("market-sheet");
+  if (old) old.classList.remove("open");
+}
+
 function openListing(l) {
-  openDetail(marketAnimal(l), true);
+  var sheet = el("market-sheet");
+  if (!sheet) {
+    sheet = document.createElement("div");
+    sheet.id = "market-sheet";
+    document.body.appendChild(sheet);
+  }
+  var media = l.photo ? '<img src="'+l.photo+'" alt="'+l.name+'"/>' : '<span style="position:relative;z-index:1">'+(l.emoji || "🐾")+'</span>';
+  sheet.innerHTML =
+    '<div style="position:absolute;inset:0" onclick="closeMarketSheet()"></div>' +
+    '<div class="market-sheet-card" style="position:relative;z-index:1">' +
+      '<div class="market-sheet-img">'+media+'</div>' +
+      '<div class="market-sheet-body">' +
+        '<div class="market-sheet-top"><div><div class="market-sheet-title">'+l.name+'</div><div style="margin-top:7px;color:rgba(255,255,255,.58);font-weight:700">'+l.city+' · '+l.owner+'</div></div><div class="market-sheet-price">'+l.price.toLocaleString("sv")+' kr</div></div>' +
+        '<div class="market-sheet-tags"><span class="market-sheet-tag">'+l.species+'</span><span class="market-sheet-tag">'+l.breed+'</span><span class="market-sheet-tag">'+l.age+'</span></div>' +
+        '<div class="market-sheet-desc">'+(l.desc || "Ingen beskrivning ännu.")+'</div>' +
+        '<div class="market-sheet-owner"><div><div style="font-weight:900;color:#fff">'+l.owner+'</div><div style="font-size:12px;color:rgba(255,255,255,.5);margin-top:2px">Säljare · '+l.city+'</div></div><div style="color:#e8b87a;font-weight:900">Verifierad</div></div>' +
+        '<div class="market-sheet-actions"><button class="market-sheet-close" onclick="closeMarketSheet()">Stäng</button><button class="market-sheet-chat" onclick="contactSellerById('+l.id+')">Skriv till säljaren</button></div>' +
+      '</div>' +
+    '</div>';
+  sheet.classList.add("open");
+}
+
+function openListingById(id) {
+  var l = findListing(id);
+  if (l) openListing(l);
 }
 
 function renderListings() {
@@ -1921,6 +2181,7 @@ function renderListings() {
       card.style.cssText = "background:#161616;border-radius:16px;border:1px solid #252525;overflow:hidden;margin-bottom:14px";
       card.setAttribute("role","button");
       card.setAttribute("tabindex","0");
+      card.setAttribute("onclick","openListingById("+l.id+")");
 
       var imgDiv = document.createElement("div");
       imgDiv.className = "mkt-img";
@@ -1956,7 +2217,10 @@ function renderListings() {
         "<div class='mkt-desc' style='font-size:13px;color:rgba(255,255,255,.52);line-height:1.55;margin-bottom:12px'>" + l.desc + "</div>" +
         "<div class='mkt-footer' style='border-top:1px solid #222;padding-top:12px;display:flex;align-items:center;justify-content:space-between'>" +
           "<span class='mkt-owner' style='font-size:12px;color:#777'>" + l.owner + "</span>" +
-          "<button type='button' data-id='" + l.id + "' class='mkt-contact' style='border:none;background:#e8b87a;color:#0a0a0a;border-radius:10px;padding:8px 13px;font-size:13px;font-weight:800;cursor:pointer;font-family:Inter,sans-serif'>Skriv</button>" +
+        "</div>" +
+        "<div class='mkt-actions'>" +
+          "<button type='button' data-id='" + l.id + "' class='mkt-info' onclick='event.stopPropagation();openListingById(" + l.id + ")'>Info</button>" +
+          "<button type='button' data-id='" + l.id + "' class='mkt-contact' onclick='event.stopPropagation();contactSellerById(" + l.id + ")' style='border:none;background:#e8b87a;color:#0a0a0a'>Skriv</button>" +
         "</div>";
       card.appendChild(body);
 
