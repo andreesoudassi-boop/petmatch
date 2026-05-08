@@ -535,7 +535,24 @@ body{
   box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
 }
 .card-profile-btn#cb-share{display:none;}
-.safety-banner{display:none;}
+.safety-banner,#safety-banner{display:none!important;}
+.content{overflow:visible;}
+#v-swipe{min-height:0;overflow:visible;}
+.card-area{
+  flex:0 0 clamp(340px,54dvh,500px);
+  height:clamp(340px,54dvh,500px);
+  max-height:none;
+  margin-bottom:78px;
+  overflow:visible;
+}
+.card{overflow:visible;}
+.card-img,.card-grad{border-radius:32px;overflow:hidden;}
+.card-actions>div:first-child{
+  position:absolute;left:50%;bottom:-60px;transform:translateX(-50%);
+  grid-template-columns:66px 84px;gap:32px!important;z-index:30;
+}
+.card-btn-nope{width:66px;height:66px;}
+.card-btn-like{width:84px;height:84px;}
 .nav{
   position:relative;margin:8px 20px calc(env(safe-area-inset-bottom,0px) + 18px);
   padding:9px 6px;background:rgba(22,22,22,.72);
@@ -720,12 +737,12 @@ body{
 </div>
 
 <div class="premium-loc-row">
-  <button class="premium-loc-pill" id="premium-dist-btn">
+  <button class="premium-loc-pill" id="premium-dist-btn" type="button" onclick="var p=document.getElementById('dist-panel');if(p)p.classList.add('open');">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.72 12.06a.5.5 0 0 0 .56 0C12.95 21.5 20 15.4 20 10a8 8 0 0 0-8-8z"/></svg>
     <span id="premium-loc-label">Stockholm, Sverige</span>
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
   </button>
-  <button class="premium-filter-btn" id="premium-filter-btn" aria-label="Filter">
+  <button class="premium-filter-btn" id="premium-filter-btn" type="button" aria-label="Filter" onclick="var p=document.getElementById('dist-panel');if(p)p.classList.add('open');">
     <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
       <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="17" x2="20" y2="17"/>
       <circle cx="9" cy="7" r="2.5"/><circle cx="15" cy="17" r="2.5"/>
@@ -739,7 +756,7 @@ body{
   <!-- SWIPE VIEW -->
   <div class="view active" id="v-swipe">
     <div class="card-area" id="card-area"></div>
-    <div class="safety-banner" id="safety-banner">
+    <div class="safety-banner" id="safety-banner" hidden style="display:none!important">
       <div class="safety-icon">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#e8b87a" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
       </div>
