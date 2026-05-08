@@ -1608,6 +1608,15 @@ body{background:radial-gradient(circle at 50% -10%,rgba(232,184,122,.14),transpa
 }
 </style>
 
+<style id="pawly-like-lift-v1">
+/* Raise only the like button a little */
+.card-actions .card-btn-like{transform:translateY(-10px)!important;}
+.card-actions .card-btn-like:active{transform:translateY(-10px) scale(.92)!important;}
+@media(max-height:760px) and (max-width:480px){
+  .card-actions .card-btn-like{transform:translateY(-8px)!important;}
+  .card-actions .card-btn-like:active{transform:translateY(-8px) scale(.92)!important;}
+}
+</style>
 <script>
 // ─── DATA ───────────────────────────────────────────────────────────────────
 var ANIMALS = [
@@ -1734,6 +1743,10 @@ function renderSwipe() {
   if (shareBtn) shareBtn.addEventListener("click", function(e){ e.stopPropagation(); shareAnimal(a); });
   el("cb-profile").addEventListener("click", function(e){ e.stopPropagation(); openDetail(a, false); });
 
+  card.addEventListener("click", function(e){
+    if(e.target.closest && e.target.closest("button")) return;
+    openDetail(a, false);
+  });
   initTouchSwipe(card, a);
 }
 
@@ -1763,11 +1776,11 @@ function doSwipe(dir) {
 }
 
 function initTouchSwipe(card, a) {
-  var sx=0, sy=0, drag=false, raf=null;
-  card.addEventListener("touchstart", function(e){ if(e.target.closest && e.target.closest("button")){ drag=false; return; } sx=e.touches[0].clientX; sy=e.touches[0].clientY; drag=true; card.style.transition="none"; }, {passive:true});
+  var sx=0, sy=0, drag=false, raf=null, moved=false;
+  card.addEventListener("touchstart", function(e){ if(e.target.closest && e.target.closest("button")){ drag=false; return; } sx=e.touches[0].clientX; sy=e.touches[0].clientY; drag=true; moved=false; card.style.transition="none"; }, {passive:true});
   card.addEventListener("touchmove", function(e){
     if (!drag) return;
-    var dx=e.touches[0].clientX-sx, dy=e.touches[0].clientY-sy;
+    var dx=e.touches[0].clientX-sx, dy=e.touches[0].clientY-sy; if(Math.abs(dx)>10 || Math.abs(dy)>10) moved=true;
     if (raf) cancelAnimationFrame(raf);
     raf = requestAnimationFrame(function(){
       card.style.transform = "translateX("+dx+"px) translateY("+(dy*.3)+"px) rotate("+(dx*.06)+"deg)";
@@ -1782,6 +1795,7 @@ function initTouchSwipe(card, a) {
     var dx=e.changedTouches[0].clientX-sx;
     var hl=el("h-like"), hn=el("h-nope");
     if (hl) hl.style.opacity="0"; if (hn) hn.style.opacity="0";
+    if (!moved && Math.abs(dx)<12) { openDetail(a, false); return; }
     if (dx>80) { doSwipe("right"); return; }
     if (dx<-80) { doSwipe("left"); return; }
     card.style.transition="transform .3s cubic-bezier(.175,.885,.32,1.275)";
