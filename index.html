@@ -1561,27 +1561,39 @@ body{background:radial-gradient(circle at 50% -10%,rgba(232,184,122,.14),transpa
 .pawly-logo-mark path{fill:none!important;}
 @media(max-height:760px) and (max-width:480px){.card-info{padding-bottom:112px!important}.card-profile-top{margin-bottom:10px!important}.card-actions>div:first-child{bottom:-6px!important}}
 </style>
-<style id="pawly-action-buttons-restore-v1">
-/* Restore nope/like buttons after moving profile button */
-.card-info{padding-bottom:40px!important;}
-.card-actions{position:static!important;display:block!important;margin-top:0!important;pointer-events:auto!important;}
+<style id="pawly-action-buttons-restore-v2">
+/* Keep swipe buttons attached to the card, above the bottom nav */
+.card{overflow:visible!important;}
+.card-area{overflow:visible!important;margin-bottom:132px!important;}
+.card-info{padding-bottom:122px!important;z-index:95!important;}
+.card-actions{position:static!important;display:block!important;margin:0!important;pointer-events:auto!important;}
 .card-actions>div:first-child{
-  position:fixed!important;
+  position:absolute!important;
   left:50%!important;
-  bottom:calc(env(safe-area-inset-bottom,0px) + 112px)!important;
+  bottom:-48px!important;
   transform:translateX(-50%)!important;
   display:grid!important;
-  grid-template-columns:72px 100px!important;
+  grid-template-columns:74px 104px!important;
   gap:42px!important;
-  z-index:120!important;
+  z-index:130!important;
   pointer-events:auto!important;
+  padding:0!important;
 }
 .card-actions>div:first-child .card-btn{pointer-events:auto!important;touch-action:manipulation!important;}
-.card-btn-nope{width:72px!important;height:72px!important;transform:none!important;}
-.card-btn-like{width:100px!important;height:100px!important;transform:none!important;}
+.card-btn-nope{width:74px!important;height:74px!important;transform:none!important;}
+.card-btn-like{width:104px!important;height:104px!important;transform:none!important;}
 .card-btn-nope:active,.card-btn-like:active{transform:scale(.92)!important;}
+.nav{z-index:80!important;}
+@media(max-width:480px){
+  .card-area{margin-bottom:136px!important;}
+  .card-actions>div:first-child{bottom:-50px!important;grid-template-columns:72px 100px!important;gap:40px!important;}
+  .card-btn-nope{width:72px!important;height:72px!important;}
+  .card-btn-like{width:100px!important;height:100px!important;}
+}
 @media(max-height:760px) and (max-width:480px){
-  .card-actions>div:first-child{bottom:calc(env(safe-area-inset-bottom,0px) + 108px)!important;grid-template-columns:66px 92px!important;gap:36px!important;}
+  .card-area{margin-bottom:128px!important;}
+  .card-info{padding-bottom:112px!important;}
+  .card-actions>div:first-child{bottom:-44px!important;grid-template-columns:66px 92px!important;gap:36px!important;}
   .card-btn-nope{width:66px!important;height:66px!important;}
   .card-btn-like{width:92px!important;height:92px!important;}
 }
