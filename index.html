@@ -1020,6 +1020,16 @@ body{background:radial-gradient(circle at 50% -10%,rgba(232,184,122,.14),transpa
   </div>
 </div>
 
+<div class="premium-loc-row">
+  <button class="premium-loc-pill" id="premium-dist-btn" type="button" aria-label="Plats och avstånd">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.72 12.06a.5.5 0 0 0 .56 0C12.95 21.5 20 15.4 20 10a8 8 0 0 0-8-8z"/></svg>
+    <span id="premium-loc-label">Stockholm, 50 km</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <button class="premium-filter-btn" id="filter-open-btn" type="button" aria-label="Filter och avstånd">
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="9" cy="7" r="2.5"/><circle cx="15" cy="17" r="2.5"/></svg>
+  </button>
+</div>
 <!-- FILTER ROW -->
 <div class="filter-row" id="filter-row">
   <button class="ftag on" data-f="Alla">
@@ -1197,8 +1207,10 @@ body{background:radial-gradient(circle at 50% -10%,rgba(232,184,122,.14),transpa
   <div class="dist-sheet" style="position:relative;z-index:1">
     <div class="dist-handle"></div>
     <div class="dist-title">Plats &amp; avst&aring;nd</div>
-    <div class="dist-sub">V&auml;lj hur l&aring;ngt bort matcher f&aring;r visas fr&aring;n Stockholm.</div>
+    <div class="dist-sub">Välj hur långt bort profiler och annonser får visas från din plats.</div>
     <div id="dist-val" style="font-size:34px;font-weight:900;color:#f6c58b;margin-bottom:18px">50 km</div>
+    <button class="dist-gps-btn" id="gps-btn" type="button">Använd min plats</button>
+    <div class="dist-gps-note" id="gps-note">GPS gör att avståndet räknas från där du är.</div>
     <input id="dist-slider" class="dist-slider" type="range" min="2" max="500" value="50"/>
     <div class="dist-labels">
       <span>2 km</span>
@@ -1739,6 +1751,14 @@ body{background:radial-gradient(circle at 50% -8%,rgba(240,196,141,.13),transpar
 #sell-zone:active{transform:scale(.99)}
 @media(max-width:480px){.petlio-empty{min-height:300px;border-radius:26px}.petlio-empty h3{font-size:25px}.petlio-toast{bottom:calc(env(safe-area-inset-bottom,0px) + 96px)}}
 </style>
+<style id="petlio-gps-v1">
+/* GPS and distance polish */
+.premium-loc-row{display:flex!important}
+.premium-loc-pill{cursor:pointer;touch-action:manipulation}
+.dist-gps-btn{width:100%;border:1px solid rgba(240,196,141,.22);background:linear-gradient(145deg,rgba(240,196,141,.13),rgba(255,255,255,.035));color:#f5c58d;border-radius:18px;padding:14px 16px;margin:0 0 18px;font-size:15px;font-weight:900;font-family:Inter,sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.06);cursor:pointer}
+.dist-gps-note{min-height:18px;margin:-6px 0 16px;color:rgba(255,255,255,.58);font-size:12px;line-height:1.35}
+.badge-dist{display:inline-flex;align-items:center;gap:4px;color:#f5c58d;font-weight:850}
+</style>
 <script>
 // ─── DATA ───────────────────────────────────────────────────────────────────
 var ANIMALS = [
@@ -1758,6 +1778,7 @@ var ANIMALS = [
 // ─── STATE ───────────────────────────────────────────────────────────────────
 var S = {
   filter:"Alla", idx:0, dist:50,
+  userLat:59.3293, userLng:18.0686, userCity:"Stockholm", locationMode:"default",
   matches:[], msgs:{}, chatWith:null, pendingMatch:null,
   mySpecies:"Hund", myGender:"Hane", myPhoto:null,
   mktCat:"Alla", mktSp:"Hund", mktPhoto:null,
@@ -1781,7 +1802,115 @@ function showToast(message) {
   clearTimeout(showToast._timer);
   showToast._timer = setTimeout(function(){ t.classList.remove("show"); }, 2300);
 }
-function filtered() { return S.filter === "Alla" ? ANIMALS : ANIMALS.filter(function(a){ return a.species === S.filter; }); }
+var CITY_COORDS = {
+  "Stockholm": {lat:59.3293,lng:18.0686},
+  "Göteborg": {lat:57.7089,lng:11.9746}, "GÃ¶teborg": {lat:57.7089,lng:11.9746},
+  "Uppsala": {lat:59.8586,lng:17.6389},
+  "Linköping": {lat:58.4108,lng:15.6214}, "LinkÃ¶ping": {lat:58.4108,lng:15.6214},
+  "Örebro": {lat:59.2753,lng:15.2134}, "Ã–rebro": {lat:59.2753,lng:15.2134},
+  "Västerås": {lat:59.6099,lng:16.5448}, "VÃ¤sterÃ¥s": {lat:59.6099,lng:16.5448},
+  "Norrköping": {lat:58.5877,lng:16.1924}, "NorrkÃ¶ping": {lat:58.5877,lng:16.1924},
+  "Östersund": {lat:63.1792,lng:14.6357}, "Ã–stersund": {lat:63.1792,lng:14.6357},
+  "Umeå": {lat:63.8258,lng:20.2630}, "UmeÃ¥": {lat:63.8258,lng:20.2630},
+  "Falun": {lat:60.6065,lng:15.6355},
+  "Malmö": {lat:55.6050,lng:13.0038}, "MalmÃ¶": {lat:55.6050,lng:13.0038}
+};
+function cityCoords(city) { return CITY_COORDS[city] || CITY_COORDS[String(city || "").trim()] || null; }
+function kmBetween(lat1,lng1,lat2,lng2) {
+  var R = 6371;
+  var dLat = (lat2-lat1) * Math.PI / 180;
+  var dLng = (lng2-lng1) * Math.PI / 180;
+  var a = Math.sin(dLat/2)*Math.sin(dLat/2) + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)*Math.sin(dLng/2);
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+function itemDistance(item) {
+  var c = item && (item.coords || cityCoords(item.location || item.city));
+  if (!c || S.userLat == null || S.userLng == null) return null;
+  return Math.round(kmBetween(S.userLat, S.userLng, c.lat, c.lng));
+}
+function distanceText(item) {
+  var d = itemDistance(item);
+  return d == null ? "" : d + " km bort";
+}
+function passesDistance(item) {
+  if (S.dist >= 500) return true;
+  var d = itemDistance(item);
+  return d == null ? true : d <= S.dist;
+}
+function sortByDistance(list) {
+  return list.slice().sort(function(a,b){
+    var da = itemDistance(a), db = itemDistance(b);
+    if (da == null && db == null) return 0;
+    if (da == null) return 1;
+    if (db == null) return -1;
+    return da - db;
+  });
+}
+function nearestCity(lat,lng) {
+  var best = {name:"Din plats", km:99999};
+  Object.keys(CITY_COORDS).forEach(function(name){
+    if (name.indexOf("Ã") !== -1) return;
+    var c = CITY_COORDS[name];
+    var km = kmBetween(lat,lng,c.lat,c.lng);
+    if (km < best.km) best = {name:name, km:km};
+  });
+  return best.name;
+}
+function updateLocationUI() {
+  var range = S.dist >= 500 ? "Sverige" : S.dist + " km";
+  var city = S.userCity || "Stockholm";
+  var label = el("premium-loc-label");
+  if (label) label.textContent = city + ", " + range;
+  var distLbl = el("dist-lbl");
+  if (distLbl) distLbl.textContent = range;
+  var distVal = el("dist-val");
+  if (distVal) distVal.textContent = S.dist >= 500 ? "Hela Sverige" : S.dist + " km";
+  var slider = el("dist-slider");
+  if (slider && parseInt(slider.value,10) !== S.dist) slider.value = S.dist;
+  var note = el("gps-note");
+  if (note) note.textContent = S.locationMode === "gps" ? "GPS aktiv: avstånd räknas från din nuvarande plats." : "GPS gör att avståndet räknas från där du är.";
+}
+function refreshDistanceViews() {
+  S.idx = 0;
+  updateLocationUI();
+  var active = document.querySelector(".view[style*='flex']") || document.querySelector(".view.active");
+  if (!active || active.id === "v-swipe") renderSwipe();
+  if (active && active.id === "v-browse") renderBrowse();
+  if (active && active.id === "v-market") renderListings();
+}
+function useMyLocation() {
+  if (!navigator.geolocation) { showToast("GPS stöds inte i den här webbläsaren"); return; }
+  var note = el("gps-note");
+  if (note) note.textContent = "Hämtar din plats...";
+  navigator.geolocation.getCurrentPosition(function(pos){
+    S.userLat = pos.coords.latitude;
+    S.userLng = pos.coords.longitude;
+    S.userCity = nearestCity(S.userLat, S.userLng);
+    S.locationMode = "gps";
+    try { localStorage.setItem("petlioLocation", JSON.stringify({lat:S.userLat,lng:S.userLng,city:S.userCity})); } catch(e) {}
+    showToast("Plats aktiverad");
+    refreshDistanceViews();
+  }, function(){
+    if (note) note.textContent = "Kunde inte hämta GPS. Appen räknar från Stockholm tills du tillåter plats.";
+    showToast("Tillåt plats för GPS-avstånd");
+    S.locationMode = "default";
+    updateLocationUI();
+  }, {enableHighAccuracy:true, timeout:10000, maximumAge:300000});
+}
+function restoreSavedLocation() {
+  try {
+    var saved = JSON.parse(localStorage.getItem("petlioLocation") || "null");
+    if (saved && saved.lat && saved.lng) {
+      S.userLat = saved.lat; S.userLng = saved.lng; S.userCity = saved.city || nearestCity(saved.lat,saved.lng); S.locationMode = "gps";
+    }
+  } catch(e) {}
+  updateLocationUI();
+}
+function filtered() {
+  var list = S.filter === "Alla" ? ANIMALS : ANIMALS.filter(function(a){ return a.species === S.filter; });
+  list = list.filter(passesDistance);
+  return sortByDistance(list);
+}
 
 // ─── VIEWS ───────────────────────────────────────────────────────────────────
 var VIEWS = ["swipe","browse","matches","chat","profile","market"];
@@ -1789,10 +1918,10 @@ var VIEWS = ["swipe","browse","matches","chat","profile","market"];
 function showView(v) {
   VIEWS.forEach(function(id) {
     var e = el("v-"+id);
-    if (e) e.style.display = "none";
+    if (e) { e.style.display = "none"; e.classList.remove("active"); }
   });
   var e = el("v-"+v);
-  if (e) e.style.display = "flex";
+  if (e) { e.style.display = "flex"; e.classList.add("active"); }
 
   document.querySelectorAll(".nbtn").forEach(function(b){ b.classList.remove("on"); });
   var nb = document.querySelector(".nbtn[data-v='"+v+"']");
@@ -1850,7 +1979,7 @@ function renderSwipe() {
     '<div class="card card-front" id="the-card" style="background:linear-gradient(135deg,'+a.color+'18,#141414)">' +
       '<div class="card-img">'+imgHTML+'</div>' +
       '<div class="card-grad"></div>' +
-      '<div class="badge badge-loc"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.72 12.06a.5.5 0 0 0 .56 0C12.95 21.5 20 15.4 20 10a8 8 0 0 0-8-8z"/></svg>'+a.location+'</div>' +
+      '<div class="badge badge-loc"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.72 12.06a.5.5 0 0 0 .56 0C12.95 21.5 20 15.4 20 10a8 8 0 0 0-8-8z"/></svg>'+a.location+(distanceText(a)?' · '+distanceText(a):'')+'</div>' +
       '<div class="badge badge-sp"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="4" r="2"/><circle cx="17" cy="4" r="2"/><circle cx="4" cy="11" r="2"/><circle cx="20" cy="11" r="2"/><path d="M12 13c-3 0-6 2-6 5s2 4 6 4 6-1 6-4-3-5-6-5z"/></svg>'+a.species+'</div>' +
       '<div class="hint hint-like" id="h-like">LIKE</div>' +
       '<div class="hint hint-nope" id="h-nope">NOPE</div>' +
@@ -1863,7 +1992,7 @@ function renderSwipe() {
           '<span class="card-gender-sym"> '+(a.gender==="Hona"?"♀":"♂")+'</span>' +
         '</div>' +
         '<div class="card-sub">'+a.breed+' · '+a.bio+'</div>' +        
-        '<div class="card-owner">Ägare: '+a.owner+'</div>' +
+        '<div class="card-owner">Ägare: '+a.owner+(distanceText(a)?' · '+distanceText(a):'')+'</div>' +
       '</div>' +
       '<div class="card-actions">' +
         '<div style="display:flex;gap:14px">' +
@@ -1951,7 +2080,7 @@ function renderBrowse(query) {
   if (!list.length) { grid.innerHTML = petlioEmptyHTML("⌕", "Inga djur hittades", "Testa ett annat filter eller sökord.", "Visa alla", "browse-reset"); var resetBtn = el("browse-reset"); if (resetBtn) resetBtn.addEventListener("click", function(){ var q=el("bsearch"); if(q) q.value=""; renderBrowse(""); }); return; }
   grid.innerHTML = list.map(function(a){
     var imgH = a.photo ? '<img src="'+a.photo+'" alt="'+a.name+'"/>' : '<span class="be">'+a.emoji+'</span>';
-    return '<div class="bcard"><div class="bcard-img" style="background:linear-gradient(135deg,'+a.color+'22,#1c1c1c)">'+imgH+'</div><div class="bcard-body"><div class="bcard-name">'+a.name+'</div><div class="bcard-sub">'+a.breed+' · '+a.location+'</div><div class="bcard-tags"><span class="btag">'+a.gender+'</span><span class="btag">'+a.species+'</span></div></div></div>';
+    return '<div class="bcard"><div class="bcard-img" style="background:linear-gradient(135deg,'+a.color+'22,#1c1c1c)">'+imgH+'</div><div class="bcard-body"><div class="bcard-name">'+a.name+'</div><div class="bcard-sub">'+a.breed+' · '+a.location+(distanceText(a)?' · '+distanceText(a):'')+'</div><div class="bcard-tags"><span class="btag">'+a.gender+'</span><span class="btag">'+a.species+'</span></div></div></div>';
   }).join("");
 }
 
@@ -2246,15 +2375,17 @@ on("filter-open-btn","click",function(){ if(el("dist-panel"))el("dist-panel").cl
 on("dist-cancel","click",function(){ if(el("dist-panel"))el("dist-panel").classList.remove("open"); });
 on("dist-bg","click",function(){ if(el("dist-panel"))el("dist-panel").classList.remove("open"); });
 on("dist-slider","input",function(){
-  var v=parseInt(this.value);
-  el("dist-val").textContent = v>=500?"Hela Sverige":v+" km";
+  var v=parseInt(this.value,10);
+  S.dist = v;
+  updateLocationUI();
 });
+on("gps-btn","click",useMyLocation);
 on("dist-apply","click",function(){
-  var v=parseInt(el("dist-slider").value);
-  el("dist-lbl").textContent = v>=500?"Sverige":v+" km";
-  if (el("premium-loc-label")) el("premium-loc-label").textContent = v>=500 ? "Stockholm, Sverige" : "Stockholm, "+v+" km";
+  var v=parseInt(el("dist-slider").value,10);
+  S.dist = v;
+  updateLocationUI();
   el("dist-panel").classList.remove("open");
-  S.dist=v; S.idx=0; renderSwipe();
+  refreshDistanceViews();
 });
 
 
@@ -2522,7 +2653,7 @@ function openListing(l) {
     '<div class="market-sheet-card" style="position:relative;z-index:1">' +
       '<div class="market-sheet-img">'+media+'</div>' +
       '<div class="market-sheet-body">' +
-        '<div class="market-sheet-top"><div><div class="market-sheet-title">'+l.name+'</div><div style="margin-top:7px;color:rgba(255,255,255,.58);font-weight:700">'+l.city+' · '+l.owner+'</div></div><div class="market-sheet-price">'+l.price.toLocaleString("sv")+' kr</div></div>' +
+        '<div class="market-sheet-top"><div><div class="market-sheet-title">'+l.name+'</div><div style="margin-top:7px;color:rgba(255,255,255,.58);font-weight:700">'+l.city+(distanceText(l)?' · '+distanceText(l):'')+' · '+l.owner+'</div></div><div class="market-sheet-price">'+l.price.toLocaleString("sv")+' kr</div></div>' +
         '<div class="market-sheet-tags"><span class="market-sheet-tag">'+l.species+'</span><span class="market-sheet-tag">'+l.breed+'</span><span class="market-sheet-tag">'+l.age+'</span></div>' +
         '<div class="market-sheet-desc">'+(l.desc || "Ingen beskrivning ännu.")+'</div>' +
         '<div class="market-sheet-owner"><div><div style="font-weight:900;color:#fff">'+l.owner+'</div><div style="font-size:12px;color:rgba(255,255,255,.5);margin-top:2px">Säljare · '+l.city+'</div></div><div style="color:#e8b87a;font-weight:900">Verifierad</div></div>' +
@@ -2541,6 +2672,7 @@ function renderListings() {
   var box = el("listings");
   if (!box) return;
   var list = mktCat === "Alla" ? MKT_LISTINGS : MKT_LISTINGS.filter(function(l) { return l.species === mktCat; });
+  list = sortByDistance(list.filter(passesDistance));
   if (!list.length) {
     box.innerHTML = "<div style='grid-column:1/-1;text-align:center;padding:40px;color:#777;font-size:14px'>Inga annonser i den här kategorin.</div>";
     return;
@@ -2571,7 +2703,7 @@ function renderListings() {
       }
       var badgeL = document.createElement("div");
       badgeL.style.cssText = "position:absolute;top:12px;left:12px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);border-radius:12px;padding:4px 12px;font-size:11px;font-weight:700;color:white";
-      badgeL.textContent = l.city;
+      badgeL.textContent = l.city + (distanceText(l) ? " · " + distanceText(l) : "");
       var badgeR = document.createElement("div");
       badgeR.style.cssText = "position:absolute;top:12px;right:12px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);border-radius:12px;padding:4px 12px;font-size:11px;font-weight:800;color:#e8b87a";
       badgeR.textContent = l.species;
@@ -2632,6 +2764,7 @@ function postListing() {
 }
 
 // ─── INIT ────────────────────────────────────────────────────────────────────
+restoreSavedLocation();
 showView("swipe");
 obSetup();
 if ("serviceWorker" in navigator) { navigator.serviceWorker.getRegistrations().then(function(regs){ regs.forEach(function(reg){ reg.unregister(); }); }).catch(function(){}); } if ("caches" in window) { caches.keys().then(function(keys){ keys.forEach(function(key){ caches.delete(key); }); }).catch(function(){}); }
