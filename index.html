@@ -1238,7 +1238,7 @@ body{background:radial-gradient(circle at 50% -10%,rgba(232,184,122,.14),transpa
 </svg>
         </div>
         <div class="ob-title">Välkommen till<br/><span style="color:#e8b87a">Petlio</span></div>
-        <div class="ob-sub">Sveriges första dejting-app för djur. Hitta den perfekta partnern för avel – enkelt, tryggt och roligt.</div>
+        <div class="ob-sub">Matcha, chatta och hitta trygga kontakter för ditt djur i en app som känns enkel, varm och premium.</div>
         <div class="ob-emoji-row"><span>Hund</span><span>Katt</span><span>Häst</span><span>Kanin</span></div>
       </div>
     </div>
@@ -1275,7 +1275,7 @@ body{background:radial-gradient(circle at 50% -10%,rgba(232,184,122,.14),transpa
           <div style="font-size:80px">💬</div>
         </div>
         <div class="ob-title">Chatta med<br/><span style="color:#e8b87a">ägaren</span></div>
-        <div class="ob-sub">När ni matchar kan du chatta direkt med djurets ägare. Boka ett möte och se om det är rätt match för avel.</div>
+        <div class="ob-sub">När ni matchar kan du chatta direkt med ägaren, lära känna profilen och boka en trygg träff.</div>
         <div class="ob-tips">
           <div class="ob-tip"><span style="color:#e8b87a">✓</span> Direkt kontakt med ägaren</div>
           <div class="ob-tip"><span style="color:#e8b87a">✓</span> Boka träff och möts fysiskt</div>
@@ -1648,6 +1648,97 @@ body{background:radial-gradient(circle at 50% -10%,rgba(232,184,122,.14),transpa
   .card-actions .card-btn-like:active{transform:translateY(-8px) scale(.92)!important;}
 }
 </style>
+<style id="petlio-launch-polish-v1">
+/* Petlio launch polish */
+:root{--petlio-line:rgba(255,255,255,.08);--petlio-soft:rgba(255,255,255,.055);--petlio-gold:#f0c48d;--petlio-gold-2:#d39252;}
+body{background:radial-gradient(circle at 50% -8%,rgba(240,196,141,.13),transparent 34%),linear-gradient(180deg,#090909 0%,#060606 100%)!important;}
+.hdr{background:linear-gradient(180deg,rgba(10,10,10,.98),rgba(10,10,10,.9) 74%,rgba(10,10,10,0))!important;border-bottom:none!important;}
+.logo span{font-size:34px!important;letter-spacing:-.02em!important;text-shadow:0 8px 34px rgba(240,196,141,.22)!important;}
+.logo .pawly-logo-mark{width:44px!important;height:44px!important;}
+.premium-filter-top{box-shadow:0 18px 48px rgba(0,0,0,.52),inset 0 1px 0 rgba(255,255,255,.08)!important;border-color:rgba(255,255,255,.09)!important;}
+.filter-row{background:linear-gradient(180deg,rgba(12,12,12,.96),rgba(12,12,12,.78))!important;border-bottom:1px solid rgba(255,255,255,.035)!important;}
+.ftag{box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 10px 24px rgba(0,0,0,.26)!important;}
+.ftag.on{box-shadow:0 14px 34px rgba(240,196,141,.28),inset 0 1px 0 rgba(255,255,255,.36)!important;}
+.card{border-color:rgba(240,196,141,.46)!important;box-shadow:0 30px 90px rgba(0,0,0,.82),0 0 0 1px rgba(255,255,255,.035),0 0 44px rgba(240,196,141,.13)!important;}
+.card:before{content:"";position:absolute;inset:1px;border-radius:35px;border:1px solid rgba(255,255,255,.04);pointer-events:none;z-index:3;}
+.card-img img{filter:saturate(1.08) contrast(1.04) brightness(.96)!important;}
+.card-grad{background:linear-gradient(to top,rgba(3,3,3,.99) 0%,rgba(3,3,3,.86) 18%,rgba(3,3,3,.45) 42%,rgba(0,0,0,.04) 100%)!important;}
+.card-profile-top{letter-spacing:.01em!important;}
+.card-name{text-shadow:0 8px 34px rgba(0,0,0,.72)!important;}
+.card-sub{text-shadow:0 4px 22px rgba(0,0,0,.72)!important;}
+.card-btn-nope,.card-btn-like{will-change:transform;}
+.card-btn-nope{background:rgba(14,14,14,.76)!important;border:1px solid rgba(255,255,255,.11)!important;}
+.card-btn-like{background:radial-gradient(circle at 32% 24%,#fff0cf 0%,#ffd19a 34%,#d28a48 100%)!important;}
+.nav{background:rgba(16,16,16,.84)!important;border-color:rgba(255,255,255,.09)!important;box-shadow:0 24px 66px rgba(0,0,0,.68),inset 0 1px 0 rgba(255,255,255,.06)!important;}
+.nbtn{transition:color .18s ease,transform .18s ease!important;}
+.nbtn:active{transform:translateY(1px) scale(.96)!important;}
+.nbtn.on svg{filter:drop-shadow(0 0 12px rgba(240,196,141,.34));}
+#v-browse,#v-profile,#v-market,#v-matches{background:linear-gradient(180deg,rgba(17,14,11,.38),rgba(5,5,5,0) 160px)!important;}
+#v-browse h2,#v-profile h2,#v-market h2,.matches-top h2{font-size:36px!important;line-height:.98!important;letter-spacing:-.01em!important;text-shadow:0 10px 34px rgba(0,0,0,.55)!important;}
+.finput{background:rgba(255,255,255,.065)!important;border:1px solid rgba(255,255,255,.09)!important;border-radius:18px!important;min-height:52px!important;color:#fff!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.045)!important;}
+.finput:focus{border-color:rgba(240,196,141,.48)!important;box-shadow:0 0 0 4px rgba(240,196,141,.08),inset 0 1px 0 rgba(255,255,255,.06)!important;}
+.pcard,#m-sell>div{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035))!important;border:1px solid rgba(255,255,255,.085)!important;border-radius:28px!important;box-shadow:0 24px 64px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.05)!important;}
+.photo-zone,#sell-zone{border-color:rgba(240,196,141,.24)!important;background:linear-gradient(180deg,rgba(240,196,141,.055),rgba(255,255,255,.025))!important;border-radius:22px!important;}
+.sp-btn,.sex-btn{border-radius:999px!important;min-height:42px!important;font-weight:850!important;}
+.save-btn,#m-sell button[onclick="postListing()"]{border-radius:19px!important;min-height:54px!important;font-weight:950!important;box-shadow:0 18px 42px rgba(237,168,93,.25),inset 0 1px 0 rgba(255,255,255,.32)!important;}
+.bgrid .bcard{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035))!important;border-color:rgba(255,255,255,.08)!important;box-shadow:0 18px 44px rgba(0,0,0,.3)!important;}
+.bgrid .bimg{border-radius:22px!important;}
+.bubbles-row{padding-bottom:4px!important;}
+.msgs-list .mitem,.no-match{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.028))!important;border:1px solid rgba(255,255,255,.08)!important;border-radius:22px!important;box-shadow:0 16px 42px rgba(0,0,0,.28)!important;}
+#ov-detail{z-index:1300!important;background:rgba(0,0,0,.76)!important;backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important;}
+.pd-sheet{max-height:94dvh!important;border-radius:34px 34px 0 0!important;background:linear-gradient(180deg,#1a1a1a,#080808)!important;border:1px solid rgba(240,196,141,.18)!important;box-shadow:0 -26px 90px rgba(0,0,0,.76),inset 0 1px 0 rgba(255,255,255,.055)!important;}
+.pd-img{height:min(58dvh,500px)!important;border-radius:34px 34px 0 0!important;background:radial-gradient(circle at 50% 38%,rgba(240,196,141,.15),#111 64%)!important;}
+.pd-img img{filter:saturate(1.07) contrast(1.05)!important;}
+.pd-grad{background:linear-gradient(to top,rgba(8,8,8,.98) 0%,rgba(8,8,8,.72) 28%,rgba(0,0,0,.05) 78%)!important;}
+.pd-close{width:44px!important;height:44px!important;right:18px!important;top:18px!important;background:rgba(18,18,18,.7)!important;border:1px solid rgba(255,255,255,.1)!important;font-size:22px!important;}
+.pd-img-info{left:24px!important;right:24px!important;bottom:24px!important;}
+#pd-name{font-size:56px!important;letter-spacing:-.02em!important;}
+#pd-age{font-size:17px!important;color:rgba(255,255,255,.82)!important;}
+.pd-body{padding:24px 24px calc(env(safe-area-inset-bottom,0px) + 30px)!important;}
+.pd-lbl{color:#f0c48d!important;letter-spacing:.14em!important;}
+.pd-txt{font-size:16px!important;color:rgba(255,255,255,.76)!important;}
+.pd-tag{background:rgba(240,196,141,.12)!important;border-color:rgba(240,196,141,.22)!important;color:#f4cc98!important;}
+.pd-owner{background:rgba(255,255,255,.05)!important;border-color:rgba(255,255,255,.09)!important;border-radius:22px!important;}
+.pd-btn-sec,.pd-btn-pri{min-height:56px!important;border-radius:19px!important;font-weight:950!important;}
+.pd-btn-pri{background:linear-gradient(135deg,#ffd8a6,#d8914c)!important;box-shadow:0 18px 42px rgba(237,168,93,.28)!important;}
+#onboarding{background:radial-gradient(circle at 50% 8%,rgba(240,196,141,.2),transparent 34%),linear-gradient(180deg,#090909,#050505)!important;}
+.ob-title{font-size:38px!important;letter-spacing:-.02em!important;}
+.ob-sub{color:rgba(255,255,255,.78)!important;}
+.ob-tip{background:rgba(255,255,255,.055)!important;border-color:rgba(255,255,255,.09)!important;border-radius:18px!important;}
+#ob-start,#ob-next{background:linear-gradient(135deg,#ffd8a6,#d8914c)!important;box-shadow:0 18px 44px rgba(237,168,93,.3)!important;}
+@media(max-width:480px){
+  .logo span{font-size:33px!important;}
+  #v-browse h2,#v-profile h2,#v-market h2,.matches-top h2{font-size:34px!important;}
+  #pd-name{font-size:52px!important;}
+  .pd-img{height:min(56dvh,480px)!important;}
+}
+@media(max-height:740px) and (max-width:480px){
+  .pd-img{height:min(51dvh,430px)!important;}
+  #pd-name{font-size:45px!important;}
+  .pd-body{padding-top:18px!important;}
+}
+</style>
+<style id="petlio-launch-polish-v2">
+/* Petlio launch polish v2: empty states, feedback and market/profile finish */
+.petlio-toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 104px);transform:translate(-50%,20px);z-index:2400;max-width:min(86vw,360px);padding:13px 18px;border-radius:999px;background:linear-gradient(135deg,rgba(28,28,28,.94),rgba(12,12,12,.94));border:1px solid rgba(240,196,141,.28);box-shadow:0 22px 56px rgba(0,0,0,.56),0 0 32px rgba(240,196,141,.16);color:#f7d4a2;font-weight:900;font-size:14px;letter-spacing:.01em;opacity:0;pointer-events:none;transition:opacity .24s ease,transform .24s ease;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.petlio-toast.show{opacity:1;transform:translate(-50%,0)}
+.petlio-empty{min-height:360px;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:34px 22px;border-radius:30px;background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.08);box-shadow:0 22px 70px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.04)}
+.petlio-empty-icon{width:68px;height:68px;border-radius:24px;display:grid;place-items:center;margin-bottom:16px;background:radial-gradient(circle at 30% 20%,#fff0cf,#e9ad6f 60%,#b97538);color:#160e07;font-size:30px;box-shadow:0 20px 48px rgba(232,184,122,.22)}
+.petlio-empty h3{margin:0 0 8px;font-family:'Playfair Display',serif;font-size:28px;line-height:1;color:#fff;letter-spacing:0}
+.petlio-empty p{margin:0 0 18px;color:rgba(255,255,255,.66);font-size:14px;line-height:1.45;max-width:280px}
+.petlio-empty .empty-btn{width:auto;min-width:150px;border:none;border-radius:999px;padding:13px 18px;background:linear-gradient(135deg,#ffd8a6,#d8914c);color:#120b05;font-weight:950;box-shadow:0 18px 42px rgba(237,168,93,.26);cursor:pointer}
+#psaved{border-radius:16px!important;background:rgba(240,196,141,.12)!important;border:1px solid rgba(240,196,141,.22)!important;color:#f6c98e!important;font-weight:850!important}
+.nbadge{position:absolute;right:18px;top:8px;min-width:18px;height:18px;border-radius:999px;display:grid;place-items:center;background:linear-gradient(135deg,#ffd8a6,#d8914c);color:#140b04;font-size:11px;font-weight:950;border:2px solid #101010;box-shadow:0 10px 24px rgba(216,145,76,.25)}
+.nbtn{position:relative}
+#m-list{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 132px)!important}
+.mitem,.mkt-card{transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.mitem:active,.mkt-card:active,.bcard:active{transform:scale(.985)}
+#m-sheet{z-index:2300!important;background:rgba(0,0,0,.74)!important;backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important}
+#m-sheet>div{border:1px solid rgba(240,196,141,.16)!important;box-shadow:0 -28px 90px rgba(0,0,0,.72),inset 0 1px 0 rgba(255,255,255,.055)!important}
+#sell-zone{transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease}
+#sell-zone:active{transform:scale(.99)}
+@media(max-width:480px){.petlio-empty{min-height:300px;border-radius:26px}.petlio-empty h3{font-size:25px}.petlio-toast{bottom:calc(env(safe-area-inset-bottom,0px) + 96px)}}
+</style>
 <script>
 // ─── DATA ───────────────────────────────────────────────────────────────────
 var ANIMALS = [
@@ -1674,6 +1765,22 @@ var S = {
 
 // ─── UTILS ───────────────────────────────────────────────────────────────────
 function el(id) { return document.getElementById(id); }
+function petlioEmptyHTML(icon, title, text, buttonText, buttonId) {
+  return '<div class="petlio-empty"><div class="petlio-empty-icon">' + icon + '</div><h3>' + title + '</h3><p>' + text + '</p>' + (buttonText ? '<button class="empty-btn" id="' + buttonId + '">' + buttonText + '</button>' : '') + '</div>';
+}
+function showToast(message) {
+  var t = el("petlio-toast");
+  if (!t) {
+    t = document.createElement("div");
+    t.id = "petlio-toast";
+    t.className = "petlio-toast";
+    document.body.appendChild(t);
+  }
+  t.textContent = message;
+  t.classList.add("show");
+  clearTimeout(showToast._timer);
+  showToast._timer = setTimeout(function(){ t.classList.remove("show"); }, 2300);
+}
 function filtered() { return S.filter === "Alla" ? ANIMALS : ANIMALS.filter(function(a){ return a.species === S.filter; }); }
 
 // ─── VIEWS ───────────────────────────────────────────────────────────────────
@@ -1725,7 +1832,7 @@ function renderSwipe() {
   if (!area) return;
 
   if (S.idx >= list.length) {
-    area.innerHTML = '<div class="empty"><h3>Inga fler djur</h3><p>Prova ett annat filter!</p><button class="empty-btn" id="rb">Börja om</button></div>';
+    area.innerHTML = petlioEmptyHTML("♡", "Inga fler profiler", "Byt filter eller börja om för att se fler djur.", "Börja om", "rb");
     var rb = el("rb"); if (rb) rb.addEventListener("click", function(){ S.idx=0; renderSwipe(); });
     return;
   }
@@ -1841,7 +1948,7 @@ function renderBrowse(query) {
   if (query) list = list.filter(function(a){
     return (a.name+a.breed+a.location+a.species).toLowerCase().includes(query);
   });
-  if (!list.length) { grid.innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted);font-size:14px">Inga djur hittades.</div>'; return; }
+  if (!list.length) { grid.innerHTML = petlioEmptyHTML("⌕", "Inga djur hittades", "Testa ett annat filter eller sökord.", "Visa alla", "browse-reset"); var resetBtn = el("browse-reset"); if (resetBtn) resetBtn.addEventListener("click", function(){ var q=el("bsearch"); if(q) q.value=""; renderBrowse(""); }); return; }
   grid.innerHTML = list.map(function(a){
     var imgH = a.photo ? '<img src="'+a.photo+'" alt="'+a.name+'"/>' : '<span class="be">'+a.emoji+'</span>';
     return '<div class="bcard"><div class="bcard-img" style="background:linear-gradient(135deg,'+a.color+'22,#1c1c1c)">'+imgH+'</div><div class="bcard-body"><div class="bcard-name">'+a.name+'</div><div class="bcard-sub">'+a.breed+' · '+a.location+'</div><div class="bcard-tags"><span class="btag">'+a.gender+'</span><span class="btag">'+a.species+'</span></div></div></div>';
@@ -1854,8 +1961,9 @@ function renderMatches() {
   if (!brow || !mlist) return;
 
   if (!S.matches.length) {
-    brow.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:6px 0">Inga träffar än – swipa mer!</div>';
-    mlist.innerHTML = "";
+    brow.innerHTML = "";
+    mlist.innerHTML = petlioEmptyHTML("♥", "Inga träffar än", "Gilla profiler för att skapa dina första matchningar.", "Börja swipa", "go-swipe");
+    var go = el("go-swipe"); if (go) go.addEventListener("click", function(){ showView("swipe"); });
     return;
   }
 
@@ -2061,10 +2169,14 @@ function handlePhoto(file, zoneId, innerTxt) {
 
 // ─── BADGE ───────────────────────────────────────────────────────────────────
 function updateBadge() {
-  var nb = el("nb-matches"); if (!nb) return;
+  var nb = el("nb-matches") || document.querySelector(".nbtn[data-v='matches']");
+  if (!nb) return;
   var old = nb.querySelector(".nbadge"); if (old) old.remove();
   if (S.matches.length) {
-    var b = document.createElement("span"); b.className="nbadge"; b.textContent=S.matches.length; nb.appendChild(b);
+    var b = document.createElement("span");
+    b.className = "nbadge";
+    b.textContent = S.matches.length > 9 ? "9+" : S.matches.length;
+    nb.appendChild(b);
   }
 }
 
@@ -2121,7 +2233,7 @@ document.querySelectorAll(".sp-btn").forEach(function(btn){
 });
 on("sb-h","click",function(){ S.myGender="Hane"; el("sb-h").classList.add("on"); el("sb-o").classList.remove("on"); });
 on("sb-o","click",function(){ S.myGender="Hona"; el("sb-o").classList.add("on"); el("sb-h").classList.remove("on"); });
-on("save-btn","click",function(){ var s=el("psaved"); s.style.display="block"; setTimeout(function(){ s.style.display="none"; },2500); });
+on("save-btn","click",function(){ var s=el("psaved"); if(s){ s.textContent="Profil sparad"; s.style.display="block"; setTimeout(function(){ s.style.display="none"; },2200); } showToast("Profilen är sparad"); });
 
 on("mt-buy","click",function(){ switchMkt("buy"); });
 on("mt-sell","click",function(){ switchMkt("sell"); });
@@ -2167,11 +2279,14 @@ function obGo(page) {
 }
 
 function obDone() {
+  try { localStorage.setItem("petlioOnboarded", "1"); } catch(e) {}
   var onboarding = el("onboarding");
   if(onboarding) onboarding.classList.add("is-hidden");
 }
 
 function obSetup() {
+  var onboarding = el("onboarding");
+  try { if (localStorage.getItem("petlioOnboarded") === "1" && onboarding) onboarding.classList.add("is-hidden"); } catch(e) {}
   if (obReady) return;
   obReady = true;
   var next = el("ob-next"), skip = el("ob-skip"), start = el("ob-start"), slides = el("ob-slides");
@@ -2274,7 +2389,7 @@ var MKT_LISTINGS = [
 var mktCat = "Alla";
 var mktSp  = "Hund";
 var mktPhoto = null;
-var MKT_CATS = ["Alla","Hund","Jakthund","Katt","Häst"];
+var MKT_CATS = ["Alla","Hund","Jakthund","Katt","Häst","Kanin"];
 var mktReady = false;
 
 function initMarket() {
@@ -2289,7 +2404,7 @@ function initMarket() {
     // Build sell species buttons
     var spEl = el("sell-sp-row");
     if (spEl) {
-      spEl.innerHTML = ["Hund","Jakthund","Katt","Häst"].map(function(s) {
+      spEl.innerHTML = ["Hund","Jakthund","Katt","Häst","Kanin"].map(function(s) {
         return '<button onclick="setMktSp(this)" data-sp="' + s + '" style="border:1px solid ' + (s==="Hund"?"var(--gold)":"var(--s2)") + ';background:' + (s==="Hund"?"var(--gold)":"var(--bg)") + ';color:' + (s==="Hund"?"#0a0a0a":"var(--muted)") + ';border-radius:14px;padding:6px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif">' + s + '</button>';
       }).join("");
     }
@@ -2494,8 +2609,8 @@ function postListing() {
   var name = el("sl-name").value.trim();
   var price = el("sl-price").value.trim();
   var city = el("sl-city").value.trim();
-  if (!name || !price || !city) { alert("Fyll i namn, pris och stad."); return; }
-  var emojis = {Hund:"🐕",Jakthund:"🐕",Katt:"🐱",Häst:"🐴"};
+  if (!name || !price || !city) { showToast("Fyll i namn, pris och stad"); return; }
+  var emojis = {Hund:"🐕",Jakthund:"🐕",Katt:"🐱",Häst:"🐴",Kanin:"🐰"};
   MKT_LISTINGS.unshift({
     id: Date.now(), name: name, species: mktSp,
     breed: el("sl-breed").value.trim() || mktSp,
@@ -2509,8 +2624,11 @@ function postListing() {
   });
   ["sl-name","sl-breed","sl-age","sl-price","sl-city","sl-desc"].forEach(function(id){ el(id).value = ""; });
   mktPhoto = null;
+  var zone = el("sell-zone");
+  if(zone){ zone.removeAttribute("style"); zone.style.height="160px"; zone.style.border="2px dashed var(--s2)"; zone.style.borderRadius="18px"; zone.style.display="flex"; zone.style.alignItems="center"; zone.style.justifyContent="center"; zone.style.cursor="pointer"; zone.style.color="var(--muted)"; zone.style.fontSize="13px"; zone.innerHTML="Klicka för att lägga till bild"; }
   switchMkt("buy");
-  alert("Annonsen är upplagd!");
+  renderListings();
+  showToast("Annonsen är publicerad");
 }
 
 // ─── INIT ────────────────────────────────────────────────────────────────────
