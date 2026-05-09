@@ -1082,6 +1082,11 @@ body{background:radial-gradient(circle at 50% -10%,rgba(232,184,122,.14),transpa
     <h2>Min profil</h2>
     <div id="psaved" class="psaved">Profil sparad</div>
     <div class="pcard">
+      <div class="flbl" style="margin-bottom:8px">Vad vill du använda Petlio till?</div>
+      <div class="purpose-row" id="purpose-row">
+        <button type="button" class="purpose-btn on" data-purpose="match">Djurträff</button>
+        <button type="button" class="purpose-btn" data-purpose="market">Köp &amp; Sälj</button>
+      </div>
       <div class="flbl" style="margin-bottom:6px">Foto</div>
       <div class="photo-zone" id="pzone">
         <div style="font-size:28px;color:var(--s3)">+</div>
@@ -1095,6 +1100,8 @@ body{background:radial-gradient(circle at 50% -10%,rgba(232,184,122,.14),transpa
         <button class="sp-btn" data-sp="Häst">Häst</button>
         <button class="sp-btn" data-sp="Kanin">Kanin</button>
       </div>
+      <div class="fwrap"><div class="flbl">E-post</div><input class="finput" id="f-email" type="email" autocomplete="email" placeholder="din@email.se"/></div>
+      <div class="fwrap"><div class="flbl">Lösenord</div><input class="finput" id="f-pass" type="password" autocomplete="new-password" placeholder="Minst 6 tecken"/></div>
       <div class="fwrap"><div class="flbl">Namn</div><input class="finput" id="f-name" placeholder="t.ex. Bella"/></div>
       <div class="fwrap"><div class="flbl">Ras</div><input class="finput" id="f-breed" placeholder="t.ex. Golden Retriever"/></div>
       <div class="fwrap"><div class="flbl">Ålder</div><input class="finput" id="f-age" placeholder="t.ex. 2 år"/></div>
@@ -1776,6 +1783,29 @@ body{background:radial-gradient(circle at 50% -8%,rgba(240,196,141,.13),transpar
 .mitem{gap:12px!important;align-items:center!important}
 @media(max-width:430px){.match-actions{gap:6px}.match-actions button{padding:0 10px;font-size:11px}.mprev{max-width:150px!important}}
 </style>
+<style id="petlio-account-profile-fix-v1">
+.match-profile,.match-chat,.match-profile-hit,.match-chat-hit,.mitem{pointer-events:auto!important;position:relative;z-index:5}
+.match-actions{position:relative;z-index:8}
+#f-email,#f-pass{font-size:16px!important}
+</style>
+<style id="petlio-purpose-v1">
+.purpose-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.purpose-btn{min-height:48px;border-radius:18px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.055);color:rgba(255,255,255,.72);font-weight:950;font-family:Inter,sans-serif;font-size:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.purpose-btn.on{background:linear-gradient(135deg,#ffd8a6,#d8914c);border-color:transparent;color:#120b05;box-shadow:0 16px 36px rgba(237,168,93,.24),inset 0 1px 0 rgba(255,255,255,.35)}
+</style>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script>
+window.PETLIO_FIREBASE_CONFIG = {
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: ""
+};
+</script>
 <script>
 // ─── DATA ───────────────────────────────────────────────────────────────────
 var ANIMALS = [
@@ -1800,7 +1830,7 @@ var S = {
   filter:"Alla", idx:0, dist:50,
   userLat:59.3293, userLng:18.0686, userCity:"Stockholm", locationMode:"default",
   matches:[], msgs:{}, chatWith:null, pendingMatch:null,
-  mySpecies:"Hund", myGender:"Hane", myPhoto:null,
+  mySpecies:"Hund", myGender:"Hane", myPhoto:null, myPurpose:"match",
   mktCat:"Alla", mktSp:"Hund", mktPhoto:null,
 };
 
@@ -1821,6 +1851,91 @@ function showToast(message) {
   t.classList.add("show");
   clearTimeout(showToast._timer);
   showToast._timer = setTimeout(function(){ t.classList.remove("show"); }, 2300);
+}
+var PETLIO_FB = { ready:false, auth:null, db:null };
+function firebaseConfigReady() {
+  var c = window.PETLIO_FIREBASE_CONFIG || {};
+  return !!(c.apiKey && c.authDomain && c.projectId && c.appId);
+}
+function initPetlioFirebase() {
+  if (PETLIO_FB.ready) return true;
+  if (!firebaseConfigReady() || !window.firebase) return false;
+  try {
+    if (!firebase.apps.length) firebase.initializeApp(window.PETLIO_FIREBASE_CONFIG);
+    PETLIO_FB.auth = firebase.auth();
+    PETLIO_FB.db = firebase.firestore();
+    PETLIO_FB.ready = true;
+    return true;
+  } catch(e) {
+    console.warn("Firebase startade inte", e);
+    return false;
+  }
+}
+async function ensurePetlioAccount(email, pass) {
+  if (!initPetlioFirebase()) return null;
+  try {
+    var cred = await PETLIO_FB.auth.createUserWithEmailAndPassword(email, pass);
+    return cred.user;
+  } catch(e) {
+    if (e && e.code === "auth/email-already-in-use") {
+      var login = await PETLIO_FB.auth.signInWithEmailAndPassword(email, pass);
+      return login.user;
+    }
+    throw e;
+  }
+}
+function firebaseProfilePayload(profile, user) {
+  return {
+    id:String(profile.id), uid:user ? user.uid : null, ownerEmail:profile.account ? profile.account.email : "",
+    name:profile.name, purpose:profile.purpose || "match", species:profile.species, breed:profile.breed, age:profile.age, gender:profile.gender,
+    location:profile.location, coords:profile.coords || null, owner:profile.owner, bio:profile.bio,
+    color:profile.color, photo:profile.photo || null, emoji:profile.emoji || "🐾", mine:!!profile.mine,
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp(), createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  };
+}
+async function saveProfileToFirebase(profile, email, pass) {
+  if (!initPetlioFirebase()) return false;
+  var user = await ensurePetlioAccount(email, pass);
+  profile.uid = user.uid;
+  await PETLIO_FB.db.collection("profiles").doc(String(profile.id)).set(firebaseProfilePayload(profile, user), { merge:true });
+  await PETLIO_FB.db.collection("users").doc(user.uid).set({ email:email, updatedAt:firebase.firestore.FieldValue.serverTimestamp() }, { merge:true });
+  return true;
+}
+async function loadFirebaseProfiles() {
+  if (!initPetlioFirebase()) return;
+  try {
+    var snap = await PETLIO_FB.db.collection("profiles").limit(80).get();
+    snap.forEach(function(doc){
+      var a = doc.data();
+      if (!a || !a.id || !a.name) return;
+      if (!ANIMALS.some(function(x){ return String(x.id) === String(a.id); })) ANIMALS.unshift(a);
+    });
+    renderSwipe(); renderBrowse(el("bsearch") ? el("bsearch").value : ""); renderMatches();
+  } catch(e) {
+    console.warn("Kunde inte ladda profiler från Firebase", e);
+  }
+}
+async function saveListingToFirebase(listing) {
+  if (!initPetlioFirebase()) return false;
+  await PETLIO_FB.db.collection("listings").doc(String(listing.id)).set({
+    id:String(listing.id), ownerUid:PETLIO_FB.auth && PETLIO_FB.auth.currentUser ? PETLIO_FB.auth.currentUser.uid : null, name:listing.name, species:listing.species, breed:listing.breed, age:listing.age,
+    price:listing.price, city:listing.city, desc:listing.desc, owner:listing.owner,
+    photo:listing.photo || null, emoji:listing.emoji || "🐾",
+    updatedAt:firebase.firestore.FieldValue.serverTimestamp(), createdAt:firebase.firestore.FieldValue.serverTimestamp()
+  }, { merge:true });
+  return true;
+}
+async function loadFirebaseListings() {
+  if (!initPetlioFirebase()) return;
+  try {
+    var snap = await PETLIO_FB.db.collection("listings").limit(80).get();
+    snap.forEach(function(doc){
+      var l = doc.data();
+      if (!l || !l.id || !l.name) return;
+      if (!MKT_LISTINGS.some(function(x){ return String(x.id) === String(l.id); })) MKT_LISTINGS.unshift(l);
+    });
+    renderListings();
+  } catch(e) { console.warn("Kunde inte ladda annonser från Firebase", e); }
 }
 var CITY_COORDS = {
   "Stockholm": {lat:59.3293,lng:18.0686},
@@ -2182,15 +2297,21 @@ function renderMatches() {
     '</div>';
   }).join("");
 
-  mlist.querySelectorAll("[data-id]").forEach(function(node){
+  mlist.querySelectorAll(".match-profile,.match-profile-hit").forEach(function(node){
     node.addEventListener("click", function(e){
-      e.preventDefault();
-      e.stopPropagation();
+      e.preventDefault(); e.stopPropagation();
       var id = parseInt(this.getAttribute("data-id"));
       var a = ANIMALS.find(function(x){ return x.id===id; });
-      if (!a) return;
-      if (this.classList.contains("match-profile") || this.classList.contains("match-profile-hit")) openDetail(a, true);
-      else openChat(a);
+      if (a) openDetail(a, true);
+    });
+  });
+  mlist.querySelectorAll(".match-chat,.match-chat-hit,.mitem").forEach(function(node){
+    node.addEventListener("click", function(e){
+      if (e.target.closest && e.target.closest(".match-profile,.match-profile-hit")) return;
+      e.preventDefault(); e.stopPropagation();
+      var id = parseInt(this.getAttribute("data-id") || (this.closest(".mitem") && this.closest(".mitem").getAttribute("data-id")));
+      var a = ANIMALS.find(function(x){ return x.id===id; });
+      if (a) openChat(a);
     });
   });
 }
@@ -2362,29 +2483,39 @@ function loadMyProfiles() {
     });
   } catch(e) {}
 }
-function createMyProfile() {
+async function createMyProfile() {
+  var email = (el("f-email") ? el("f-email").value : "").trim();
+  var pass = (el("f-pass") ? el("f-pass").value : "").trim();
   var name = (el("f-name").value || "").trim();
   var breed = (el("f-breed").value || "").trim();
   var age = (el("f-age").value || "").trim();
   var city = (el("f-city").value || "").trim() || S.userCity || "Stockholm";
   var bio = (el("f-bio").value || "").trim();
+  if (!email || email.indexOf("@") === -1) { showToast("Skriv en giltig e-post"); return; }
+  if (!pass || pass.length < 6) { showToast("Lösenord måste vara minst 6 tecken"); return; }
   if (!name) { showToast("Skriv namn på djuret"); return; }
   if (!breed) { showToast("Skriv ras"); return; }
   var coords = cityCoords(city) || {lat:S.userLat,lng:S.userLng};
   var profile = {
     id:"mine-" + Date.now(), mine:true,
-    name:name, species:S.mySpecies, breed:breed, age:age || "Okänd", gender:S.myGender,
-    location:city, coords:coords, owner:"Du", bio:bio || "Ny profil på Petlio.",
+    account:{ email:email },
+    name:name, purpose:S.myPurpose || "match", species:S.mySpecies, breed:breed, age:age || "Okänd", gender:S.myGender,
+    location:city, coords:coords, owner:email.split("@")[0] || "Du", bio:bio || "Ny profil på Petlio.",
     color:animalColor(S.mySpecies), photo:S.myPhoto, emoji:animalEmoji(S.mySpecies)
   };
   ANIMALS = ANIMALS.filter(function(a){ return !a.mine; });
   ANIMALS.unshift(profile);
   saveMyProfiles();
+  try { localStorage.setItem("petlioAccount", JSON.stringify({email:email})); } catch(e) {}
+  var firebaseSaved = false;
+  try { firebaseSaved = await saveProfileToFirebase(profile, email, pass); }
+  catch(e) { console.warn("Firebase sparning misslyckades", e); showToast("Profil sparad lokalt - kontrollera Firebase"); }
   S.idx = 0;
   var saved = el("psaved");
-  if(saved){ saved.textContent="Profil skapad och syns i appen"; saved.style.display="block"; setTimeout(function(){ saved.style.display="none"; },2200); }
-  showToast("Profil skapad");
-  showView("swipe");
+  if(saved){ saved.textContent="Profil skapad"; saved.style.display="block"; setTimeout(function(){ saved.style.display="none"; },2200); }
+  showToast(firebaseSaved ? "Profil skapad och sparad online" : "Profil skapad lokalt");
+  if ((S.myPurpose || "match") === "market") { switchMkt("sell"); showView("market"); }
+  else { openDetail(profile, true); }
 }
 function handlePhoto(file, zoneId, innerTxt) {
   if (!file) return;
@@ -2468,6 +2599,13 @@ document.querySelectorAll(".sp-btn").forEach(function(btn){
 });
 on("sb-h","click",function(){ S.myGender="Hane"; el("sb-h").classList.add("on"); el("sb-o").classList.remove("on"); });
 on("sb-o","click",function(){ S.myGender="Hona"; el("sb-o").classList.add("on"); el("sb-h").classList.remove("on"); });
+document.querySelectorAll("#purpose-row .purpose-btn").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    S.myPurpose = this.getAttribute("data-purpose") || "match";
+    document.querySelectorAll("#purpose-row .purpose-btn").forEach(function(b){ b.classList.remove("on"); });
+    this.classList.add("on");
+  });
+});
 on("save-btn","click",createMyProfile);
 
 on("mt-buy","click",function(){ switchMkt("buy"); });
@@ -2845,13 +2983,13 @@ function renderListings() {
   }
 }
 
-function postListing() {
+async function postListing() {
   var name = el("sl-name").value.trim();
   var price = el("sl-price").value.trim();
   var city = el("sl-city").value.trim();
   if (!name || !price || !city) { showToast("Fyll i namn, pris och stad"); return; }
   var emojis = {Hund:"🐕",Jakthund:"🐕",Katt:"🐱",Häst:"🐴",Kanin:"🐰"};
-  MKT_LISTINGS.unshift({
+  var listing = {
     id: Date.now(), name: name, species: mktSp,
     breed: el("sl-breed").value.trim() || mktSp,
     age: el("sl-age").value.trim() || "Okänd",
@@ -2861,7 +2999,10 @@ function postListing() {
     owner: "Du",
     photo: mktPhoto,
     emoji: emojis[mktSp] || "🐾"
-  });
+  };
+  MKT_LISTINGS.unshift(listing);
+  try { await saveListingToFirebase(listing); }
+  catch(e) { console.warn("Firebase annons misslyckades", e); showToast("Annons sparad lokalt - kontrollera Firebase"); }
   ["sl-name","sl-breed","sl-age","sl-price","sl-city","sl-desc"].forEach(function(id){ el(id).value = ""; });
   mktPhoto = null;
   var zone = el("sell-zone");
@@ -2872,11 +3013,14 @@ function postListing() {
 }
 
 // ─── INIT ────────────────────────────────────────────────────────────────────
+initPetlioFirebase();
 loadMyProfiles();
 restoreSavedLocation();
 populateCityList();
 showView("swipe");
 obSetup();
+loadFirebaseProfiles();
+loadFirebaseListings();
 if ("serviceWorker" in navigator) { window.addEventListener("load", function(){ navigator.serviceWorker.register("./sw.js").catch(function(){}); }); }
 </script>
 
