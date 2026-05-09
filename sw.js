@@ -1,9 +1,13 @@
-const CACHE_NAME = "petlio-v31";
+const CACHE_NAME = "petlio-v32";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./manifest.json",
   "./icon.svg",
+  "./assets/hund.webp",
+  "./assets/katt.webp",
+  "./assets/kanin.webp",
+  "./assets/hast.webp",
 ];
 
 self.addEventListener("install", function(event) {
