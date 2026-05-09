@@ -1491,8 +1491,10 @@ body{background:radial-gradient(circle at 50% -10%,rgba(232,184,122,.14),transpa
   </div>
 </div>
 <!-- Hidden photo sources -->
-<img id="img-dog" src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&q=85" style="display:none"/>
-<img id="img-cat" src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=900&q=85" style="display:none"/>
+<img id="img-dog" src="assets/hund.webp" style="display:none"/>
+<img id="img-cat" src="assets/katt.webp" style="display:none"/>
+<img id="img-rabbit" src="assets/kanin.webp" style="display:none"/>
+<img id="img-horse" src="assets/hast.webp" style="display:none"/>
 <style id="petmatch-iphone-fixes-v3">
 /* iPhone fixes: action buttons, profile tap, market cards */
 .card-info{z-index:45!important;pointer-events:auto!important;}
@@ -1763,6 +1765,17 @@ body{background:radial-gradient(circle at 50% -8%,rgba(240,196,141,.13),transpar
 .dist-city-input:focus{border-color:rgba(240,196,141,.44);box-shadow:0 0 0 4px rgba(240,196,141,.08),inset 0 1px 0 rgba(255,255,255,.05)}
 .dist-current{margin:-6px 0 16px;color:#f5c58d;font-weight:900;font-size:13px}
 </style>
+<style id="petlio-matches-actions-v1">
+.bubble{border:0;background:transparent;color:inherit;padding:0;font:inherit;-webkit-tap-highlight-color:transparent}
+.match-profile-hit,.match-chat-hit{border:0;background:transparent;color:inherit;padding:0;font:inherit;text-align:left;-webkit-tap-highlight-color:transparent}
+.match-profile-hit{flex:0 0 auto;border-radius:999px}
+.match-chat-hit{flex:1;min-width:0;display:block}
+.match-actions{display:flex;gap:8px;flex-shrink:0;margin-left:auto}
+.match-actions button{border:1px solid rgba(240,196,141,.24);background:rgba(240,196,141,.08);color:#f6c58b;border-radius:999px;min-height:36px;padding:0 13px;font-weight:900;font-size:12px;font-family:Inter,sans-serif}
+.match-actions .match-chat{background:linear-gradient(135deg,#ffd7a0,#e8a85f);border-color:transparent;color:#130d08;box-shadow:0 10px 24px rgba(232,184,122,.18)}
+.mitem{gap:12px!important;align-items:center!important}
+@media(max-width:430px){.match-actions{gap:6px}.match-actions button{padding:0 10px;font-size:11px}.mprev{max-width:150px!important}}
+</style>
 <script>
 // ─── DATA ───────────────────────────────────────────────────────────────────
 var ANIMALS = [
@@ -1770,8 +1783,9 @@ var ANIMALS = [
   {id:2,  name:"Mjukis", species:"Katt",     breed:"Huskykatt",           age:"3 mån", gender:"Hona", location:"Göteborg",    owner:"Erik L.",   bio:"Busig kattunge som älskar att leka. Söker sällskap!",      color:"#a78bfa", photo:document.getElementById("img-cat").src, emoji:"🐱"},
   {id:13, name:"Rex",    species:"Hund",     breed:"Labrador",            age:"1 år",  gender:"Hane", location:"Malmö",       owner:"Maria S.",  bio:"Social, trygg och lekfull. Vaccinerad och redo för nya vänner.", color:"#e8b87a", photo:document.getElementById("img-dog").src, emoji:"🐕"},
   {id:14, name:"Luna",   species:"Katt",     breed:"Brittisk korthår",     age:"2 år",  gender:"Hona", location:"Malmö",       owner:"Sara P.",   bio:"Lugn, nyfiken och väldigt gosig. Trivs bäst i trygga hem.", color:"#a78bfa", photo:document.getElementById("img-cat").src, emoji:"🐱"},
+  {id:15, name:"Nino",   species:"Kanin",    breed:"Dvärgkanin",          age:"8 mån", gender:"Hane", location:"Malmö",       owner:"Emma J.",   bio:"Nyfiken och social kanin som gillar lugna miljöer.", color:"#f9a8d4", photo:document.getElementById("img-rabbit").src, emoji:"🐰"},
   {id:4,  name:"Thor",   species:"Hund",     breed:"Schäfer",             age:"4 år",  gender:"Hane", location:"Uppsala",     owner:"Jonas M.",  bio:"Intelligent, lojal och hälsotestad. HD-röntgad.",          color:"#34d399", photo:null, emoji:"🐕"},
-  {id:5,  name:"Misty",  species:"Häst",     breed:"Svensk Varmblod",     age:"6 år",  gender:"Sto",  location:"Linköping",   owner:"Maja R.",   bio:"Vältränad och varm. Letar efter passande hingst.",         color:"#c084fc", photo:null, emoji:"🐴"},
+  {id:5,  name:"Misty",  species:"Häst",     breed:"Svensk Varmblod",     age:"6 år",  gender:"Sto",  location:"Linköping",   owner:"Maja R.",   bio:"Vältränad och varm. Letar efter passande hingst.",         color:"#c084fc", photo:document.getElementById("img-horse").src, emoji:"🐴"},
   {id:6,  name:"Felix",  species:"Katt",     breed:"Ragdoll",             age:"2 år",  gender:"Hane", location:"Örebro",      owner:"Lena S.",   bio:"Extremt gosig och lugn. Perfekt sällskapsdjur.",           color:"#fb7185", photo:null, emoji:"🐱"},
   {id:7,  name:"Bamse",  species:"Hund",     breed:"Labrador",            age:"3 år",  gender:"Hane", location:"Västerås",    owner:"Peter A.",  bio:"Snäll och leklystig. Utmärkt jaktinstinkt.",              color:"#fbbf24", photo:null, emoji:"🦮"},
   {id:8,  name:"Rufus",  species:"Hund",     breed:"Beagle",              age:"5 år",  gender:"Hane", location:"Norrköping",  owner:"David T.",  bio:"Nyfiken med fantastisk näsa. Stamtavla och hälsotest.",    color:"#f59e0b", photo:null, emoji:"🐶"},
@@ -2134,39 +2148,52 @@ function renderMatches() {
   brow.innerHTML = S.matches.map(function(a){
     var hasMsgs = S.msgs[a.id] && S.msgs[a.id].length;
     var inner = a.photo ? '<img src="'+a.photo+'"/>' : a.emoji;
-    return '<div class="bubble" data-id="'+a.id+'"><div class="bubble-av'+(hasMsgs?" read":"")+'" style="background:linear-gradient(135deg,'+a.color+'33,#1c1c1c)">'+inner+'</div><div class="bubble-nm">'+a.name+'</div></div>';
+    return '<button type="button" class="bubble" data-id="'+a.id+'" aria-label="Visa profil för '+a.name+'"><div class="bubble-av'+(hasMsgs?" read":"")+'" style="background:linear-gradient(135deg,'+a.color+'33,#1c1c1c)">'+inner+'</div><div class="bubble-nm">'+a.name+'</div></button>';
   }).join("");
 
   brow.querySelectorAll(".bubble").forEach(function(b){
-    b.addEventListener("click", function(){
+    b.addEventListener("click", function(e){
+      e.preventDefault();
       var id = parseInt(this.getAttribute("data-id"));
       var a = ANIMALS.find(function(x){ return x.id===id; });
-      if (a) openChat(a);
+      if (a) openDetail(a, true);
     });
   });
 
   var sorted = S.matches.slice().sort(function(a,b){
     var am = S.msgs[a.id]||[], bm = S.msgs[b.id]||[];
-    return bm.length - am.length;
+    return (bm[bm.length-1]?.t||0) - (am[am.length-1]?.t||0);
   });
 
   mlist.innerHTML = sorted.map(function(a){
-    var msgs = S.msgs[a.id]||[];
-    var last = msgs.length ? msgs[msgs.length-1] : null;
+    var msgs = S.msgs[a.id]||[], last = msgs[msgs.length-1];
     var unread = last && last.from==="them";
     var inner = a.photo ? '<img src="'+a.photo+'"/>' : a.emoji;
-    return '<div class="mitem" data-id="'+a.id+'"><div class="mav" style="background:linear-gradient(135deg,'+a.color+'33,#1c1c1c)">'+inner+'</div><div style="flex:1;min-width:0"><div class="mname">'+a.name+'</div><div class="msub">'+a.location+' · '+a.owner+'</div><div class="mprev">'+(last?(last.from==="me"?"Du: ":"")+last.text.slice(0,40):"Börja konversationen")+'</div></div>'+(unread?'<div class="munread"></div>':'')+'</div>';
+    var prev = last ? (last.from==="me"?"Du: ":"") + last.text.slice(0,40) : "Ni har matchat. Säg hej.";
+    return '<div class="mitem" data-id="'+a.id+'">' +
+      '<button type="button" class="match-profile-hit" data-id="'+a.id+'" aria-label="Visa profil för '+a.name+'">' +
+        '<div class="mav" style="background:linear-gradient(135deg,'+a.color+'33,#1c1c1c)">'+inner+'</div>' +
+      '</button>' +
+      '<button type="button" class="match-chat-hit" data-id="'+a.id+'" aria-label="Chatta med '+a.name+'">' +
+        '<div class="mname">'+a.name+'</div><div class="msub">'+a.location+' · '+a.owner+'</div><div class="mprev">'+prev+'</div>' +
+      '</button>' +
+      '<div class="match-actions"><button type="button" class="match-profile" data-id="'+a.id+'">Profil</button><button type="button" class="match-chat" data-id="'+a.id+'">Chatta</button></div>' +
+      (unread?'<div class="munread"></div>':'') +
+    '</div>';
   }).join("");
 
-  mlist.querySelectorAll(".mitem").forEach(function(item){
-    item.addEventListener("click", function(){
+  mlist.querySelectorAll("[data-id]").forEach(function(node){
+    node.addEventListener("click", function(e){
+      e.preventDefault();
+      e.stopPropagation();
       var id = parseInt(this.getAttribute("data-id"));
       var a = ANIMALS.find(function(x){ return x.id===id; });
-      if (a) openChat(a);
+      if (!a) return;
+      if (this.classList.contains("match-profile") || this.classList.contains("match-profile-hit")) openDetail(a, true);
+      else openChat(a);
     });
   });
 }
-
 // ─── CHAT ────────────────────────────────────────────────────────────────────
 function openChat(a) {
   S.chatWith = a;
@@ -2592,11 +2619,11 @@ function shareAnimal(a) {
 
 // ── MARKET ──
 var MKT_LISTINGS = [
-  {id:1, name:"Rex",   species:"Hund",     breed:"Labrador",        age:"8 veckor", price:8000, city:"Stockholm", desc:"Söt labrador valp. Vaccinerad och ID-märkt.",         owner:"Maria S.", photo:null, emoji:"🐕"},
-  {id:2, name:"Nala",  species:"Katt",     breed:"Ragdoll",         age:"12 veckor", price:6000, city:"Göteborg",  desc:"Rasren ragdoll med stamtavla. Extremt social.",       owner:"Johan K.", photo:null, emoji:"🐱"},
-  {id:3, name:"Titan", species:"Hund",     breed:"Golden Retriever",age:"10 veckor", price:9000, city:"Malmö",     desc:"Väluppfödd golden med hälsotestat bakgrund.",         owner:"Anna B.",  photo:null, emoji:"🦮"},
+  {id:1, name:"Rex",   species:"Hund",     breed:"Labrador",        age:"8 veckor", price:8000, city:"Stockholm", desc:"Söt labrador valp. Vaccinerad och ID-märkt.",         owner:"Maria S.", photo:document.getElementById("img-dog").src, emoji:"🐕"},
+  {id:2, name:"Nala",  species:"Katt",     breed:"Ragdoll",         age:"12 veckor", price:6000, city:"Göteborg",  desc:"Rasren ragdoll med stamtavla. Extremt social.",       owner:"Johan K.", photo:document.getElementById("img-cat").src, emoji:"🐱"},
+  {id:3, name:"Titan", species:"Hund",     breed:"Golden Retriever",age:"10 veckor", price:9000, city:"Malmö",     desc:"Väluppfödd golden med hälsotestat bakgrund.",         owner:"Anna B.",  photo:document.getElementById("img-dog").src, emoji:"🦮"},
   {id:4, name:"Saga",  species:"Jakthund", breed:"Drever",          age:"6 mån",    price:5000, city:"Östersund", desc:"Vältränad jakthund med bra instinkter.",              owner:"Lars H.",  photo:null, emoji:"🐕"},
-  {id:5, name:"Luna",  species:"Häst",     breed:"Svensk Varmblod", age:"3 år",     price:45000,city:"Uppsala",   desc:"Vältränad sto med fint exteriör och gott temperament.",owner:"Maja R.", photo:null, emoji:"🐴"},
+  {id:5, name:"Luna",  species:"Häst",     breed:"Svensk Varmblod", age:"3 år",     price:45000,city:"Uppsala",   desc:"Vältränad sto med fint exteriör och gott temperament.",owner:"Maja R.", photo:document.getElementById("img-horse").src, emoji:"🐴"},
 ];
 var mktCat = "Alla";
 var mktSp  = "Hund";
