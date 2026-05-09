@@ -1000,6 +1000,10 @@ body{background:radial-gradient(circle at 50% -10%,rgba(232,184,122,.14),transpa
 .my-profile-hero{height:360px;position:relative;display:flex;align-items:center;justify-content:center;background:#151515;overflow:hidden}.my-profile-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.my-profile-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.18) 42%,rgba(0,0,0,.92));}.my-profile-emoji{font-size:96px;position:relative;z-index:1}.my-profile-info{position:absolute;left:22px;right:22px;bottom:20px;z-index:2}.my-profile-name{font-family:'Playfair Display',serif;font-size:52px;line-height:.95;font-weight:900;color:#fff;text-shadow:0 8px 26px rgba(0,0,0,.55)}.my-profile-meta{margin-top:10px;color:rgba(255,255,255,.82);font-size:16px;font-weight:800;line-height:1.4}.my-profile-body{padding:18px 18px 20px}.my-profile-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.my-profile-tag{border-radius:999px;background:rgba(232,184,122,.12);border:1px solid rgba(232,184,122,.18);color:#f4c991;padding:8px 11px;font-size:12px;font-weight:900}.my-profile-bio{color:rgba(255,255,255,.72);font-size:15px;line-height:1.55;margin-bottom:16px}.my-profile-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.my-profile-actions button{border:0;border-radius:16px;padding:14px 10px;font:950 14px/1 Inter,sans-serif;cursor:pointer}.my-profile-edit{background:rgba(255,255,255,.07);color:#f3c489;border:1px solid rgba(232,184,122,.18)!important}.my-profile-view{background:linear-gradient(135deg,#ffd8a6,#d8914c);color:#090909;box-shadow:0 14px 34px rgba(232,184,122,.22)}
 @media(max-width:480px){.my-profile-hero{height:55vh;min-height:390px;max-height:560px}.my-profile-name{font-size:48px}.my-profile-card{border-radius:28px}}
 </style>
+<style id="petlio-my-profile-card-v2">
+.my-profile-card{border-radius:28px!important;background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035))!important;border:1px solid rgba(232,184,122,.22)!important;box-shadow:0 22px 70px rgba(0,0,0,.45)!important;overflow:hidden!important;margin-bottom:18px!important}.my-profile-hero{height:260px!important;min-height:260px!important;max-height:260px!important;border-bottom:1px solid rgba(232,184,122,.14)!important}.my-profile-hero:after{background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.45))!important}.my-profile-info{position:relative!important;left:auto!important;right:auto!important;bottom:auto!important;padding:18px 18px 0!important}.my-profile-name{font-size:42px!important;line-height:1!important;color:#fff!important}.my-profile-meta{font-size:15px!important;color:rgba(255,255,255,.72)!important}.my-profile-body{padding:16px 18px 20px!important}.my-profile-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.my-profile-stat{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.045);border-radius:16px;padding:12px}.my-profile-stat span{display:block;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:rgba(232,184,122,.76);margin-bottom:5px}.my-profile-stat b{display:block;color:white;font-size:14px;line-height:1.25}.my-profile-bio{border-top:1px solid rgba(255,255,255,.08);padding-top:14px!important;margin-bottom:16px!important}.my-profile-actions{grid-template-columns:1fr!important}.my-profile-edit,.my-profile-view{min-height:52px!important;font-size:15px!important}.my-profile-view{display:none!important}
+@media(max-width:480px){.my-profile-hero{height:245px!important;min-height:245px!important}.my-profile-name{font-size:40px!important}.my-profile-row{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body>
 
@@ -1269,23 +1273,6 @@ body{background:radial-gradient(circle at 50% -10%,rgba(232,184,122,.14),transpa
         <div class="ob-title">Välkommen till<br/><span style="color:#e8b87a">Petlio</span></div>
         <div class="ob-sub">Matcha, chatta och hitta trygga kontakter för ditt djur i en app som känns enkel, varm och premium.</div>
         <div class="ob-emoji-row"><span>Hund</span><span>Katt</span><span>Häst</span><span>Kanin</span></div>
-        <div class="petlio-auth-card" id="petlio-auth-card">
-          <div class="petlio-auth-tabs" role="tablist" aria-label="Konto">
-            <button type="button" class="petlio-auth-tab on" id="auth-tab-create" data-auth-mode="create">Skapa konto</button>
-            <button type="button" class="petlio-auth-tab" id="auth-tab-login" data-auth-mode="login">Logga in</button>
-          </div>
-          <div class="petlio-auth-field">
-            <label for="auth-email">E-post</label>
-            <input id="auth-email" type="email" autocomplete="email" placeholder="din@email.se" />
-          </div>
-          <div class="petlio-auth-field">
-            <label for="auth-pass">Lösenord</label>
-            <input id="auth-pass" type="password" autocomplete="current-password" placeholder="Minst 6 tecken" />
-          </div>
-          <button type="button" class="petlio-auth-primary" id="auth-primary">Skapa konto & profil</button>
-          <button type="button" class="petlio-auth-ghost" id="auth-demo">Titta runt först</button>
-          <div class="petlio-auth-note">Petlio sparar profilen tryggt med Firebase när du skapar konto.</div>
-        </div>
       </div>
     </div>
 
@@ -1344,7 +1331,24 @@ body{background:radial-gradient(circle at 50% -10%,rgba(232,184,122,.14),transpa
           <div class="ob-tip"><span style="color:#e8b87a">✓</span> Lägg upp din egen annons</div>
           <div class="ob-tip"><span style="color:#e8b87a">✓</span> Helt gratis att använda</div>
         </div>
-        <button id="ob-start">Kom igång →</button>
+
+        <div class="petlio-auth-card" id="petlio-auth-card">
+          <div class="petlio-auth-tabs" role="tablist" aria-label="Konto">
+            <button type="button" class="petlio-auth-tab on" id="auth-tab-create" data-auth-mode="create">Skapa konto</button>
+            <button type="button" class="petlio-auth-tab" id="auth-tab-login" data-auth-mode="login">Logga in</button>
+          </div>
+          <div class="petlio-auth-field">
+            <label for="auth-email">E-post</label>
+            <input id="auth-email" type="email" autocomplete="email" placeholder="din@email.se" />
+          </div>
+          <div class="petlio-auth-field">
+            <label for="auth-pass">Lösenord</label>
+            <input id="auth-pass" type="password" autocomplete="current-password" placeholder="Minst 6 tecken" />
+          </div>
+          <button type="button" class="petlio-auth-primary" id="auth-primary">Skapa konto & profil</button>
+          <button type="button" class="petlio-auth-ghost" id="auth-demo">Titta runt först</button>
+          <div class="petlio-auth-note">Petlio sparar profilen tryggt med Firebase när du skapar konto.</div>
+        </div>
       </div>
     </div>
 
@@ -1866,6 +1870,21 @@ var S = {
   mktCat:"Alla", mktSp:"Hund", mktPhoto:null,
 };
 
+function petlioLightPhoto(photo){
+  var src = photoSrc(photo) || "";
+  if (!src) return null;
+  if (src.indexOf("data:") === 0 && src.length > 180000) return null;
+  return src;
+}
+function petlioProfileSnapshot(a){
+  if(!a) return null;
+  return {
+    id:a.id, uid:a.uid || null, mine:!!a.mine, account:a.account || null,
+    name:a.name, purpose:a.purpose || "match", species:a.species, breed:a.breed, age:a.age, gender:a.gender,
+    location:a.location, coords:a.coords || null, owner:a.owner, bio:a.bio,
+    color:a.color, photo:petlioLightPhoto(a.photo), emoji:a.emoji || "🐾"
+  };
+}
 function petlioFindAnimalById(id) {
   var sid = String(id);
   return ANIMALS.find(function(x){ return String(x.id) === sid; }) || S.matches.find(function(x){ return String(x.id) === sid; }) || null;
@@ -1875,7 +1894,7 @@ function petlioMatchSnapshot(a) {
   return {
     id:a.id, uid:a.uid || null, name:a.name, species:a.species, breed:a.breed, age:a.age, gender:a.gender,
     location:a.location, coords:a.coords || null, owner:a.owner, bio:a.bio, color:a.color,
-    photo:photoSrc(a.photo) || null, emoji:a.emoji || "🐾", mine:!!a.mine
+    photo:petlioLightPhoto(a.photo), emoji:a.emoji || "🐾", mine:!!a.mine
   };
 }
 function savePetlioSocialLocal() {
@@ -2025,7 +2044,7 @@ function firebaseProfilePayload(profile, user) {
     id:String(profile.id), uid:user ? user.uid : null, ownerEmail:profile.account ? profile.account.email : "",
     name:profile.name, purpose:profile.purpose || "match", species:profile.species, breed:profile.breed, age:profile.age, gender:profile.gender,
     location:profile.location, coords:profile.coords || null, owner:profile.owner, bio:profile.bio,
-    color:profile.color, photo:photoSrc(profile.photo) || null, emoji:profile.emoji || "🐾", mine:!!profile.mine,
+    color:profile.color, photo:petlioLightPhoto(profile.photo), emoji:profile.emoji || "🐾", mine:!!profile.mine,
     updatedAt: firebase.firestore.FieldValue.serverTimestamp(), createdAt: firebase.firestore.FieldValue.serverTimestamp()
   };
 }
@@ -2662,8 +2681,11 @@ function renderMyProfile(){
   card.style.display = "block";
   var img = a.photo ? imgMarkup(a.photo, a.name) : '<div class="my-profile-emoji">'+(a.emoji || "🐾")+'</div>';
   var purpose = (a.purpose || "match") === "market" ? "Köp & Sälj" : "Djurträff";
-  card.innerHTML = '<div class="my-profile-hero">'+img+'<div class="my-profile-info"><div class="my-profile-name">'+a.name+'</div><div class="my-profile-meta">'+(a.age || "")+' · '+(a.gender || "")+' · '+(a.location || "")+'</div></div></div>'+
-    '<div class="my-profile-body"><div class="my-profile-tags"><span class="my-profile-tag">'+purpose+'</span><span class="my-profile-tag">'+(a.species || "Djur")+'</span><span class="my-profile-tag">'+(a.breed || "")+'</span></div><div class="my-profile-bio">'+(a.bio || "Ny profil på Petlio.")+'</div><div class="my-profile-actions"><button type="button" class="my-profile-edit" id="my-profile-edit">Redigera profil</button><button type="button" class="my-profile-view" id="my-profile-view">Visa som kort</button></div></div>';
+  card.innerHTML = '<div class="my-profile-hero">'+img+'</div>' +
+    '<div class="my-profile-info"><div class="my-profile-name">'+(a.name || "Min profil")+'</div><div class="my-profile-meta">'+purpose+' · '+(a.location || "")+'</div></div>' +
+    '<div class="my-profile-body"><div class="my-profile-tags"><span class="my-profile-tag">'+purpose+'</span><span class="my-profile-tag">'+(a.species || "Djur")+'</span><span class="my-profile-tag">'+(a.gender || "")+'</span></div>' +
+    '<div class="my-profile-row"><div class="my-profile-stat"><span>Ras</span><b>'+(a.breed || "Ej angivet")+'</b></div><div class="my-profile-stat"><span>Ålder</span><b>'+(a.age || "Ej angivet")+'</b></div><div class="my-profile-stat"><span>Stad</span><b>'+(a.location || "Ej angivet")+'</b></div><div class="my-profile-stat"><span>Ägare</span><b>'+(a.owner || "Du")+'</b></div></div>' +
+    '<div class="my-profile-bio">'+(a.bio || "Ny profil på Petlio.")+'</div><div class="my-profile-actions"><button type="button" class="my-profile-edit" id="my-profile-edit">Redigera profil</button><button type="button" class="my-profile-view" id="my-profile-view">Visa som kort</button></div></div>';
   var edit = el("my-profile-edit"); if(edit) edit.addEventListener("click", function(){ fillProfileFormFromAnimal(a); card.style.display="none"; form.style.display="block"; if(title) title.textContent="Redigera profil"; });
   var view = el("my-profile-view"); if(view) view.addEventListener("click", function(){ openDetail(a, true); });
 }
@@ -2677,7 +2699,7 @@ function animalColor(species) {
   return map[species] || "#e8b87a";
 }
 function saveMyProfiles() {
-  try { localStorage.setItem("petlioMyProfiles", JSON.stringify(ANIMALS.filter(function(a){ return a.mine; }))); } catch(e) {}
+  try { localStorage.setItem("petlioMyProfiles", JSON.stringify(ANIMALS.filter(function(a){ return a.mine; }).map(petlioProfileSnapshot).filter(Boolean))); } catch(e) { console.warn("Kunde inte spara profil lokalt", e); }
 }
 function loadMyProfiles() {
   try {
