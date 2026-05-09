@@ -857,7 +857,28 @@ body{
 .mkt-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
 .mkt-info,.mkt-contact{min-height:38px!important;border-radius:13px!important;font-size:12px!important;font-weight:900!important;font-family:'Inter',sans-serif!important;cursor:pointer!important;}
 .mkt-info{border:1px solid rgba(255,255,255,.1)!important;background:rgba(255,255,255,.07)!important;color:#fff!important;}
-</style>
+
+/* Petlio premium polish v40 */
+:root{--lux-gold:#f7c982;--lux-gold2:#e7a75d;--lux-line:rgba(247,201,130,.26);--lux-glass:rgba(24,24,24,.72)}
+#app{background:radial-gradient(circle at 50% -8%,rgba(247,201,130,.12),transparent 30%),linear-gradient(180deg,#090909 0%,#050505 56%,#020202 100%)!important}
+.card,.listing,.profile-card,.my-profile-card{box-shadow:0 26px 80px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.06)!important}
+.my-profile-card{display:block;width:100%;overflow:hidden;border:1px solid var(--lux-line)!important;border-radius:34px!important;background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.025))!important}
+.my-profile-shell{position:relative;overflow:hidden;border-radius:34px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.018))}
+.my-profile-hero{height:390px!important;position:relative;overflow:hidden;background:linear-gradient(145deg,#222,#080808)!important}
+.my-profile-hero img{width:100%!important;height:100%!important;object-fit:cover!important;display:block;filter:saturate(1.04) contrast(1.04)}
+.my-profile-hero:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(180deg,transparent,rgba(0,0,0,.88));pointer-events:none}
+.my-profile-edit-float{position:absolute!important;right:18px;top:18px;z-index:3;width:auto!important;padding:13px 18px!important;border-radius:999px!important;background:rgba(10,10,10,.72)!important;border:1px solid var(--lux-line)!important;color:var(--lux-gold)!important;font-weight:900!important;backdrop-filter:blur(14px)}
+.my-profile-info{display:flex!important;align-items:flex-end!important;justify-content:space-between!important;gap:14px!important;padding:20px 22px 10px!important;margin-top:-96px!important;position:relative;z-index:2;color:#fff!important}
+.my-profile-kicker{font-size:12px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--lux-gold);margin-bottom:4px}
+.my-profile-name{font-family:Playfair Display,serif!important;font-size:46px!important;line-height:.96!important;color:#fff!important;text-shadow:0 8px 26px rgba(0,0,0,.7)}
+.my-profile-view{display:inline-flex!important;align-items:center;justify-content:center;min-width:102px;border-radius:999px!important;border:1px solid var(--lux-line)!important;background:rgba(255,255,255,.12)!important;color:#fff!important;padding:12px 15px!important;font-weight:900!important;white-space:nowrap}
+.my-profile-body{padding:14px 22px 24px!important;position:relative;z-index:2;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.84))!important}
+.my-profile-tags{display:flex!important;gap:8px!important;flex-wrap:wrap!important;margin-bottom:14px!important}.my-profile-tag{border:1px solid rgba(247,201,130,.22)!important;background:rgba(247,201,130,.1)!important;color:#f4d3a1!important;border-radius:999px!important;padding:8px 11px!important;font-weight:800!important;font-size:12px!important}
+.my-profile-row{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;margin:12px 0!important}.my-profile-stat{border:1px solid rgba(255,255,255,.08)!important;background:rgba(255,255,255,.045)!important;border-radius:18px!important;padding:12px!important}.my-profile-stat span{display:block;color:rgba(255,255,255,.52)!important;font-size:12px!important;font-weight:800!important}.my-profile-stat b{display:block;color:#fff!important;font-size:15px!important;margin-top:4px!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.my-profile-bio{color:rgba(255,255,255,.82)!important;font-size:16px!important;line-height:1.45!important;margin:14px 0 16px!important}.my-profile-edit-main{display:flex!important;align-items:center;justify-content:center;width:100%!important;border:0!important;border-radius:18px!important;padding:16px!important;background:linear-gradient(135deg,var(--lux-gold),var(--lux-gold2))!important;color:#120905!important;font-weight:1000!important;box-shadow:0 18px 42px rgba(231,167,93,.28)!important}
+.match-modal{backdrop-filter:blur(18px)!important}.match-card{border:1px solid var(--lux-line)!important;box-shadow:0 28px 100px rgba(247,201,130,.18),0 30px 90px rgba(0,0,0,.65)!important}.match-title{font-family:Playfair Display,serif!important;color:var(--lux-gold)!important;text-shadow:0 12px 50px rgba(247,201,130,.28)!important}
+.action-row{z-index:5!important}.like,.pass{box-shadow:0 20px 58px rgba(0,0,0,.42)!important}.like{background:linear-gradient(135deg,#ffe6b4,#e5a75d)!important}.profile-cta{z-index:7!important}
+@media(max-width:520px){.my-profile-hero{height:330px!important}.my-profile-name{font-size:40px!important}.my-profile-info{margin-top:-86px!important;padding-left:18px!important;padding-right:18px!important}.my-profile-body{padding:12px 18px 22px!important}.my-profile-row{grid-template-columns:1fr 1fr!important}}</style>
 
 <style id="petmatch-final-design-v2">
 /* Final design pass: premium Tinder-style app */
@@ -1897,34 +1918,58 @@ function petlioMatchSnapshot(a) {
     photo:petlioLightPhoto(a.photo), emoji:a.emoji || "🐾", mine:!!a.mine
   };
 }
+function petlioMatchIdList() {
+  var seen = {};
+  return (S.matches || []).map(function(m){ return m && m.id ? String(m.id) : ""; }).filter(function(id){ if(!id || seen[id]) return false; seen[id]=true; return true; });
+}
+function petlioCleanMessages(msgs) {
+  var out = {};
+  Object.keys(msgs || {}).forEach(function(id){
+    var list = Array.isArray(msgs[id]) ? msgs[id] : [];
+    out[id] = list.slice(-80).map(function(m){
+      return { from:m.from || "me", text:String(m.text || "").slice(0,600), time:m.time || "", t:m.t || Date.now() };
+    });
+  });
+  return out;
+}
+function petlioRestoreMatches(ids, snapshots) {
+  var byId = {};
+  (snapshots || []).forEach(function(m){ if(m && m.id) byId[String(m.id)] = m; });
+  (snapshots || []).forEach(function(m){ if(m && m.id && ids.indexOf(String(m.id)) < 0) ids.push(String(m.id)); });
+  ids.forEach(function(id){
+    var existing = petlioFindAnimalById(id) || byId[id];
+    if (!existing) return;
+    if (!S.matches.some(function(x){ return String(x.id) === String(id); })) S.matches.push(existing);
+    if (!ANIMALS.some(function(x){ return String(x.id) === String(id); }) && !existing.mine) ANIMALS.push(existing);
+  });
+}
 function savePetlioSocialLocal() {
-  try { localStorage.setItem("petlioMatches", JSON.stringify(S.matches.map(petlioMatchSnapshot).filter(Boolean))); }
-  catch(e) { console.warn("Kunde inte spara matchningar lokalt", e); }
-  try { localStorage.setItem("petlioMessages", JSON.stringify(S.msgs || {})); }
-  catch(e) { console.warn("Kunde inte spara meddelanden lokalt", e); }
+  var ids = petlioMatchIdList();
+  var snapshots = (S.matches || []).map(petlioMatchSnapshot).filter(Boolean);
+  var messages = petlioCleanMessages(S.msgs || {});
+  try { localStorage.setItem("petlioMatchIds", JSON.stringify(ids)); } catch(e) { console.warn("Kunde inte spara match-id lokalt", e); }
+  try { localStorage.setItem("petlioMatches", JSON.stringify(snapshots)); } catch(e) { console.warn("Kunde inte spara matchningar lokalt", e); }
+  try { localStorage.setItem("petlioMessages", JSON.stringify(messages)); } catch(e) { console.warn("Kunde inte spara meddelanden lokalt", e); }
 }
 function loadPetlioSocialLocal() {
   try {
+    var ids = JSON.parse(localStorage.getItem("petlioMatchIds") || "[]");
     var savedMatches = JSON.parse(localStorage.getItem("petlioMatches") || "[]");
     var savedMsgs = JSON.parse(localStorage.getItem("petlioMessages") || "{}");
-    if (savedMsgs && typeof savedMsgs === "object") S.msgs = savedMsgs;
-    if (Array.isArray(savedMatches)) {
-      savedMatches.forEach(function(m){
-        if (!m || !m.id) return;
-        var existing = petlioFindAnimalById(m.id) || m;
-        if (!S.matches.some(function(x){ return String(x.id) === String(m.id); })) S.matches.push(existing);
-        if (!ANIMALS.some(function(x){ return String(x.id) === String(m.id); }) && !m.mine) ANIMALS.push(m);
-      });
-    }
-  } catch(e) { console.warn("Kunde inte läsa sparade matchningar", e); }
+    if (!Array.isArray(ids)) ids = [];
+    ids = ids.map(function(id){ return String(id); });
+    if (savedMsgs && typeof savedMsgs === "object") S.msgs = petlioCleanMessages(savedMsgs);
+    if (Array.isArray(savedMatches)) petlioRestoreMatches(ids, savedMatches);
+  } catch(e) { console.warn("Kunde inte lasa sparade matchningar", e); }
 }
 async function savePetlioSocialFirebase() {
   if (!initPetlioFirebase() || !PETLIO_FB.auth || !PETLIO_FB.auth.currentUser) return false;
   try {
     var uid = PETLIO_FB.auth.currentUser.uid;
     await PETLIO_FB.db.collection("users").doc(uid).collection("appState").doc("social").set({
-      matches:S.matches.map(petlioMatchSnapshot).filter(Boolean),
-      messages:S.msgs || {},
+      matchIds:petlioMatchIdList(),
+      matches:(S.matches || []).map(petlioMatchSnapshot).filter(Boolean),
+      messages:petlioCleanMessages(S.msgs || {}),
       updatedAt:firebase.firestore.FieldValue.serverTimestamp()
     }, { merge:true });
     return true;
@@ -1941,20 +1986,14 @@ async function loadPetlioSocialFirebase() {
         var doc = await PETLIO_FB.db.collection("users").doc(user.uid).collection("appState").doc("social").get();
         if (!doc.exists) { resolve(false); return; }
         var data = doc.data() || {};
-        if (data.messages && typeof data.messages === "object") S.msgs = data.messages;
-        if (Array.isArray(data.matches)) {
-          data.matches.forEach(function(m){
-            if (!m || !m.id) return;
-            var existing = petlioFindAnimalById(m.id) || m;
-            if (!S.matches.some(function(x){ return String(x.id) === String(m.id); })) S.matches.push(existing);
-            if (!ANIMALS.some(function(x){ return String(x.id) === String(m.id); }) && !m.mine) ANIMALS.push(m);
-          });
-        }
+        var ids = Array.isArray(data.matchIds) ? data.matchIds.map(function(id){ return String(id); }) : [];
+        var snapshots = Array.isArray(data.matches) ? data.matches : [];
+        if (data.messages && typeof data.messages === "object") S.msgs = petlioCleanMessages(data.messages);
+        petlioRestoreMatches(ids, snapshots);
         renderMatches(); renderMyProfile(); updateBadge();
         resolve(true);
-      } catch(e) { console.warn("Kunde inte läsa matchningar från Firebase", e); resolve(false); }
+      } catch(e) { console.warn("Kunde inte lasa matchningar fran Firebase", e); resolve(false); }
     });
-    setTimeout(function(){ if(!done){ done = true; resolve(false); } }, 2500);
   });
 }
 function persistPetlioSocial() {
@@ -2680,13 +2719,26 @@ function renderMyProfile(){
   form.style.display = "none";
   card.style.display = "block";
   var img = a.photo ? imgMarkup(a.photo, a.name) : '<div class="my-profile-emoji">'+(a.emoji || "🐾")+'</div>';
-  var purpose = (a.purpose || "match") === "market" ? "Köp & Sälj" : "Djurträff";
-  card.innerHTML = '<div class="my-profile-hero">'+img+'</div>' +
-    '<div class="my-profile-info"><div class="my-profile-name">'+(a.name || "Min profil")+'</div><div class="my-profile-meta">'+purpose+' · '+(a.location || "")+'</div></div>' +
-    '<div class="my-profile-body"><div class="my-profile-tags"><span class="my-profile-tag">'+purpose+'</span><span class="my-profile-tag">'+(a.species || "Djur")+'</span><span class="my-profile-tag">'+(a.gender || "")+'</span></div>' +
-    '<div class="my-profile-row"><div class="my-profile-stat"><span>Ras</span><b>'+(a.breed || "Ej angivet")+'</b></div><div class="my-profile-stat"><span>Ålder</span><b>'+(a.age || "Ej angivet")+'</b></div><div class="my-profile-stat"><span>Stad</span><b>'+(a.location || "Ej angivet")+'</b></div><div class="my-profile-stat"><span>Ägare</span><b>'+(a.owner || "Du")+'</b></div></div>' +
-    '<div class="my-profile-bio">'+(a.bio || "Ny profil på Petlio.")+'</div><div class="my-profile-actions"><button type="button" class="my-profile-edit" id="my-profile-edit">Redigera profil</button><button type="button" class="my-profile-view" id="my-profile-view">Visa som kort</button></div></div>';
-  var edit = el("my-profile-edit"); if(edit) edit.addEventListener("click", function(){ fillProfileFormFromAnimal(a); card.style.display="none"; form.style.display="block"; if(title) title.textContent="Redigera profil"; });
+  var purpose = (a.purpose || "match") === "market" ? "Kop & Salj" : "Djurtraff";
+  var city = a.location || "Inte angivet";
+  var bio = a.bio || "Ny profil pa Petlio.";
+  card.innerHTML =
+    '<div class="my-profile-shell">' +
+      '<div class="my-profile-hero">'+img+'<button type="button" class="my-profile-edit my-profile-edit-float" id="my-profile-edit-top">Redigera</button></div>' +
+      '<div class="my-profile-info">' +
+        '<div><div class="my-profile-kicker">'+purpose+'</div><div class="my-profile-name">'+(a.name || "Min profil")+'</div></div>' +
+        '<button type="button" class="my-profile-view" id="my-profile-view">Visa kort</button>' +
+      '</div>' +
+      '<div class="my-profile-body">' +
+        '<div class="my-profile-tags"><span class="my-profile-tag">'+purpose+'</span><span class="my-profile-tag">'+(a.species || "Djur")+'</span><span class="my-profile-tag">'+(a.gender || "")+'</span></div>' +
+        '<div class="my-profile-row"><div class="my-profile-stat"><span>Ras</span><b>'+(a.breed || "Ej angivet")+'</b></div><div class="my-profile-stat"><span>Alder</span><b>'+(a.age || "Ej angivet")+'</b></div><div class="my-profile-stat"><span>Stad</span><b>'+city+'</b></div><div class="my-profile-stat"><span>Agare</span><b>'+(a.owner || "Du")+'</b></div></div>' +
+        '<div class="my-profile-bio">'+bio+'</div>' +
+        '<button type="button" class="my-profile-edit my-profile-edit-main" id="my-profile-edit">Redigera profil</button>' +
+      '</div>' +
+    '</div>';
+  function editProfile(){ fillProfileFormFromAnimal(a); card.style.display="none"; form.style.display="block"; if(title) title.textContent="Redigera profil"; }
+  var edit = el("my-profile-edit"); if(edit) edit.addEventListener("click", editProfile);
+  var editTop = el("my-profile-edit-top"); if(editTop) editTop.addEventListener("click", editProfile);
   var view = el("my-profile-view"); if(view) view.addEventListener("click", function(){ openDetail(a, true); });
 }
 // ─── PROFILE ─────────────────────────────────────────────────────────────────
@@ -3285,6 +3337,7 @@ async function postListing() {
 // ─── INIT ────────────────────────────────────────────────────────────────────
 initPetlioFirebase();
 loadMyProfiles();
+loadPetlioSocialLocal();
 restoreSavedLocation();
 populateCityList();
 showView("swipe");
