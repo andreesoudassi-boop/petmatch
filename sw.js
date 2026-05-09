@@ -1,17 +1,42 @@
-self.addEventListener('install', function(event) {
-  self.skipWaiting();
-});
+const CACHE_NAME = "petlio-v26";
+const APP_SHELL = [
+  "./",
+  "./index.html",
+  "./manifest.json",
+  "./icon.svg",
+  "./assets/hund.webp",
+  "./assets/katt.webp",
+  "./assets/kanin.webp",
+  "./assets/hast.webp"
+];
 
-self.addEventListener('activate', function(event) {
+self.addEventListener("install", function(event) {
   event.waitUntil(
-    caches.keys()
-      .then(function(keys) { return Promise.all(keys.map(function(key) { return caches.delete(key); })); })
-      .then(function() { return self.registration.unregister(); })
-      .then(function() { return self.clients.matchAll({ type: 'window', includeUncontrolled: true }); })
-      .then(function(clients) { clients.forEach(function(client) { client.navigate(client.url); }); })
+    caches.open(CACHE_NAME).then(function(cache) {
+      return cache.addAll(APP_SHELL.map(function(url) { return new Request(url, { cache: "reload" }); }));
+    }).then(function() { return self.skipWaiting(); })
   );
 });
 
-self.addEventListener('fetch', function(event) {
-  event.respondWith(fetch(event.request));
+self.addEventListener("activate", function(event) {
+  event.waitUntil(
+    caches.keys().then(function(keys) {
+      return Promise.all(keys.filter(function(key) { return key !== CACHE_NAME; }).map(function(key) { return caches.delete(key); }));
+    }).then(function() { return self.clients.claim(); })
+  );
+});
+
+self.addEventListener("fetch", function(event) {
+  if (event.request.method !== "GET") return;
+  event.respondWith(
+    fetch(event.request).then(function(response) {
+      var copy = response.clone();
+      caches.open(CACHE_NAME).then(function(cache) { cache.put(event.request, copy); }).catch(function(){});
+      return response;
+    }).catch(function() {
+      return caches.match(event.request).then(function(cached) {
+        return cached || caches.match("./index.html");
+      });
+    })
+  );
 });
