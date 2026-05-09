@@ -1809,19 +1809,19 @@ window.PETLIO_FIREBASE_CONFIG = {
 <script>
 // ─── DATA ───────────────────────────────────────────────────────────────────
 var ANIMALS = [
-  {id:1,  name:"Bella",  species:"Hund",     breed:"Australian Shepherd", age:"2 år",  gender:"Hona", location:"Stockholm",   owner:"Anna K.",   bio:"Glad och lekfull. Älskar långa promenader och bad.",       color:"#e8b87a", photo:document.getElementById("img-dog").src, emoji:"🐕"},
-  {id:2,  name:"Mjukis", species:"Katt",     breed:"Huskykatt",           age:"3 mån", gender:"Hona", location:"Göteborg",    owner:"Erik L.",   bio:"Busig kattunge som älskar att leka. Söker sällskap!",      color:"#a78bfa", photo:document.getElementById("img-cat").src, emoji:"🐱"},
-  {id:13, name:"Rex",    species:"Hund",     breed:"Labrador",            age:"1 år",  gender:"Hane", location:"Malmö",       owner:"Maria S.",  bio:"Social, trygg och lekfull. Vaccinerad och redo för nya vänner.", color:"#e8b87a", photo:document.getElementById("img-dog").src, emoji:"🐕"},
-  {id:14, name:"Luna",   species:"Katt",     breed:"Brittisk korthår",     age:"2 år",  gender:"Hona", location:"Malmö",       owner:"Sara P.",   bio:"Lugn, nyfiken och väldigt gosig. Trivs bäst i trygga hem.", color:"#a78bfa", photo:document.getElementById("img-cat").src, emoji:"🐱"},
-  {id:15, name:"Nino",   species:"Kanin",    breed:"Dvärgkanin",          age:"8 mån", gender:"Hane", location:"Malmö",       owner:"Emma J.",   bio:"Nyfiken och social kanin som gillar lugna miljöer.", color:"#f9a8d4", photo:document.getElementById("img-rabbit").src, emoji:"🐰"},
-  {id:4,  name:"Thor",   species:"Hund",     breed:"Schäfer",             age:"4 år",  gender:"Hane", location:"Uppsala",     owner:"Jonas M.",  bio:"Intelligent, lojal och hälsotestad. HD-röntgad.",          color:"#34d399", photo:document.getElementById("img-dog").src, emoji:"🐕"},
-  {id:5,  name:"Misty",  species:"Häst",     breed:"Svensk Varmblod",     age:"6 år",  gender:"Sto",  location:"Linköping",   owner:"Maja R.",   bio:"Vältränad och varm. Letar efter passande hingst.",         color:"#c084fc", photo:document.getElementById("img-horse").src, emoji:"🐴"},
-  {id:6,  name:"Felix",  species:"Katt",     breed:"Ragdoll",             age:"2 år",  gender:"Hane", location:"Örebro",      owner:"Lena S.",   bio:"Extremt gosig och lugn. Perfekt sällskapsdjur.",           color:"#fb7185", photo:document.getElementById("img-cat").src, emoji:"🐱"},
-  {id:7,  name:"Bamse",  species:"Hund",     breed:"Labrador",            age:"3 år",  gender:"Hane", location:"Västerås",    owner:"Peter A.",  bio:"Snäll och leklystig. Utmärkt jaktinstinkt.",              color:"#fbbf24", photo:document.getElementById("img-dog").src, emoji:"🦮"},
-  {id:8,  name:"Rufus",  species:"Hund",     breed:"Beagle",              age:"5 år",  gender:"Hane", location:"Norrköping",  owner:"David T.",  bio:"Nyfiken med fantastisk näsa. Stamtavla och hälsotest.",    color:"#f59e0b", photo:document.getElementById("img-dog").src, emoji:"🐶"},
-  {id:10, name:"Jäger",  species:"Jakthund", breed:"Drever",              age:"3 år",  gender:"Hane", location:"Östersund",   owner:"Lars H.",   bio:"Utmärkt spårhund. Van av skogsjakt och klövvilt.",         color:"#d97706", photo:document.getElementById("img-dog").src, emoji:"🐕"},
-  {id:11, name:"Saga",   species:"Jakthund", breed:"Svensk Stövare",      age:"4 år",  gender:"Hona", location:"Umeå",        owner:"Gunnar S.", bio:"Hälsotestad med ren stamtavla. Van vid älgjakt.",          color:"#b45309", photo:document.getElementById("img-dog").src, emoji:"🐶"},
-  {id:12, name:"Rask",   species:"Jakthund", breed:"Hamiltonstövare",     age:"2 år",  gender:"Hane", location:"Falun",       owner:"Erik B.",   bio:"Energisk med fantastisk näsa. SKK-registrerad.",           color:"#92400e", photo:document.getElementById("img-dog").src, emoji:"🐕"},
+  {id:1,  name:"Bella",  species:"Hund",     breed:"Australian Shepherd", age:"2 år",  gender:"Hona", location:"Stockholm",   owner:"Anna K.",   bio:"Glad och lekfull. Älskar långa promenader och bad.",       color:"#e8b87a", photo:assetPhoto("hund.webp","img-dog"), emoji:"🐕"},
+  {id:2,  name:"Mjukis", species:"Katt",     breed:"Huskykatt",           age:"3 mån", gender:"Hona", location:"Göteborg",    owner:"Erik L.",   bio:"Busig kattunge som älskar att leka. Söker sällskap!",      color:"#a78bfa", photo:assetPhoto("katt.webp","img-cat"), emoji:"🐱"},
+  {id:13, name:"Rex",    species:"Hund",     breed:"Labrador",            age:"1 år",  gender:"Hane", location:"Malmö",       owner:"Maria S.",  bio:"Social, trygg och lekfull. Vaccinerad och redo för nya vänner.", color:"#e8b87a", photo:assetPhoto("hund.webp","img-dog"), emoji:"🐕"},
+  {id:14, name:"Luna",   species:"Katt",     breed:"Brittisk korthår",     age:"2 år",  gender:"Hona", location:"Malmö",       owner:"Sara P.",   bio:"Lugn, nyfiken och väldigt gosig. Trivs bäst i trygga hem.", color:"#a78bfa", photo:assetPhoto("katt.webp","img-cat"), emoji:"🐱"},
+  {id:15, name:"Nino",   species:"Kanin",    breed:"Dvärgkanin",          age:"8 mån", gender:"Hane", location:"Malmö",       owner:"Emma J.",   bio:"Nyfiken och social kanin som gillar lugna miljöer.", color:"#f9a8d4", photo:assetPhoto("kanin.webp","img-rabbit"), emoji:"🐰"},
+  {id:4,  name:"Thor",   species:"Hund",     breed:"Schäfer",             age:"4 år",  gender:"Hane", location:"Uppsala",     owner:"Jonas M.",  bio:"Intelligent, lojal och hälsotestad. HD-röntgad.",          color:"#34d399", photo:assetPhoto("hund.webp","img-dog"), emoji:"🐕"},
+  {id:5,  name:"Misty",  species:"Häst",     breed:"Svensk Varmblod",     age:"6 år",  gender:"Sto",  location:"Linköping",   owner:"Maja R.",   bio:"Vältränad och varm. Letar efter passande hingst.",         color:"#c084fc", photo:assetPhoto("hast.webp","img-horse"), emoji:"🐴"},
+  {id:6,  name:"Felix",  species:"Katt",     breed:"Ragdoll",             age:"2 år",  gender:"Hane", location:"Örebro",      owner:"Lena S.",   bio:"Extremt gosig och lugn. Perfekt sällskapsdjur.",           color:"#fb7185", photo:assetPhoto("katt.webp","img-cat"), emoji:"🐱"},
+  {id:7,  name:"Bamse",  species:"Hund",     breed:"Labrador",            age:"3 år",  gender:"Hane", location:"Västerås",    owner:"Peter A.",  bio:"Snäll och leklystig. Utmärkt jaktinstinkt.",              color:"#fbbf24", photo:assetPhoto("hund.webp","img-dog"), emoji:"🦮"},
+  {id:8,  name:"Rufus",  species:"Hund",     breed:"Beagle",              age:"5 år",  gender:"Hane", location:"Norrköping",  owner:"David T.",  bio:"Nyfiken med fantastisk näsa. Stamtavla och hälsotest.",    color:"#f59e0b", photo:assetPhoto("hund.webp","img-dog"), emoji:"🐶"},
+  {id:10, name:"Jäger",  species:"Jakthund", breed:"Drever",              age:"3 år",  gender:"Hane", location:"Östersund",   owner:"Lars H.",   bio:"Utmärkt spårhund. Van av skogsjakt och klövvilt.",         color:"#d97706", photo:assetPhoto("hund.webp","img-dog"), emoji:"🐕"},
+  {id:11, name:"Saga",   species:"Jakthund", breed:"Svensk Stövare",      age:"4 år",  gender:"Hona", location:"Umeå",        owner:"Gunnar S.", bio:"Hälsotestad med ren stamtavla. Van vid älgjakt.",          color:"#b45309", photo:assetPhoto("hund.webp","img-dog"), emoji:"🐶"},
+  {id:12, name:"Rask",   species:"Jakthund", breed:"Hamiltonstövare",     age:"2 år",  gender:"Hane", location:"Falun",       owner:"Erik B.",   bio:"Energisk med fantastisk näsa. SKK-registrerad.",           color:"#92400e", photo:assetPhoto("hund.webp","img-dog"), emoji:"🐕"},
 ];
 
 
@@ -1836,6 +1836,34 @@ var S = {
 
 // ─── UTILS ───────────────────────────────────────────────────────────────────
 function el(id) { return document.getElementById(id); }
+function hiddenPhoto(id) {
+  var img = document.getElementById(id);
+  return img ? img.src : "";
+}
+function assetPhoto(file, fallbackId) {
+  return { src:"assets/" + file, fallback:hiddenPhoto(fallbackId) };
+}
+function photoSrc(photo) {
+  return photo && typeof photo === "object" ? photo.src : photo;
+}
+function photoFallback(photo) {
+  return photo && typeof photo === "object" ? photo.fallback : "";
+}
+function imgMarkup(photo, alt) {
+  var src = photoSrc(photo);
+  if (!src) return "";
+  var fb = photoFallback(photo);
+  return '<img src="' + src + '" alt="' + (alt || "") + '"' + (fb ? ' data-fallback="' + fb + '"' : '') + '/>';
+}
+document.addEventListener("error", function(e) {
+  var img = e.target;
+  if (!img || img.tagName !== "IMG") return;
+  var fb = img.getAttribute("data-fallback");
+  if (fb && img.src !== fb) {
+    img.removeAttribute("data-fallback");
+    img.src = fb;
+  }
+}, true);
 function petlioEmptyHTML(icon, title, text, buttonText, buttonId) {
   return '<div class="petlio-empty"><div class="petlio-empty-icon">' + icon + '</div><h3>' + title + '</h3><p>' + text + '</p>' + (buttonText ? '<button class="empty-btn" id="' + buttonId + '">' + buttonText + '</button>' : '') + '</div>';
 }
@@ -1889,7 +1917,7 @@ function firebaseProfilePayload(profile, user) {
     id:String(profile.id), uid:user ? user.uid : null, ownerEmail:profile.account ? profile.account.email : "",
     name:profile.name, purpose:profile.purpose || "match", species:profile.species, breed:profile.breed, age:profile.age, gender:profile.gender,
     location:profile.location, coords:profile.coords || null, owner:profile.owner, bio:profile.bio,
-    color:profile.color, photo:profile.photo || null, emoji:profile.emoji || "🐾", mine:!!profile.mine,
+    color:profile.color, photo:photoSrc(profile.photo) || null, emoji:profile.emoji || "🐾", mine:!!profile.mine,
     updatedAt: firebase.firestore.FieldValue.serverTimestamp(), createdAt: firebase.firestore.FieldValue.serverTimestamp()
   };
 }
@@ -1920,7 +1948,7 @@ async function saveListingToFirebase(listing) {
   await PETLIO_FB.db.collection("listings").doc(String(listing.id)).set({
     id:String(listing.id), ownerUid:PETLIO_FB.auth && PETLIO_FB.auth.currentUser ? PETLIO_FB.auth.currentUser.uid : null, name:listing.name, species:listing.species, breed:listing.breed, age:listing.age,
     price:listing.price, city:listing.city, desc:listing.desc, owner:listing.owner,
-    photo:listing.photo || null, emoji:listing.emoji || "🐾",
+    photo:photoSrc(listing.photo) || null, emoji:listing.emoji || "🐾",
     updatedAt:firebase.firestore.FieldValue.serverTimestamp(), createdAt:firebase.firestore.FieldValue.serverTimestamp()
   }, { merge:true });
   return true;
@@ -2134,7 +2162,7 @@ function renderSwipe() {
   var next = list[S.idx+1];
 
   var imgHTML = a.photo
-    ? '<img src="'+a.photo+'" alt="'+a.name+'"/>'
+    ? imgMarkup(a.photo, a.name)
     : '<span style="font-size:110px;position:relative;z-index:1">'+a.emoji+'</span>';
 
   var backHTML = next ? '<div class="card card-back" style="background:linear-gradient(135deg,'+next.color+'11,#1c1c1c)"></div>' : '';
@@ -2243,7 +2271,7 @@ function renderBrowse(query) {
   });
   if (!list.length) { grid.innerHTML = petlioEmptyHTML("⌕", "Inga djur hittades", "Testa ett annat filter eller sökord.", "Visa alla", "browse-reset"); var resetBtn = el("browse-reset"); if (resetBtn) resetBtn.addEventListener("click", function(){ var q=el("bsearch"); if(q) q.value=""; renderBrowse(""); }); return; }
   grid.innerHTML = list.map(function(a){
-    var imgH = a.photo ? '<img src="'+a.photo+'" alt="'+a.name+'"/>' : '<span class="be">'+a.emoji+'</span>';
+    var imgH = a.photo ? imgMarkup(a.photo, a.name) : '<span class="be">'+a.emoji+'</span>';
     return '<div class="bcard"><div class="bcard-img" style="background:linear-gradient(135deg,'+a.color+'22,#1c1c1c)">'+imgH+'</div><div class="bcard-body"><div class="bcard-name">'+a.name+'</div><div class="bcard-sub">'+a.breed+' · '+a.location+(distanceText(a)?' · '+distanceText(a):'')+'</div><div class="bcard-tags"><span class="btag">'+a.gender+'</span><span class="btag">'+a.species+'</span></div></div></div>';
   }).join("");
 }
@@ -2262,7 +2290,7 @@ function renderMatches() {
 
   brow.innerHTML = S.matches.map(function(a){
     var hasMsgs = S.msgs[a.id] && S.msgs[a.id].length;
-    var inner = a.photo ? '<img src="'+a.photo+'"/>' : a.emoji;
+    var inner = a.photo ? imgMarkup(a.photo, a.name) : a.emoji;
     return '<button type="button" class="bubble" data-id="'+a.id+'" aria-label="Visa profil för '+a.name+'"><div class="bubble-av'+(hasMsgs?" read":"")+'" style="background:linear-gradient(135deg,'+a.color+'33,#1c1c1c)">'+inner+'</div><div class="bubble-nm">'+a.name+'</div></button>';
   }).join("");
 
@@ -2283,7 +2311,7 @@ function renderMatches() {
   mlist.innerHTML = sorted.map(function(a){
     var msgs = S.msgs[a.id]||[], last = msgs[msgs.length-1];
     var unread = last && last.from==="them";
-    var inner = a.photo ? '<img src="'+a.photo+'"/>' : a.emoji;
+    var inner = a.photo ? imgMarkup(a.photo, a.name) : a.emoji;
     var prev = last ? (last.from==="me"?"Du: ":"") + last.text.slice(0,40) : "Ni har matchat. Säg hej.";
     return '<div class="mitem" data-id="'+a.id+'">' +
       '<button type="button" class="match-profile-hit" data-id="'+a.id+'" aria-label="Visa profil för '+a.name+'">' +
@@ -2320,7 +2348,7 @@ function openChat(a) {
   S.chatWith = a;
   var av = el("chat-av");
   av.style.background = "linear-gradient(135deg,"+a.color+"33,#1c1c1c)";
-  av.innerHTML = a.photo ? '<img src="'+a.photo+'"/>' : a.emoji;
+  av.innerHTML = a.photo ? imgMarkup(a.photo, a.name) : a.emoji;
   el("chat-nm").textContent = a.name;
   el("chat-sb").textContent = a.owner+" · "+a.location;
   showView("chat");
@@ -2369,7 +2397,7 @@ function openDetail(a, fromMatches) {
   var oldSpan = pdImg.querySelector(".pd-em"); if (oldSpan) oldSpan.remove();
 
   if (a.photo) {
-    var img = document.createElement("img"); img.src = a.photo; pdImg.insertBefore(img, pdImg.firstChild);
+    var img = document.createElement("img"); img.src = photoSrc(a.photo); if (photoFallback(a.photo)) img.setAttribute("data-fallback", photoFallback(a.photo)); pdImg.insertBefore(img, pdImg.firstChild);
   } else {
     var span = document.createElement("span"); span.className="pd-em";
     span.style.cssText="font-size:110px;position:relative;z-index:1"; span.textContent=a.emoji;
@@ -2439,9 +2467,9 @@ function burstConfetti() {
 function showMatchOverlay(a) {
   var mine = el("mo-me");
   var mph = el("mo-photo");
-  if (mine) mine.innerHTML = S.myPhoto ? '<img src="'+S.myPhoto+'"/>' : "🐾";
+  if (mine) mine.innerHTML = S.myPhoto ? imgMarkup(S.myPhoto, "Min profil") : "🐾";
   mph.style.background = "linear-gradient(135deg,"+a.color+"44,#181818)";
-  mph.innerHTML = a.photo ? '<img src="'+a.photo+'"/>' : a.emoji;
+  mph.innerHTML = a.photo ? imgMarkup(a.photo, a.name) : a.emoji;
   var title = document.querySelector("#ov-match .match-title");
   if (title) title.innerHTML = "Det är <span>en match!</span>";
   el("mo-sub").textContent = "Du och "+a.owner+" gillar varandra. Skriv första meddelandet nu.";
@@ -2757,11 +2785,11 @@ function shareAnimal(a) {
 
 // ── MARKET ──
 var MKT_LISTINGS = [
-  {id:1, name:"Rex",   species:"Hund",     breed:"Labrador",        age:"8 veckor", price:8000, city:"Stockholm", desc:"Söt labrador valp. Vaccinerad och ID-märkt.",         owner:"Maria S.", photo:document.getElementById("img-dog").src, emoji:"🐕"},
-  {id:2, name:"Nala",  species:"Katt",     breed:"Ragdoll",         age:"12 veckor", price:6000, city:"Göteborg",  desc:"Rasren ragdoll med stamtavla. Extremt social.",       owner:"Johan K.", photo:document.getElementById("img-cat").src, emoji:"🐱"},
-  {id:3, name:"Titan", species:"Hund",     breed:"Golden Retriever",age:"10 veckor", price:9000, city:"Malmö",     desc:"Väluppfödd golden med hälsotestat bakgrund.",         owner:"Anna B.",  photo:document.getElementById("img-dog").src, emoji:"🦮"},
-  {id:4, name:"Saga",  species:"Jakthund", breed:"Drever",          age:"6 mån",    price:5000, city:"Östersund", desc:"Vältränad jakthund med bra instinkter.",              owner:"Lars H.",  photo:document.getElementById("img-dog").src, emoji:"🐕"},
-  {id:5, name:"Luna",  species:"Häst",     breed:"Svensk Varmblod", age:"3 år",     price:45000,city:"Uppsala",   desc:"Vältränad sto med fint exteriör och gott temperament.",owner:"Maja R.", photo:document.getElementById("img-horse").src, emoji:"🐴"},
+  {id:1, name:"Rex",   species:"Hund",     breed:"Labrador",        age:"8 veckor", price:8000, city:"Stockholm", desc:"Söt labrador valp. Vaccinerad och ID-märkt.",         owner:"Maria S.", photo:assetPhoto("hund.webp","img-dog"), emoji:"🐕"},
+  {id:2, name:"Nala",  species:"Katt",     breed:"Ragdoll",         age:"12 veckor", price:6000, city:"Göteborg",  desc:"Rasren ragdoll med stamtavla. Extremt social.",       owner:"Johan K.", photo:assetPhoto("katt.webp","img-cat"), emoji:"🐱"},
+  {id:3, name:"Titan", species:"Hund",     breed:"Golden Retriever",age:"10 veckor", price:9000, city:"Malmö",     desc:"Väluppfödd golden med hälsotestat bakgrund.",         owner:"Anna B.",  photo:assetPhoto("hund.webp","img-dog"), emoji:"🦮"},
+  {id:4, name:"Saga",  species:"Jakthund", breed:"Drever",          age:"6 mån",    price:5000, city:"Östersund", desc:"Vältränad jakthund med bra instinkter.",              owner:"Lars H.",  photo:assetPhoto("hund.webp","img-dog"), emoji:"🐕"},
+  {id:5, name:"Luna",  species:"Häst",     breed:"Svensk Varmblod", age:"3 år",     price:45000,city:"Uppsala",   desc:"Vältränad sto med fint exteriör och gott temperament.",owner:"Maja R.", photo:assetPhoto("hast.webp","img-horse"), emoji:"🐴"},
 ];
 var mktCat = "Alla";
 var mktSp  = "Hund";
@@ -2893,7 +2921,7 @@ function openListing(l) {
     sheet.id = "market-sheet";
     document.body.appendChild(sheet);
   }
-  var media = l.photo ? '<img src="'+l.photo+'" alt="'+l.name+'"/>' : '<span style="position:relative;z-index:1">'+(l.emoji || "🐾")+'</span>';
+  var media = l.photo ? imgMarkup(l.photo, l.name) : '<span style="position:relative;z-index:1">'+(l.emoji || "🐾")+'</span>';
   sheet.innerHTML =
     '<div style="position:absolute;inset:0" onclick="closeMarketSheet()"></div>' +
     '<div class="market-sheet-card" style="position:relative;z-index:1">' +
@@ -2938,7 +2966,7 @@ function renderListings() {
       imgDiv.style.cssText = "height:200px;background:#1a1a1a;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center";
       if (l.photo) {
         var img = document.createElement("img");
-        img.src = l.photo;
+        img.src = photoSrc(l.photo); if (photoFallback(l.photo)) img.setAttribute("data-fallback", photoFallback(l.photo));
         img.style.cssText = "position:absolute;inset:0;width:100%;height:100%;object-fit:cover";
         imgDiv.appendChild(img);
       } else {
