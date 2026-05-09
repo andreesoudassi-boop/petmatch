@@ -1869,14 +1869,14 @@ function petlioMatchSnapshot(a) {
   return {
     id:a.id, uid:a.uid || null, name:a.name, species:a.species, breed:a.breed, age:a.age, gender:a.gender,
     location:a.location, coords:a.coords || null, owner:a.owner, bio:a.bio, color:a.color,
-    photo:a.photo || null, emoji:a.emoji || "🐾", mine:!!a.mine
+    photo:photoSrc(a.photo) || null, emoji:a.emoji || "🐾", mine:!!a.mine
   };
 }
 function savePetlioSocialLocal() {
-  try {
-    localStorage.setItem("petlioMatches", JSON.stringify(S.matches.map(petlioMatchSnapshot).filter(Boolean)));
-    localStorage.setItem("petlioMessages", JSON.stringify(S.msgs || {}));
-  } catch(e) { console.warn("Kunde inte spara matchningar lokalt", e); }
+  try { localStorage.setItem("petlioMatches", JSON.stringify(S.matches.map(petlioMatchSnapshot).filter(Boolean))); }
+  catch(e) { console.warn("Kunde inte spara matchningar lokalt", e); }
+  try { localStorage.setItem("petlioMessages", JSON.stringify(S.msgs || {})); }
+  catch(e) { console.warn("Kunde inte spara meddelanden lokalt", e); }
 }
 function loadPetlioSocialLocal() {
   try {
