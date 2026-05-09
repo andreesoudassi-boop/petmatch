@@ -986,6 +986,15 @@ body{background:radial-gradient(circle at 50% -10%,rgba(232,184,122,.14),transpa
 @keyframes matchConfetti{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:0;transform:translateY(170px) rotate(280deg)}}
 @media(max-width:480px){.match-title{font-size:58px!important}.match-photo{width:120px!important;height:120px!important}.match-photos{height:142px!important}}
 </style>
+<style id="petlio-auth-polish-v1">
+.petlio-auth-card{width:100%;margin-top:10px;padding:14px;border:1px solid rgba(232,184,122,.18);border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035));box-shadow:0 20px 60px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.petlio-auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;margin-bottom:12px;border-radius:999px;background:rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.08)}
+.petlio-auth-tab{border:0;border-radius:999px;padding:11px 10px;background:transparent;color:rgba(255,255,255,.58);font:900 13px/1 Inter,sans-serif;cursor:pointer}
+.petlio-auth-tab.on{background:linear-gradient(135deg,#ffd8a6,#d8914c);color:#080808;box-shadow:0 10px 28px rgba(232,184,122,.22)}
+.petlio-auth-field{margin-top:10px;text-align:left}.petlio-auth-field label{display:block;margin:0 0 6px 4px;font:800 12px/1 Inter,sans-serif;color:#f1c58f;letter-spacing:.02em}.petlio-auth-field input{width:100%;height:50px;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:rgba(0,0,0,.38);color:#fff;padding:0 15px;font:800 16px Inter,sans-serif;outline:none}.petlio-auth-field input:focus{border-color:rgba(232,184,122,.55);box-shadow:0 0 0 4px rgba(232,184,122,.1)}
+.petlio-auth-primary,.petlio-auth-ghost{width:100%;border:0;border-radius:18px;margin-top:12px;padding:15px 14px;font:950 15px/1 Inter,sans-serif;cursor:pointer}.petlio-auth-primary{background:linear-gradient(135deg,#ffd8a6,#d8914c);color:#090909;box-shadow:0 16px 38px rgba(232,184,122,.25)}.petlio-auth-ghost{background:rgba(255,255,255,.055);color:#f4d3a8;border:1px solid rgba(232,184,122,.18)}.petlio-auth-note{margin-top:11px;color:rgba(255,255,255,.52);font:700 12px/1.45 Inter,sans-serif}
+#ob-1 .ob-content{justify-content:flex-start;padding-top:18px}.petlio-auth-card + *{margin-top:0}@media(max-height:760px){#ob-1 .ob-logo{margin-bottom:10px}#ob-1 .ob-title{font-size:30px!important}.petlio-auth-card{padding:12px;border-radius:22px}.petlio-auth-field input{height:46px}.petlio-auth-primary,.petlio-auth-ghost{padding:13px}}
+</style>
 </head>
 <body>
 
@@ -1081,25 +1090,6 @@ body{background:radial-gradient(circle at 50% -10%,rgba(232,184,122,.14),transpa
   <div class="view" id="v-profile">
     <h2>Min profil</h2>
     <div id="psaved" class="psaved">Profil sparad</div>
-
-    <!-- Profile card shown after save -->
-    <div id="my-profile-card" style="display:none;margin-bottom:16px">
-      <div style="background:#161616;border-radius:20px;overflow:hidden;border:1px solid #252525">
-        <div id="mpc-img" style="height:220px;display:flex;align-items:center;justify-content:center;font-size:80px;position:relative;overflow:hidden;background:#1a1a1a">
-          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.9) 0%,transparent 60%)"></div>
-          <div style="position:absolute;bottom:16px;left:18px;right:18px;z-index:2">
-            <div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900" id="mpc-name"></div>
-            <div style="font-size:13px;color:rgba(255,255,255,.7);margin-top:4px" id="mpc-sub"></div>
-          </div>
-        </div>
-        <div style="padding:14px 18px 18px">
-          <div style="font-size:13px;color:rgba(255,255,255,.65);line-height:1.6;margin-bottom:14px" id="mpc-bio"></div>
-          <button onclick="showProfileForm()" style="width:100%;border:1px solid #2a2a2a;background:transparent;color:rgba(255,255,255,.6);border-radius:12px;padding:11px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif">Redigera profil</button>
-        </div>
-      </div>
-    </div>
-
-    <div id="profile-form">
     <div class="pcard">
       <div class="flbl" style="margin-bottom:8px">Vad vill du använda Petlio till?</div>
       <div class="purpose-row" id="purpose-row">
@@ -1133,7 +1123,7 @@ body{background:radial-gradient(circle at 50% -10%,rgba(232,184,122,.14),transpa
       <div class="fwrap"><div class="flbl">Beskrivning</div><textarea class="finput" id="f-bio" rows="3" style="resize:none" placeholder="Berätta om ditt djur..."></textarea></div>
       <button class="save-btn" id="save-btn">Spara profil</button>
     </div>
-  </div></div>
+  </div>
 
   <!-- MARKET VIEW -->
   <div class="view" id="v-market">
@@ -1273,6 +1263,23 @@ body{background:radial-gradient(circle at 50% -10%,rgba(232,184,122,.14),transpa
         <div class="ob-title">Välkommen till<br/><span style="color:#e8b87a">Petlio</span></div>
         <div class="ob-sub">Matcha, chatta och hitta trygga kontakter för ditt djur i en app som känns enkel, varm och premium.</div>
         <div class="ob-emoji-row"><span>Hund</span><span>Katt</span><span>Häst</span><span>Kanin</span></div>
+        <div class="petlio-auth-card" id="petlio-auth-card">
+          <div class="petlio-auth-tabs" role="tablist" aria-label="Konto">
+            <button type="button" class="petlio-auth-tab on" id="auth-tab-create" data-auth-mode="create">Skapa konto</button>
+            <button type="button" class="petlio-auth-tab" id="auth-tab-login" data-auth-mode="login">Logga in</button>
+          </div>
+          <div class="petlio-auth-field">
+            <label for="auth-email">E-post</label>
+            <input id="auth-email" type="email" autocomplete="email" placeholder="din@email.se" />
+          </div>
+          <div class="petlio-auth-field">
+            <label for="auth-pass">Lösenord</label>
+            <input id="auth-pass" type="password" autocomplete="current-password" placeholder="Minst 6 tecken" />
+          </div>
+          <button type="button" class="petlio-auth-primary" id="auth-primary">Skapa konto & profil</button>
+          <button type="button" class="petlio-auth-ghost" id="auth-demo">Titta runt först</button>
+          <div class="petlio-auth-note">Petlio sparar profilen tryggt med Firebase när du skapar konto.</div>
+        </div>
       </div>
     </div>
 
@@ -1853,6 +1860,82 @@ var S = {
   mktCat:"Alla", mktSp:"Hund", mktPhoto:null,
 };
 
+function petlioFindAnimalById(id) {
+  var sid = String(id);
+  return ANIMALS.find(function(x){ return String(x.id) === sid; }) || S.matches.find(function(x){ return String(x.id) === sid; }) || null;
+}
+function petlioMatchSnapshot(a) {
+  if (!a) return null;
+  return {
+    id:a.id, uid:a.uid || null, name:a.name, species:a.species, breed:a.breed, age:a.age, gender:a.gender,
+    location:a.location, coords:a.coords || null, owner:a.owner, bio:a.bio, color:a.color,
+    photo:a.photo || null, emoji:a.emoji || "🐾", mine:!!a.mine
+  };
+}
+function savePetlioSocialLocal() {
+  try {
+    localStorage.setItem("petlioMatches", JSON.stringify(S.matches.map(petlioMatchSnapshot).filter(Boolean)));
+    localStorage.setItem("petlioMessages", JSON.stringify(S.msgs || {}));
+  } catch(e) { console.warn("Kunde inte spara matchningar lokalt", e); }
+}
+function loadPetlioSocialLocal() {
+  try {
+    var savedMatches = JSON.parse(localStorage.getItem("petlioMatches") || "[]");
+    var savedMsgs = JSON.parse(localStorage.getItem("petlioMessages") || "{}");
+    if (savedMsgs && typeof savedMsgs === "object") S.msgs = savedMsgs;
+    if (Array.isArray(savedMatches)) {
+      savedMatches.forEach(function(m){
+        if (!m || !m.id) return;
+        var existing = petlioFindAnimalById(m.id) || m;
+        if (!S.matches.some(function(x){ return String(x.id) === String(m.id); })) S.matches.push(existing);
+        if (!ANIMALS.some(function(x){ return String(x.id) === String(m.id); }) && !m.mine) ANIMALS.push(m);
+      });
+    }
+  } catch(e) { console.warn("Kunde inte läsa sparade matchningar", e); }
+}
+async function savePetlioSocialFirebase() {
+  if (!initPetlioFirebase() || !PETLIO_FB.auth || !PETLIO_FB.auth.currentUser) return false;
+  try {
+    var uid = PETLIO_FB.auth.currentUser.uid;
+    await PETLIO_FB.db.collection("users").doc(uid).collection("appState").doc("social").set({
+      matches:S.matches.map(petlioMatchSnapshot).filter(Boolean),
+      messages:S.msgs || {},
+      updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge:true });
+    return true;
+  } catch(e) { console.warn("Kunde inte spara matchningar i Firebase", e); return false; }
+}
+async function loadPetlioSocialFirebase() {
+  if (!initPetlioFirebase() || !PETLIO_FB.auth) return false;
+  return new Promise(function(resolve){
+    var done = false;
+    PETLIO_FB.auth.onAuthStateChanged(async function(user){
+      if (done) return; done = true;
+      if (!user) { resolve(false); return; }
+      try {
+        var doc = await PETLIO_FB.db.collection("users").doc(user.uid).collection("appState").doc("social").get();
+        if (!doc.exists) { resolve(false); return; }
+        var data = doc.data() || {};
+        if (data.messages && typeof data.messages === "object") S.msgs = data.messages;
+        if (Array.isArray(data.matches)) {
+          data.matches.forEach(function(m){
+            if (!m || !m.id) return;
+            var existing = petlioFindAnimalById(m.id) || m;
+            if (!S.matches.some(function(x){ return String(x.id) === String(m.id); })) S.matches.push(existing);
+            if (!ANIMALS.some(function(x){ return String(x.id) === String(m.id); }) && !m.mine) ANIMALS.push(m);
+          });
+        }
+        renderMatches(); updateBadge();
+        resolve(true);
+      } catch(e) { console.warn("Kunde inte läsa matchningar från Firebase", e); resolve(false); }
+    });
+    setTimeout(function(){ if(!done){ done = true; resolve(false); } }, 2500);
+  });
+}
+function persistPetlioSocial() {
+  savePetlioSocialLocal();
+  savePetlioSocialFirebase();
+}
 // ─── UTILS ───────────────────────────────────────────────────────────────────
 function el(id) { return document.getElementById(id); }
 function hiddenPhoto(id) {
@@ -2240,10 +2323,11 @@ function doSwipe(dir) {
   card.style.opacity = "0";
 
   setTimeout(function() {
-    var already = S.matches.find(function(m){ return m.id===a.id; });
+    var already = S.matches.find(function(m){ return String(m.id)===String(a.id); });
     if (dir==="right" && !already) {
       S.matches.push(a);
       S.pendingMatch = a;
+      persistPetlioSocial();
       showMatchOverlay(a);
     } else {
       S.idx++;
@@ -2317,7 +2401,7 @@ function renderMatches() {
     b.addEventListener("click", function(e){
       e.preventDefault();
       var id = parseInt(this.getAttribute("data-id"));
-      var a = ANIMALS.find(function(x){ return x.id===id; });
+      var a = petlioFindAnimalById(id);
       if (a) openDetail(a, true);
     });
   });
@@ -2348,7 +2432,7 @@ function renderMatches() {
     node.addEventListener("click", function(e){
       e.preventDefault(); e.stopPropagation();
       var id = parseInt(this.getAttribute("data-id"));
-      var a = ANIMALS.find(function(x){ return x.id===id; });
+      var a = petlioFindAnimalById(id);
       if (a) openDetail(a, true);
     });
   });
@@ -2357,11 +2441,31 @@ function renderMatches() {
       if (e.target.closest && e.target.closest(".match-profile,.match-profile-hit")) return;
       e.preventDefault(); e.stopPropagation();
       var id = parseInt(this.getAttribute("data-id") || (this.closest(".mitem") && this.closest(".mitem").getAttribute("data-id")));
-      var a = ANIMALS.find(function(x){ return x.id===id; });
+      var a = petlioFindAnimalById(id);
       if (a) openChat(a);
     });
   });
 }
+// Robust iPhone tap handling for matches/profile/chat
+(function petlioMatchTapDelegation(){
+  function handle(e){
+    var target = e.target;
+    if (!target || !target.closest) return;
+    var profileBtn = target.closest(".match-profile,.match-profile-hit,.bubble");
+    var chatBtn = target.closest(".match-chat,.match-chat-hit,.mitem");
+    if (!profileBtn && !chatBtn) return;
+    var idNode = profileBtn || chatBtn;
+    var id = idNode.getAttribute("data-id") || (idNode.closest(".mitem") && idNode.closest(".mitem").getAttribute("data-id"));
+    var a = petlioFindAnimalById(id);
+    if (!a) return;
+    e.preventDefault();
+    e.stopPropagation();
+    if (profileBtn) openDetail(a, true);
+    else openChat(a);
+  }
+  document.addEventListener("click", handle, true);
+  document.addEventListener("touchend", handle, true);
+})();
 // ─── CHAT ────────────────────────────────────────────────────────────────────
 function openChat(a) {
   S.chatWith = a;
@@ -2391,10 +2495,12 @@ function sendMsg() {
   if (!txt) return;
   if (!S.msgs[a.id]) S.msgs[a.id]=[];
   var time = new Date().toLocaleTimeString("sv",{hour:"2-digit",minute:"2-digit"});
-  S.msgs[a.id].push({from:"me",text:txt,time:time});
+  S.msgs[a.id].push({from:"me",text:txt,time:time,t:Date.now()});
+  persistPetlioSocial();
   inp.value=""; renderChat();
   setTimeout(function(){
-    S.msgs[a.id].push({from:"them",text:"Hej! Tack för meddelandet!",time:new Date().toLocaleTimeString("sv",{hour:"2-digit",minute:"2-digit"})});
+    S.msgs[a.id].push({from:"them",text:"Hej! Tack för meddelandet!",time:new Date().toLocaleTimeString("sv",{hour:"2-digit",minute:"2-digit"}),t:Date.now()});
+    persistPetlioSocial();
     renderChat();
   }, 1200);
 }
@@ -2562,42 +2668,7 @@ async function createMyProfile() {
   if(saved){ saved.textContent="Profil skapad"; saved.style.display="block"; setTimeout(function(){ saved.style.display="none"; },2200); }
   showToast(firebaseSaved ? "Profil skapad och sparad online" : "Profil skapad lokalt");
   if ((S.myPurpose || "match") === "market") { switchMkt("sell"); showView("market"); }
-  else { showMyProfileCard(profile); }
-}
-
-function showMyProfileCard(profile) {
-  var card = el("my-profile-card");
-  var form = el("profile-form");
-  if (!card || !form) { openDetail(profile, true); return; }
-
-  // Fill card
-  el("mpc-name").textContent = profile.name + ", " + (profile.age || "");
-  el("mpc-sub").textContent = (profile.breed || "") + "  ·  " + (profile.location || profile.city || "");
-
-  var imgDiv = el("mpc-img");
-  var oldImg = imgDiv.querySelector("img");
-  if (oldImg) oldImg.remove();
-  if (profile.photo) {
-    var img = document.createElement("img");
-    img.src = typeof profile.photo === "string" ? profile.photo : (document.getElementById(profile.photo) || {src:""}).src;
-    img.style.cssText = "position:absolute;inset:0;width:100%;height:100%;object-fit:cover";
-    imgDiv.insertBefore(img, imgDiv.firstChild);
-  } else {
-    var emojis = {Hund:"🐕",Jakthund:"🐕",Katt:"🐱",Häst:"🐴"};
-    imgDiv.style.fontSize = "80px";
-  }
-
-  el("mpc-bio").textContent = profile.bio || "";
-
-  card.style.display = "block";
-  form.style.display = "none";
-}
-
-function showProfileForm() {
-  var card = el("my-profile-card");
-  var form = el("profile-form");
-  if (card) card.style.display = "none";
-  if (form) form.style.display = "block";
+  else { openDetail(profile, true); }
 }
 function handlePhoto(file, zoneId, innerTxt) {
   if (!file) return;
@@ -2657,7 +2728,7 @@ on("mo-send","click",function(){
   if (txt && S.pendingMatch) {
     if (!S.msgs[S.pendingMatch.id]) S.msgs[S.pendingMatch.id]=[];
     var t=new Date().toLocaleTimeString("sv",{hour:"2-digit",minute:"2-digit"});
-    S.msgs[S.pendingMatch.id].push({from:"me",text:txt,time:t});
+    S.msgs[S.pendingMatch.id].push({from:"me",text:txt,time:t,t:Date.now()}); persistPetlioSocial();
   }
   closeMatch();
 });
@@ -2717,7 +2788,42 @@ on("dist-apply","click",function(){
 });
 
 
+function petlioSetAuthMode(mode){
+  S.authMode = mode === "login" ? "login" : "create";
+  var create = el("auth-tab-create"), login = el("auth-tab-login"), primary = el("auth-primary"), pass = el("auth-pass");
+  if(create) create.classList.toggle("on", S.authMode === "create");
+  if(login) login.classList.toggle("on", S.authMode === "login");
+  if(primary) primary.textContent = S.authMode === "login" ? "Logga in" : "Skapa konto & profil";
+  if(pass) pass.setAttribute("autocomplete", S.authMode === "login" ? "current-password" : "new-password");
+}
+async function petlioAuthPrimary(){
+  var email = (el("auth-email") ? el("auth-email").value : "").trim();
+  var pass = (el("auth-pass") ? el("auth-pass").value : "").trim();
+  if(!email || email.indexOf("@") === -1){ showToast("Skriv en giltig e-post"); return; }
+  if(!pass || pass.length < 6){ showToast("Lösenord måste vara minst 6 tecken"); return; }
+  if(S.authMode === "login"){
+    if(!initPetlioFirebase()){ showToast("Firebase är inte redo ännu"); return; }
+    try{
+      var cred = await PETLIO_FB.auth.signInWithEmailAndPassword(email, pass);
+      try{ localStorage.setItem("petlioAccount", JSON.stringify({email:email, uid:cred.user.uid})); localStorage.setItem("petlioOnboarded","1"); localStorage.setItem("petlioAuthGateV1","1"); localStorage.removeItem("petlioGuest"); }catch(e){}
+      await loadFirebaseProfiles();
+      var mine = ANIMALS.find(function(a){ return a.uid && String(a.uid) === String(cred.user.uid); });
+      var onboarding = el("onboarding"); if(onboarding) onboarding.classList.add("is-hidden");
+      showToast("Du är inloggad");
+      if(mine){ openDetail(mine, true); } else { showView("profile"); }
+    }catch(e){ console.warn(e); showToast("Kunde inte logga in - kontrollera e-post/lösenord"); }
+    return;
+  }
+  if(el("f-email")) el("f-email").value = email;
+  if(el("f-pass")) el("f-pass").value = pass;
+  try{ localStorage.setItem("petlioAccountDraft", JSON.stringify({email:email})); localStorage.setItem("petlioOnboarded","1"); localStorage.setItem("petlioAuthGateV1","1"); localStorage.removeItem("petlioGuest"); }catch(e){}
+  var onboarding = el("onboarding"); if(onboarding) onboarding.classList.add("is-hidden");
+  showView("profile");
+  setTimeout(function(){ var n = el("f-name"); if(n) n.focus(); }, 250);
+}
+
 // ── ONBOARDING ──
+var authPrimaryBound = false;
 var obPage = 1;
 var OB_TOTAL = 4;
 var obReady = false;
@@ -2738,17 +2844,25 @@ function obGo(page) {
 }
 
 function obDone() {
-  try { localStorage.setItem("petlioOnboarded", "1"); } catch(e) {}
+  try { localStorage.setItem("petlioOnboarded", "1"); localStorage.setItem("petlioAuthGateV1", "1"); localStorage.setItem("petlioGuest", "1"); } catch(e) {}
   var onboarding = el("onboarding");
   if(onboarding) onboarding.classList.add("is-hidden");
 }
 
 function obSetup() {
   var onboarding = el("onboarding");
-  try { if (localStorage.getItem("petlioOnboarded") === "1" && onboarding) onboarding.classList.add("is-hidden"); } catch(e) {}
+  try { if (localStorage.getItem("petlioAuthGateV1") === "1" && onboarding) onboarding.classList.add("is-hidden"); } catch(e) {}
   if (obReady) return;
   obReady = true;
   var next = el("ob-next"), skip = el("ob-skip"), start = el("ob-start"), slides = el("ob-slides");
+  if (!authPrimaryBound) {
+    authPrimaryBound = true;
+    document.querySelectorAll(".petlio-auth-tab").forEach(function(btn){ btn.addEventListener("click", function(){ petlioSetAuthMode(this.getAttribute("data-auth-mode")); }); });
+    var primaryAuth = el("auth-primary"); if(primaryAuth) primaryAuth.addEventListener("click", petlioAuthPrimary);
+    var demoAuth = el("auth-demo"); if(demoAuth) demoAuth.addEventListener("click", obDone);
+    [el("auth-email"), el("auth-pass")].forEach(function(inp){ if(inp) inp.addEventListener("keydown", function(e){ if(e.key === "Enter") petlioAuthPrimary(); }); });
+    petlioSetAuthMode("create");
+  }
   if (next) next.addEventListener("click", function(){ if (obPage < OB_TOTAL) obGo(obPage+1); });
   if (skip) skip.addEventListener("click", obDone);
   if (start) start.addEventListener("click", obDone);
