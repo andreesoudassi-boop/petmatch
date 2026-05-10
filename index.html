@@ -1076,31 +1076,45 @@ body{max-width:430px!important;margin:0 auto!important;}
   .card{border-radius:31px!important}.card-img,.card-grad{border-radius:31px!important}.card-info{padding:0 22px 120px!important}.card-actions{bottom:22px!important}.card-actions>div:first-child{grid-template-columns:68px 98px!important;gap:38px!important}.card-btn-nope{width:68px!important;height:68px!important}.card-btn-like{width:98px!important;height:98px!important}.card-sub{font-size:16px!important}.nav{height:82px!important;bottom:max(8px,env(safe-area-inset-bottom,0px))!important}
 }
 </style>
-<style id="petlio-view-fix-v42">
-/* v42: keep swipe only on Matcha and protect bottom actions */
-.view:not(.active){display:none!important;}
+<style id="petlio-layout-repair-v43">
+/* v43: repair swipe composition and stop hidden pages leaking */
+.view{display:none!important;}
+.view.active{display:flex!important;}
 #v-swipe:not(.active){display:none!important;}
-#v-swipe.active{display:flex!important;}
 #v-swipe.active{height:100%!important;min-height:0!important;padding:0 18px!important;flex-direction:column!important;overflow:hidden!important;}
-#v-swipe.active .card-area{flex:1 1 auto!important;height:auto!important;min-height:0!important;max-height:none!important;padding:0!important;margin:0 0 calc(env(safe-area-inset-bottom,0px) + 142px)!important;position:relative!important;overflow:visible!important;}
-#v-swipe.active .card{inset:0!important;border-radius:34px!important;overflow:hidden!important;}
-#v-swipe.active .card-info{padding:0 24px 156px!important;}
-#v-swipe.active .card-actions{bottom:48px!important;z-index:110!important;}
-#v-swipe.active .card-actions>div:first-child{grid-template-columns:72px 104px!important;gap:40px!important;}
-#v-swipe.active .card-btn-nope{width:72px!important;height:72px!important;}
-#v-swipe.active .card-btn-like{width:104px!important;height:104px!important;}
-#v-browse,#v-matches,#v-market,#v-profile{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 118px)!important;overflow-y:auto!important;}
-#v-matches{overflow-y:auto!important;}
-#v-market{overflow-y:auto!important;}
-#v-profile{overflow-y:auto!important;}
+#v-swipe.active .card-area{flex:1 1 auto!important;height:auto!important;min-height:0!important;max-height:none!important;padding:0!important;margin:0 0 calc(env(safe-area-inset-bottom,0px) + 118px)!important;position:relative!important;overflow:visible!important;}
+#v-swipe.active .card{position:absolute!important;inset:0!important;border-radius:34px!important;overflow:hidden!important;border:1px solid rgba(247,201,130,.34)!important;box-shadow:0 28px 76px rgba(0,0,0,.72),0 0 0 1px rgba(255,255,255,.035)!important;}
+#v-swipe.active .card-img,#v-swipe.active .card-grad{border-radius:34px!important;overflow:hidden!important;}
+#v-swipe.active .card-img img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center center!important;}
+#v-swipe.active .card-grad{background:linear-gradient(to top,rgba(0,0,0,.98) 0%,rgba(0,0,0,.82) 23%,rgba(0,0,0,.30) 54%,rgba(0,0,0,.02) 100%)!important;}
+#v-swipe.active .card-info{position:absolute!important;left:0!important;right:0!important;bottom:0!important;padding:0 24px 132px!important;z-index:60!important;display:block!important;pointer-events:none!important;}
+#v-swipe.active .card-info>*{pointer-events:auto!important;}
+#v-swipe.active .card-profile-top{margin:0 0 14px 0!important;min-height:42px!important;padding:10px 17px!important;font-size:14px!important;}
+#v-swipe.active .card-name{font-size:clamp(48px,13vw,60px)!important;line-height:.9!important;}
+#v-swipe.active .card-age,#v-swipe.active .card-sep,#v-swipe.active .card-gender-sym{font-size:20px!important;}
+#v-swipe.active .card-sub{font-size:17px!important;line-height:1.28!important;max-width:360px!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
+#v-swipe.active .card-owner{display:none!important;}
+#v-swipe.active .card-actions{position:absolute!important;left:0!important;right:0!important;bottom:28px!important;margin:0!important;display:flex!important;justify-content:center!important;z-index:90!important;pointer-events:none!important;}
+#v-swipe.active .card-actions>div:first-child{position:static!important;transform:none!important;display:grid!important;grid-template-columns:70px 100px!important;gap:38px!important;align-items:center!important;pointer-events:auto!important;}
+#v-swipe.active .card-btn-nope{width:70px!important;height:70px!important;}
+#v-swipe.active .card-btn-like{width:100px!important;height:100px!important;}
+#v-swipe.active .card-btn-like svg{width:34px!important;height:34px!important;}
+#v-swipe.active .card-btn-nope svg{width:27px!important;height:27px!important;}
+#v-swipe.active .badge-loc{top:16px!important;left:16px!important;}
+#v-swipe.active .card-front::after{right:20px!important;top:20px!important;width:72px!important;height:72px!important;}
+#v-browse,#v-matches,#v-market,#v-profile{overflow-y:auto!important;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 130px)!important;}
+#v-profile .pcard,#profile-form-card{margin-bottom:80px!important;}
+#v-profile h2{margin-top:4px!important;}
 .nav{z-index:300!important;}
 @media(max-height:790px) and (max-width:480px){
-  #v-swipe.active .card-area{margin-bottom:calc(env(safe-area-inset-bottom,0px) + 132px)!important;}
-  #v-swipe.active .card-info{padding-bottom:142px!important;}
-  #v-swipe.active .card-actions{bottom:42px!important;}
-  #v-swipe.active .card-actions>div:first-child{grid-template-columns:66px 94px!important;gap:36px!important;}
-  #v-swipe.active .card-btn-nope{width:66px!important;height:66px!important;}
-  #v-swipe.active .card-btn-like{width:94px!important;height:94px!important;}
+  #v-swipe.active .card-area{margin-bottom:calc(env(safe-area-inset-bottom,0px) + 110px)!important;}
+  #v-swipe.active .card-info{padding:0 22px 116px!important;}
+  #v-swipe.active .card-actions{bottom:24px!important;}
+  #v-swipe.active .card-actions>div:first-child{grid-template-columns:64px 90px!important;gap:34px!important;}
+  #v-swipe.active .card-btn-nope{width:64px!important;height:64px!important;}
+  #v-swipe.active .card-btn-like{width:90px!important;height:90px!important;}
+  #v-swipe.active .card-name{font-size:50px!important;}
+  #v-swipe.active .card-sub{font-size:15px!important;}
 }
 </style>
 </head>
@@ -1964,7 +1978,7 @@ var ANIMALS = [
 var S = {
   filter:"Alla", idx:0, dist:50,
   userLat:59.3293, userLng:18.0686, userCity:"Stockholm", locationMode:"default",
-  matches:[], msgs:{}, chatWith:null, pendingMatch:null,
+  matches:[], msgs:{}, likes:{}, matchDocs:{}, chatWith:null, pendingMatch:null,
   mySpecies:"Hund", myGender:"Hane", myPhoto:null, myPurpose:"match",
   mktCat:"Alla", mktSp:"Hund", mktPhoto:null,
 };
@@ -2021,6 +2035,85 @@ function petlioRestoreMatches(ids, snapshots) {
     if (!ANIMALS.some(function(x){ return String(x.id) === String(id); }) && !existing.mine) ANIMALS.push(existing);
   });
 }
+function petlioMyProfileId(){ var p = petlioMyProfile ? petlioMyProfile() : null; return p && p.id ? String(p.id) : "guest"; }
+function petlioLikeKey(target){ return String(target && target.id ? target.id : target); }
+function petlioMatchKeyFor(a){
+  var me = petlioMyProfileId();
+  var other = petlioLikeKey(a);
+  return [me, other].sort().join("_");
+}
+function petlioMarkLiked(a){ if(!a || !a.id) return; S.likes[String(a.id)] = { id:String(a.id), t:Date.now() }; }
+function petlioCleanLikes(){
+  var out = {};
+  Object.keys(S.likes || {}).forEach(function(id){ if(id) out[id] = { id:id, t:(S.likes[id] && S.likes[id].t) || Date.now() }; });
+  return out;
+}
+function petlioAddMatch(a, matchId){
+  if(!a || !a.id) return false;
+  if (!S.matches.some(function(x){ return String(x.id) === String(a.id); })) S.matches.push(a);
+  if(matchId) S.matchDocs[String(a.id)] = matchId;
+  if(!S.msgs[a.id]) S.msgs[a.id] = [];
+  return true;
+}
+async function savePetlioLikeFirebase(a){
+  if(!initPetlioFirebase() || !PETLIO_FB.auth || !PETLIO_FB.auth.currentUser || !a || !a.id) return {online:false,matched:false};
+  var me = petlioMyProfile();
+  if(!me || !me.id) return {online:false,matched:false};
+  var user = PETLIO_FB.auth.currentUser;
+  var fromProfileId = String(me.id), toProfileId = String(a.id);
+  var likeId = fromProfileId + "_" + toProfileId;
+  var reverseId = toProfileId + "_" + fromProfileId;
+  try{
+    var likePayload = {
+      fromUid:user.uid, fromProfileId:fromProfileId, fromName:me.name || "",
+      toUid:a.uid || null, toProfileId:toProfileId, toName:a.name || "",
+      createdAt:firebase.firestore.FieldValue.serverTimestamp()
+    };
+    await PETLIO_FB.db.collection("likes").doc(likeId).set(likePayload, {merge:true});
+    var rev = await PETLIO_FB.db.collection("likes").doc(reverseId).get();
+    if(rev.exists || !a.uid){
+      var matchId = petlioMatchKeyFor(a);
+      await PETLIO_FB.db.collection("matches").doc(matchId).set({
+        id:matchId,
+        profileIds:[fromProfileId,toProfileId].sort(),
+        uids:[user.uid,a.uid || "demo"].filter(Boolean),
+        profiles:{ me:petlioMatchSnapshot(me), other:petlioMatchSnapshot(a) },
+        updatedAt:firebase.firestore.FieldValue.serverTimestamp(),
+        createdAt:firebase.firestore.FieldValue.serverTimestamp()
+      }, {merge:true});
+      S.matchDocs[toProfileId] = matchId;
+      return {online:true,matched:true,matchId:matchId};
+    }
+    return {online:true,matched:false};
+  }catch(e){ console.warn("Kunde inte spara like/match i Firebase", e); return {online:false,matched:false,error:e}; }
+}
+async function savePetlioChatMessageFirebase(a, msg){
+  if(!initPetlioFirebase() || !PETLIO_FB.auth || !PETLIO_FB.auth.currentUser || !a || !msg) return false;
+  try{
+    var matchId = S.matchDocs[String(a.id)] || petlioMatchKeyFor(a);
+    await PETLIO_FB.db.collection("matches").doc(matchId).collection("messages").add({
+      from:msg.from || "me", text:msg.text || "", time:msg.time || "", t:msg.t || Date.now(),
+      uid:PETLIO_FB.auth.currentUser.uid,
+      createdAt:firebase.firestore.FieldValue.serverTimestamp()
+    });
+    await PETLIO_FB.db.collection("matches").doc(matchId).set({updatedAt:firebase.firestore.FieldValue.serverTimestamp()}, {merge:true});
+    return true;
+  }catch(e){ console.warn("Kunde inte spara meddelande i Firebase", e); return false; }
+}
+async function loadPetlioMatchesFirebase(){
+  if(!initPetlioFirebase() || !PETLIO_FB.auth || !PETLIO_FB.auth.currentUser) return false;
+  var me = petlioMyProfile(); if(!me || !me.id) return false;
+  try{
+    var snap = await PETLIO_FB.db.collection("matches").where("profileIds","array-contains",String(me.id)).limit(50).get();
+    snap.forEach(function(doc){
+      var d = doc.data() || {}, ids = d.profileIds || [];
+      var otherId = ids.find(function(id){ return String(id) !== String(me.id); });
+      var other = petlioFindAnimalById(otherId) || (d.profiles && d.profiles.other && String(d.profiles.other.id) === String(otherId) ? d.profiles.other : null) || (d.profiles && d.profiles.me && String(d.profiles.me.id) === String(otherId) ? d.profiles.me : null);
+      if(other){ petlioAddMatch(other, doc.id); }
+    });
+    savePetlioSocialLocal(); renderMatches(); updateBadge(); return true;
+  }catch(e){ console.warn("Kunde inte lasa Firebase-matchningar", e); return false; }
+}
 function savePetlioSocialLocal() {
   var ids = petlioMatchIdList();
   var snapshots = (S.matches || []).map(petlioMatchSnapshot).filter(Boolean);
@@ -2028,15 +2121,21 @@ function savePetlioSocialLocal() {
   try { localStorage.setItem("petlioMatchIds", JSON.stringify(ids)); } catch(e) { console.warn("Kunde inte spara match-id lokalt", e); }
   try { localStorage.setItem("petlioMatches", JSON.stringify(snapshots)); } catch(e) { console.warn("Kunde inte spara matchningar lokalt", e); }
   try { localStorage.setItem("petlioMessages", JSON.stringify(messages)); } catch(e) { console.warn("Kunde inte spara meddelanden lokalt", e); }
+  try { localStorage.setItem("petlioLikes", JSON.stringify(petlioCleanLikes())); } catch(e) { console.warn("Kunde inte spara likes lokalt", e); }
+  try { localStorage.setItem("petlioMatchDocs", JSON.stringify(S.matchDocs || {})); } catch(e) {}
 }
 function loadPetlioSocialLocal() {
   try {
     var ids = JSON.parse(localStorage.getItem("petlioMatchIds") || "[]");
     var savedMatches = JSON.parse(localStorage.getItem("petlioMatches") || "[]");
     var savedMsgs = JSON.parse(localStorage.getItem("petlioMessages") || "{}");
+    var savedLikes = JSON.parse(localStorage.getItem("petlioLikes") || "{}");
+    var savedMatchDocs = JSON.parse(localStorage.getItem("petlioMatchDocs") || "{}");
     if (!Array.isArray(ids)) ids = [];
     ids = ids.map(function(id){ return String(id); });
     if (savedMsgs && typeof savedMsgs === "object") S.msgs = petlioCleanMessages(savedMsgs);
+    if (savedLikes && typeof savedLikes === "object") S.likes = savedLikes;
+    if (savedMatchDocs && typeof savedMatchDocs === "object") S.matchDocs = savedMatchDocs;
     if (Array.isArray(savedMatches)) petlioRestoreMatches(ids, savedMatches);
   } catch(e) { console.warn("Kunde inte lasa sparade matchningar", e); }
 }
@@ -2048,6 +2147,8 @@ async function savePetlioSocialFirebase() {
       matchIds:petlioMatchIdList(),
       matches:(S.matches || []).map(petlioMatchSnapshot).filter(Boolean),
       messages:petlioCleanMessages(S.msgs || {}),
+      likes:petlioCleanLikes(),
+      matchDocs:S.matchDocs || {},
       updatedAt:firebase.firestore.FieldValue.serverTimestamp()
     }, { merge:true });
     return true;
@@ -2067,6 +2168,8 @@ async function loadPetlioSocialFirebase() {
         var ids = Array.isArray(data.matchIds) ? data.matchIds.map(function(id){ return String(id); }) : [];
         var snapshots = Array.isArray(data.matches) ? data.matches : [];
         if (data.messages && typeof data.messages === "object") S.msgs = petlioCleanMessages(data.messages);
+        if (data.likes && typeof data.likes === "object") S.likes = data.likes;
+        if (data.matchDocs && typeof data.matchDocs === "object") S.matchDocs = data.matchDocs;
         petlioRestoreMatches(ids, snapshots);
         renderMatches(); renderMyProfile(); updateBadge();
         resolve(true);
@@ -2466,20 +2569,29 @@ function doSwipe(dir) {
   card.style.opacity = "0";
 
   setTimeout(function() {
-    var already = S.matches.find(function(m){ return String(m.id)===String(a.id); });
-    if (dir==="right" && !already) {
-      S.matches.push(a);
-      S.pendingMatch = a;
-      persistPetlioSocial();
-      showMatchOverlay(a);
-    } else {
-      S.idx++;
-      renderSwipe();
-    }
-    updateBadge();
+    if (dir === "right") handlePetlioLike(a);
+    else { S.idx++; renderSwipe(); updateBadge(); }
   }, 340);
 }
 
+async function handlePetlioLike(a){
+  var already = S.matches.find(function(m){ return String(m.id)===String(a.id); });
+  petlioMarkLiked(a);
+  var online = await savePetlioLikeFirebase(a);
+  var shouldMatch = already || online.matched || !a.uid;
+  if (shouldMatch) {
+    petlioAddMatch(a, online.matchId || petlioMatchKeyFor(a));
+    S.pendingMatch = a;
+    persistPetlioSocial();
+    showMatchOverlay(a);
+  } else {
+    persistPetlioSocial();
+    showToast("Like sparad");
+    S.idx++;
+    renderSwipe();
+  }
+  updateBadge();
+}
 function initTouchSwipe(card, a) {
   var sx=0, sy=0, drag=false, raf=null, moved=false;
   card.addEventListener("touchstart", function(e){ if(e.target.closest && e.target.closest("button")){ drag=false; return; } sx=e.touches[0].clientX; sy=e.touches[0].clientY; drag=true; moved=false; card.style.transition="none"; }, {passive:true});
@@ -2610,6 +2722,17 @@ function renderMatches() {
   document.addEventListener("touchend", handle, true);
 })();
 // ─── CHAT ────────────────────────────────────────────────────────────────────
+async function loadPetlioChatMessagesFirebase(a){
+  if(!initPetlioFirebase() || !PETLIO_FB.auth || !PETLIO_FB.auth.currentUser || !a) return false;
+  try{
+    var matchId = S.matchDocs[String(a.id)] || petlioMatchKeyFor(a);
+    var snap = await PETLIO_FB.db.collection("matches").doc(matchId).collection("messages").orderBy("t","asc").limit(120).get();
+    var list = [];
+    snap.forEach(function(doc){ var m = doc.data() || {}; if(m.text) list.push({from:m.from || "them", text:m.text, time:m.time || "", t:m.t || Date.now()}); });
+    if(list.length){ S.msgs[a.id] = list; savePetlioSocialLocal(); renderChat(); }
+    return true;
+  }catch(e){ console.warn("Kunde inte lasa chatt fran Firebase", e); return false; }
+}
 function openChat(a) {
   S.chatWith = a;
   var av = el("chat-av");
@@ -2619,6 +2742,7 @@ function openChat(a) {
   el("chat-sb").textContent = a.owner+" · "+a.location;
   showView("chat");
   renderChat();
+  loadPetlioChatMessagesFirebase(a);
 }
 
 function renderChat() {
@@ -2638,16 +2762,19 @@ function sendMsg() {
   if (!txt) return;
   if (!S.msgs[a.id]) S.msgs[a.id]=[];
   var time = new Date().toLocaleTimeString("sv",{hour:"2-digit",minute:"2-digit"});
-  S.msgs[a.id].push({from:"me",text:txt,time:time,t:Date.now()});
+  var msg = {from:"me",text:txt,time:time,t:Date.now()};
+  S.msgs[a.id].push(msg);
   persistPetlioSocial();
+  savePetlioChatMessageFirebase(a, msg);
   inp.value=""; renderChat();
-  setTimeout(function(){
-    S.msgs[a.id].push({from:"them",text:"Hej! Tack för meddelandet!",time:new Date().toLocaleTimeString("sv",{hour:"2-digit",minute:"2-digit"}),t:Date.now()});
-    persistPetlioSocial();
-    renderChat();
-  }, 1200);
+  if(!a.uid){
+    setTimeout(function(){
+      S.msgs[a.id].push({from:"them",text:"Hej! Tack for meddelandet!",time:new Date().toLocaleTimeString("sv",{hour:"2-digit",minute:"2-digit"}),t:Date.now()});
+      persistPetlioSocial();
+      renderChat();
+    }, 1200);
+  }
 }
-
 function ensureDetailOverlay(){
   if(el("ov-detail")) return;
   var wrap=document.createElement("div");
@@ -2772,7 +2899,21 @@ function petlioCurrentEmail(){
 function petlioMyProfile(){
   var uid = petlioCurrentUserId();
   var email = petlioCurrentEmail();
-  return ANIMALS.find(function(a){ return uid && a.uid && String(a.uid) === String(uid); }) || ANIMALS.find(function(a){ return email && a.account && a.account.email === email; }) || (!uid && !email ? ANIMALS.find(function(a){ return a && a.mine; }) : null) || ANIMALS.find(function(a){ return a && a.mine; }) || null;
+  var found = ANIMALS.find(function(a){ return uid && a.uid && String(a.uid) === String(uid); }) || ANIMALS.find(function(a){ return email && a.account && a.account.email === email; }) || ANIMALS.find(function(a){ return a && a.mine; }) || null;
+  if (found) return found;
+  try {
+    var saved = JSON.parse(localStorage.getItem("petlioMyProfiles") || "[]");
+    if ((!saved || !saved.length) && localStorage.getItem("petlioActiveProfile")) saved = [JSON.parse(localStorage.getItem("petlioActiveProfile"))];
+    if (Array.isArray(saved) && saved.length) {
+      var a = saved[0];
+      if (a && a.id) {
+        a.mine = true;
+        if (!ANIMALS.some(function(x){ return String(x.id) === String(a.id); })) ANIMALS.unshift(a);
+        return a;
+      }
+    }
+  } catch(e) {}
+  return null;
 }
 function fillProfileFormFromAnimal(a){
   if(!a) return;
@@ -2829,11 +2970,16 @@ function animalColor(species) {
   return map[species] || "#e8b87a";
 }
 function saveMyProfiles() {
-  try { localStorage.setItem("petlioMyProfiles", JSON.stringify(ANIMALS.filter(function(a){ return a.mine; }).map(petlioProfileSnapshot).filter(Boolean))); } catch(e) { console.warn("Kunde inte spara profil lokalt", e); }
+  try {
+    var mine = ANIMALS.filter(function(a){ return a.mine; }).map(petlioProfileSnapshot).filter(Boolean);
+    localStorage.setItem("petlioMyProfiles", JSON.stringify(mine));
+    if (mine.length) localStorage.setItem("petlioActiveProfile", JSON.stringify(mine[0]));
+  } catch(e) { console.warn("Kunde inte spara profil lokalt", e); }
 }
 function loadMyProfiles() {
   try {
     var saved = JSON.parse(localStorage.getItem("petlioMyProfiles") || "[]");
+    if ((!saved || !saved.length) && localStorage.getItem("petlioActiveProfile")) saved = [JSON.parse(localStorage.getItem("petlioActiveProfile"))];
     saved.forEach(function(a){
       if (!a || !a.id) return;
       if (!ANIMALS.some(function(x){ return String(x.id) === String(a.id); })) ANIMALS.unshift(a);
@@ -3421,6 +3567,8 @@ populateCityList();
 showView("swipe");
 obSetup();
 loadFirebaseProfiles();
+loadPetlioSocialFirebase();
+setTimeout(loadPetlioMatchesFirebase, 1200);
 loadFirebaseListings();
 if ("serviceWorker" in navigator) { window.addEventListener("load", function(){ navigator.serviceWorker.register("./sw.js").catch(function(){}); }); }
 </script>
