@@ -1076,6 +1076,33 @@ body{max-width:430px!important;margin:0 auto!important;}
   .card{border-radius:31px!important}.card-img,.card-grad{border-radius:31px!important}.card-info{padding:0 22px 120px!important}.card-actions{bottom:22px!important}.card-actions>div:first-child{grid-template-columns:68px 98px!important;gap:38px!important}.card-btn-nope{width:68px!important;height:68px!important}.card-btn-like{width:98px!important;height:98px!important}.card-sub{font-size:16px!important}.nav{height:82px!important;bottom:max(8px,env(safe-area-inset-bottom,0px))!important}
 }
 </style>
+<style id="petlio-view-fix-v42">
+/* v42: keep swipe only on Matcha and protect bottom actions */
+.view:not(.active){display:none!important;}
+#v-swipe:not(.active){display:none!important;}
+#v-swipe.active{display:flex!important;}
+#v-swipe.active{height:100%!important;min-height:0!important;padding:0 18px!important;flex-direction:column!important;overflow:hidden!important;}
+#v-swipe.active .card-area{flex:1 1 auto!important;height:auto!important;min-height:0!important;max-height:none!important;padding:0!important;margin:0 0 calc(env(safe-area-inset-bottom,0px) + 142px)!important;position:relative!important;overflow:visible!important;}
+#v-swipe.active .card{inset:0!important;border-radius:34px!important;overflow:hidden!important;}
+#v-swipe.active .card-info{padding:0 24px 156px!important;}
+#v-swipe.active .card-actions{bottom:48px!important;z-index:110!important;}
+#v-swipe.active .card-actions>div:first-child{grid-template-columns:72px 104px!important;gap:40px!important;}
+#v-swipe.active .card-btn-nope{width:72px!important;height:72px!important;}
+#v-swipe.active .card-btn-like{width:104px!important;height:104px!important;}
+#v-browse,#v-matches,#v-market,#v-profile{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 118px)!important;overflow-y:auto!important;}
+#v-matches{overflow-y:auto!important;}
+#v-market{overflow-y:auto!important;}
+#v-profile{overflow-y:auto!important;}
+.nav{z-index:300!important;}
+@media(max-height:790px) and (max-width:480px){
+  #v-swipe.active .card-area{margin-bottom:calc(env(safe-area-inset-bottom,0px) + 132px)!important;}
+  #v-swipe.active .card-info{padding-bottom:142px!important;}
+  #v-swipe.active .card-actions{bottom:42px!important;}
+  #v-swipe.active .card-actions>div:first-child{grid-template-columns:66px 94px!important;gap:36px!important;}
+  #v-swipe.active .card-btn-nope{width:66px!important;height:66px!important;}
+  #v-swipe.active .card-btn-like{width:94px!important;height:94px!important;}
+}
+</style>
 </head>
 <body>
 
