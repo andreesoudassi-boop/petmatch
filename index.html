@@ -1124,6 +1124,14 @@ body{max-width:430px!important;margin:0 auto!important;}
   .profile-loading-card p{margin:0;max-width:430px;color:rgba(255,255,255,.62);font-size:17px;line-height:1.45}
   @keyframes petlioProfilePulse{0%,100%{transform:translateY(0) scale(1);filter:saturate(1)}50%{transform:translateY(-4px) scale(1.04);filter:saturate(1.18)}}
 </style>
+<style id="petlio-trust-v46">
+  .pd-trust{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 4px}
+  .pd-trust-pill{border:1px solid rgba(232,184,122,.18);background:rgba(255,255,255,.045);border-radius:16px;padding:12px;color:rgba(255,255,255,.78);font:800 12px/1.25 Inter,sans-serif}
+  .pd-trust-pill b{display:block;color:#f3c489;font-size:13px;margin-bottom:3px}
+  .pd-safety-actions{display:flex;gap:10px;margin-top:14px}
+  .pd-safety-actions button{flex:1;min-height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.25);color:rgba(255,255,255,.7);font:900 12px Inter,sans-serif;cursor:pointer}
+  .pd-safety-actions button:last-child{color:#ffc5c5;border-color:rgba(255,120,120,.18)}
+</style>
 </head>
 <body>
 
@@ -1993,6 +2001,7 @@ var S = {
   matches:[], msgs:{}, likes:{}, matchDocs:{}, chatWith:null, pendingMatch:null,
   mySpecies:"Hund", myGender:"Hane", myPhoto:null, myPurpose:"match",
   mktCat:"Alla", mktSp:"Hund", mktPhoto:null,
+  blocked:{}, reports:[],
 };
 var PETLIO_REMOTE_PROFILE_CHECKED = false;
 var PETLIO_PROFILE_WAIT_TIMER = null;
@@ -2011,6 +2020,34 @@ function petlioProfileSnapshot(a){
     location:a.location, coords:a.coords || null, owner:a.owner, bio:a.bio,
     color:a.color, photo:petlioLightPhoto(a.photo), emoji:a.emoji || "🐾"
   };
+}
+function petlioIsBlocked(a){ return !!(a && a.id && S.blocked && S.blocked[String(a.id)]); }
+function petlioVisibleMatches(){ return (S.matches || []).filter(function(a){ return a && !a.mine && !petlioIsBlocked(a); }); }
+function petlioSaveBlockedLocal(){ try { localStorage.setItem("petlioBlocked", JSON.stringify(S.blocked || {})); } catch(e) {} }
+function petlioLoadBlockedLocal(){ try { var b = JSON.parse(localStorage.getItem("petlioBlocked") || "{}"); if (b && typeof b === "object") S.blocked = b; } catch(e) {} }
+function petlioReportProfile(a){
+  if(!a || !a.id) return;
+  var report = { id:String(a.id), name:a.name || "", t:Date.now() };
+  S.reports = Array.isArray(S.reports) ? S.reports : [];
+  S.reports.push(report);
+  try { localStorage.setItem("petlioReports", JSON.stringify(S.reports.slice(-40))); } catch(e) {}
+  try {
+    if(initPetlioFirebase() && PETLIO_FB.auth && PETLIO_FB.auth.currentUser){
+      PETLIO_FB.db.collection("reports").add({ profileId:String(a.id), profileName:a.name || "", reporterUid:PETLIO_FB.auth.currentUser.uid, createdAt:firebase.firestore.FieldValue.serverTimestamp() });
+    }
+  } catch(e) {}
+  showToast("Tack, profilen ar rapporterad");
+}
+function petlioBlockProfile(a){
+  if(!a || !a.id) return;
+  S.blocked[String(a.id)] = { id:String(a.id), name:a.name || "", t:Date.now() };
+  S.matches = (S.matches || []).filter(function(x){ return String(x.id) !== String(a.id); });
+  delete S.msgs[a.id];
+  petlioSaveBlockedLocal();
+  persistPetlioSocial();
+  closeDetail();
+  renderSwipe(); renderBrowse(); renderMatches(); updateBadge();
+  showToast("Profilen ar blockerad");
 }
 function petlioFindAnimalById(id) {
   var sid = String(id);
@@ -2137,6 +2174,7 @@ function savePetlioSocialLocal() {
   try { localStorage.setItem("petlioMessages", JSON.stringify(messages)); } catch(e) { console.warn("Kunde inte spara meddelanden lokalt", e); }
   try { localStorage.setItem("petlioLikes", JSON.stringify(petlioCleanLikes())); } catch(e) { console.warn("Kunde inte spara likes lokalt", e); }
   try { localStorage.setItem("petlioMatchDocs", JSON.stringify(S.matchDocs || {})); } catch(e) {}
+  petlioSaveBlockedLocal();
 }
 function loadPetlioSocialLocal() {
   try {
@@ -2145,6 +2183,7 @@ function loadPetlioSocialLocal() {
     var savedMsgs = JSON.parse(localStorage.getItem("petlioMessages") || "{}");
     var savedLikes = JSON.parse(localStorage.getItem("petlioLikes") || "{}");
     var savedMatchDocs = JSON.parse(localStorage.getItem("petlioMatchDocs") || "{}");
+    petlioLoadBlockedLocal();
     if (!Array.isArray(ids)) ids = [];
     ids = ids.map(function(id){ return String(id); });
     if (savedMsgs && typeof savedMsgs === "object") S.msgs = petlioCleanMessages(savedMsgs);
@@ -2163,6 +2202,7 @@ async function savePetlioSocialFirebase() {
       messages:petlioCleanMessages(S.msgs || {}),
       likes:petlioCleanLikes(),
       matchDocs:S.matchDocs || {},
+      blocked:S.blocked || {},
       updatedAt:firebase.firestore.FieldValue.serverTimestamp()
     }, { merge:true });
     return true;
@@ -2184,6 +2224,7 @@ async function loadPetlioSocialFirebase() {
         if (data.messages && typeof data.messages === "object") S.msgs = petlioCleanMessages(data.messages);
         if (data.likes && typeof data.likes === "object") S.likes = data.likes;
         if (data.matchDocs && typeof data.matchDocs === "object") S.matchDocs = data.matchDocs;
+        if (data.blocked && typeof data.blocked === "object") S.blocked = data.blocked;
         petlioRestoreMatches(ids, snapshots);
         renderMatches(); renderMyProfile(); updateBadge();
         resolve(true);
@@ -2475,6 +2516,7 @@ function restoreSavedLocation() {
 }
 function filtered() {
   var list = S.filter === "Alla" ? ANIMALS : ANIMALS.filter(function(a){ return a.species === S.filter; });
+  list = list.filter(function(a){ return a && !a.mine && !petlioIsBlocked(a); });
   list = list.filter(passesDistance);
   return sortByDistance(list);
 }
@@ -2681,7 +2723,7 @@ function renderMatches() {
     return;
   }
 
-  brow.innerHTML = S.matches.map(function(a){
+  brow.innerHTML = petlioVisibleMatches().map(function(a){
     var hasMsgs = S.msgs[a.id] && S.msgs[a.id].length;
     var inner = a.photo ? imgMarkup(a.photo, a.name) : a.emoji;
     return '<button type="button" class="bubble" data-id="'+a.id+'" aria-label="Visa profil för '+a.name+'"><div class="bubble-av'+(hasMsgs?" read":"")+'" style="background:linear-gradient(135deg,'+a.color+'33,#1c1c1c)">'+inner+'</div><div class="bubble-nm">'+a.name+'</div></button>';
@@ -2696,7 +2738,7 @@ function renderMatches() {
     });
   });
 
-  var sorted = S.matches.slice().sort(function(a,b){
+  var sorted = petlioVisibleMatches().slice().sort(function(a,b){
     var am = S.msgs[a.id]||[], bm = S.msgs[b.id]||[];
     return (bm[bm.length-1]?.t||0) - (am[am.length-1]?.t||0);
   });
@@ -2857,6 +2899,8 @@ function openDetail(a, fromMatches) {
     sec.textContent="✕ Nope"; sec.onclick=function(){ closeDetail(); doSwipe("left"); };
     pri.textContent="♥ Gilla"; pri.onclick=function(){ closeDetail(); doSwipe("right"); };
   }
+  var reportBtn = el("pd-report"); if(reportBtn) reportBtn.onclick=function(){ petlioReportProfile(a); };
+  var blockBtn = el("pd-block"); if(blockBtn) blockBtn.onclick=function(){ petlioBlockProfile(a); };
   el("ov-detail").classList.add("open");
 }
 
@@ -3085,10 +3129,11 @@ function updateBadge() {
   var nb = el("nb-matches") || document.querySelector(".nbtn[data-v='matches']");
   if (!nb) return;
   var old = nb.querySelector(".nbadge"); if (old) old.remove();
-  if (S.matches.length) {
+  var visibleMatches = petlioVisibleMatches();
+  if (visibleMatches.length) {
     var b = document.createElement("span");
     b.className = "nbadge";
-    b.textContent = S.matches.length > 9 ? "9+" : S.matches.length;
+    b.textContent = visibleMatches.length > 9 ? "9+" : visibleMatches.length;
     nb.appendChild(b);
   }
 }
@@ -3604,6 +3649,7 @@ async function postListing() {
 
 // ─── INIT ────────────────────────────────────────────────────────────────────
 initPetlioFirebase();
+petlioLoadBlockedLocal();
 loadMyProfiles();
 loadPetlioSocialLocal();
 restoreSavedLocation();
