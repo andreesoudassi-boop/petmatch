@@ -1117,6 +1117,13 @@ body{max-width:430px!important;margin:0 auto!important;}
   #v-swipe.active .card-sub{font-size:15px!important;}
 }
 </style>
+<style id="petlio-profile-loading-v45">
+  .profile-loading-card{display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;min-height:420px;margin:24px 0;padding:42px 24px;border:1px solid rgba(244,198,137,.24);border-radius:34px;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.025));box-shadow:0 24px 70px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.08);text-align:center}
+  .profile-loading-orb{width:92px;height:92px;border-radius:28px;display:grid;place-items:center;background:linear-gradient(145deg,#ffe7bc,#e6a65d);color:#1b0e07;box-shadow:0 18px 45px rgba(230,166,93,.26);animation:petlioProfilePulse 1.15s ease-in-out infinite}
+  .profile-loading-card h3{margin:0;font-family:Georgia,serif;font-size:34px;color:#fff;letter-spacing:0}
+  .profile-loading-card p{margin:0;max-width:430px;color:rgba(255,255,255,.62);font-size:17px;line-height:1.45}
+  @keyframes petlioProfilePulse{0%,100%{transform:translateY(0) scale(1);filter:saturate(1)}50%{transform:translateY(-4px) scale(1.04);filter:saturate(1.18)}}
+</style>
 </head>
 <body>
 
@@ -1212,6 +1219,11 @@ body{max-width:430px!important;margin:0 auto!important;}
   <div class="view" id="v-profile">
     <h2>Min profil</h2>
     <div id="psaved" class="psaved">Profil sparad</div>
+    <div id="profile-loading-card" class="profile-loading-card" style="display:none">
+      <div class="profile-loading-orb" aria-hidden="true">♡</div>
+      <h3>Hamtar din profil</h3>
+      <p>Vi synkar profil, matchningar och konto.</p>
+    </div>
     <div id="my-profile-card" class="my-profile-card" style="display:none"></div>
     <div class="pcard" id="profile-form-card">
       <div class="flbl" style="margin-bottom:8px">Vad vill du använda Petlio till?</div>
@@ -1982,6 +1994,8 @@ var S = {
   mySpecies:"Hund", myGender:"Hane", myPhoto:null, myPurpose:"match",
   mktCat:"Alla", mktSp:"Hund", mktPhoto:null,
 };
+var PETLIO_REMOTE_PROFILE_CHECKED = false;
+var PETLIO_PROFILE_WAIT_TIMER = null;
 
 function petlioLightPhoto(photo){
   var src = photoSrc(photo) || "";
@@ -2277,7 +2291,12 @@ async function saveProfileToFirebase(profile, email, pass) {
   return true;
 }
 async function loadFirebaseProfiles() {
-  if (!initPetlioFirebase()) return;
+  if (!initPetlioFirebase()) {
+    PETLIO_REMOTE_PROFILE_CHECKED = true;
+    renderMyProfile();
+    return false;
+  }
+  PETLIO_REMOTE_PROFILE_CHECKED = false;
   try {
     var snap = await PETLIO_FB.db.collection("profiles").limit(80).get();
     snap.forEach(function(doc){
@@ -2285,9 +2304,16 @@ async function loadFirebaseProfiles() {
       if (!a || !a.id || !a.name) return;
       if (!ANIMALS.some(function(x){ return String(x.id) === String(a.id); })) ANIMALS.unshift(a);
     });
-    renderSwipe(); renderBrowse(el("bsearch") ? el("bsearch").value : ""); renderMatches(); renderMyProfile();
+    renderSwipe();
+    renderBrowse(el("bsearch") ? el("bsearch").value : "");
+    renderMatches();
+    return true;
   } catch(e) {
-    console.warn("Kunde inte ladda profiler från Firebase", e);
+    console.warn("Kunde inte ladda profiler fran Firebase", e);
+    return false;
+  } finally {
+    PETLIO_REMOTE_PROFILE_CHECKED = true;
+    renderMyProfile();
   }
 }
 async function saveListingToFirebase(listing) {
@@ -2477,7 +2503,16 @@ function showView(v) {
   if (v==="browse")  renderBrowse();
   if (v==="matches") renderMatches();
   if (v==="market")  initMarket();
-    if (v==="profile") renderMyProfile();
+    if (v==="profile") {
+    renderMyProfile();
+    if (!PETLIO_REMOTE_PROFILE_CHECKED) {
+      clearTimeout(PETLIO_PROFILE_WAIT_TIMER);
+      PETLIO_PROFILE_WAIT_TIMER = setTimeout(function(){
+        PETLIO_REMOTE_PROFILE_CHECKED = true;
+        renderMyProfile();
+      }, 2200);
+    }
+  }
   updateBadge();
 }
 
@@ -2925,19 +2960,29 @@ function fillProfileFormFromAnimal(a){
   if(el("f-bio")) el("f-bio").value = a.bio || "";
 }
 function renderMyProfile(){
-  var card = el("my-profile-card"), form = el("profile-form-card"), title = document.querySelector("#v-profile h2");
+  var card = el("my-profile-card"), form = el("profile-form-card"), loading = el("profile-loading-card"), title = document.querySelector("#v-profile h2");
   if(!card || !form) return;
   var a = petlioMyProfile();
+  var shouldWait = !a && !PETLIO_REMOTE_PROFILE_CHECKED && (petlioCurrentUserId() || petlioCurrentEmail());
+  if(shouldWait){
+    card.style.display = "none";
+    form.style.display = "none";
+    if(loading) loading.style.display = "flex";
+    if(title) title.textContent = "Min profil";
+    return;
+  }
   if(!a){
+    if(loading) loading.style.display = "none";
     card.style.display = "none";
     form.style.display = "block";
     if(title) title.textContent = "Skapa profil";
     return;
   }
+  if(loading) loading.style.display = "none";
   if(title) title.textContent = "Min profil";
   form.style.display = "none";
   card.style.display = "block";
-  var img = a.photo ? imgMarkup(a.photo, a.name) : '<div class="my-profile-emoji">'+(a.emoji || "🐾")+'</div>';
+  var img = a.photo ? imgMarkup(a.photo, a.name) : '<div class="my-profile-emoji">'+(a.emoji || "paw")+'</div>';
   var purpose = (a.purpose || "match") === "market" ? "Kop & Salj" : "Djurtraff";
   var city = a.location || "Inte angivet";
   var bio = a.bio || "Ny profil pa Petlio.";
@@ -2959,8 +3004,7 @@ function renderMyProfile(){
   var edit = el("my-profile-edit"); if(edit) edit.addEventListener("click", editProfile);
   var editTop = el("my-profile-edit-top"); if(editTop) editTop.addEventListener("click", editProfile);
   var view = el("my-profile-view"); if(view) view.addEventListener("click", function(){ openDetail(a, true); });
-}
-// ─── PROFILE ─────────────────────────────────────────────────────────────────
+}// PROFILE ─────────────────────────────────────────────────────────────────
 function animalEmoji(species) {
   var map = {Hund:"🐕",Jakthund:"🐕",Katt:"🐱",Häst:"🐴",Kanin:"🐰"};
   return map[species] || "🐾";
