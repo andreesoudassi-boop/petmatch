@@ -1257,6 +1257,19 @@ body{max-width:430px!important;margin:0 auto!important;}
     #v-profile .my-profile-name{font-size:46px!important}
   }
 </style>
+<style id="petlio-launch-v52">
+  /* v52: profile editor polish and remove the online badge artefact entirely */
+  #v-swipe.active .badge-loc{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+  #v-swipe.active .badge-loc::before,#v-swipe.active .badge-loc::after{display:none!important;content:none!important}
+  #v-swipe.active .card-front::before{display:none!important;content:none!important}
+  #profile-form-card.is-editing .account-field{display:none!important}
+  .profile-section-title{margin:22px 0 12px;color:var(--gold);font-size:13px;font-weight:1000;text-transform:uppercase;letter-spacing:.14em}
+  .profile-account-panel{align-items:center;justify-content:space-between;gap:14px;margin:12px 0 22px;padding:15px 16px;border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035));border:1px solid rgba(232,184,122,.26);box-shadow:0 14px 34px rgba(0,0,0,.22)}
+  .profile-account-panel span{display:block;margin-bottom:4px;color:var(--muted);font-size:12px;font-weight:1000;text-transform:uppercase;letter-spacing:.12em}.profile-account-panel b{display:block;max-width:45vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff;font-size:14px}.profile-account-panel button{height:42px;border-radius:999px;border:1px solid rgba(232,184,122,.38);background:rgba(232,184,122,.12);color:var(--gold);font-weight:1000;padding:0 16px}
+  .photo-strip{display:flex;gap:10px;overflow-x:auto;margin:12px 0 18px;padding:2px 0 8px;scrollbar-width:none}.photo-strip::-webkit-scrollbar{display:none}.photo-thumb,.photo-add{flex:0 0 auto;width:74px;height:74px;border-radius:20px;border:1px solid rgba(232,184,122,.22);background:rgba(255,255,255,.045);color:var(--gold);font-weight:1000;overflow:hidden;position:relative}.photo-thumb.on{border-color:rgba(255,212,157,.9);box-shadow:0 0 0 2px rgba(232,184,122,.16),0 12px 30px rgba(232,184,122,.16)}.photo-thumb.on:after{content:"Huvud";position:absolute;left:7px;bottom:7px;font-size:9px;line-height:1;padding:5px 7px;border-radius:999px;background:rgba(0,0,0,.68);color:var(--gold)}.photo-thumb img{width:100%;height:100%;object-fit:cover;display:block}.photo-add{width:112px;padding:0 12px;background:linear-gradient(145deg,rgba(255,223,181,.18),rgba(232,164,78,.10));white-space:normal}.photo-zone.has{border-style:solid!important;border-color:rgba(232,184,122,.55)!important}.photo-zone-overlay{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.55));color:#fff;font-weight:1000;text-shadow:0 2px 18px #000}
+  @media(max-width:480px){.profile-account-panel{padding:13px 14px}.profile-account-panel b{max-width:42vw}.photo-thumb,.photo-add{height:68px}.photo-thumb{width:68px}.photo-add{width:104px}}
+  .petlio-auth-forgot{display:block;width:max-content;margin:10px 0 0 auto;border:0;background:transparent;color:var(--gold);font-weight:900;font-size:13px;padding:6px 2px}
+</style>
 </head>
 <body>
 
@@ -1369,7 +1382,7 @@ body{max-width:430px!important;margin:0 auto!important;}
         <div style="font-size:28px;color:var(--s3)">+</div>
         <div class="pz-txt">Lägg till foto</div>
       </div>
-      <input type="file" id="photo-file" accept="image/*" style="display:none"/>
+      <input type="file" id="photo-file" accept="image/*" multiple style="display:none"/><div class="photo-strip" id="photo-strip"></div>
       <div class="sp-row" id="sp-row">
         <button class="sp-btn on" data-sp="Hund">Hund</button>
         <button class="sp-btn" data-sp="Jakthund">Jakthund</button>
@@ -1377,8 +1390,11 @@ body{max-width:430px!important;margin:0 auto!important;}
         <button class="sp-btn" data-sp="Häst">Häst</button>
         <button class="sp-btn" data-sp="Kanin">Kanin</button>
       </div>
-      <div class="fwrap"><div class="flbl">E-post</div><input class="finput" id="f-email" type="email" autocomplete="email" placeholder="din@email.se"/></div>
-      <div class="fwrap"><div class="flbl">Lösenord</div><input class="finput" id="f-pass" type="password" autocomplete="new-password" placeholder="Minst 6 tecken"/></div>
+      <div class="profile-section-title account-field">Personuppgifter</div>
+      <div class="fwrap account-field"><div class="flbl">E-post</div><input class="finput" id="f-email" type="email" autocomplete="email" placeholder="din@email.se"/></div>
+      <div class="fwrap account-field"><div class="flbl">L&ouml;senord</div><input class="finput" id="f-pass" type="password" autocomplete="new-password" placeholder="Minst 6 tecken"/></div>
+      <div class="profile-account-panel" id="profile-account-panel" style="display:none"><div><span>Konto</span><b id="profile-account-email">Inte inloggad</b></div><button type="button" id="profile-reset-pass">Byt l&ouml;senord</button></div>
+      <div class="profile-section-title">Djuruppgifter</div>
       <div class="fwrap"><div class="flbl">Namn</div><input class="finput" id="f-name" placeholder="t.ex. Bella"/></div>
       <div class="fwrap"><div class="flbl">Ras</div><input class="finput" id="f-breed" placeholder="t.ex. Golden Retriever"/></div>
       <div class="fwrap"><div class="flbl">Ålder</div><input class="finput" id="f-age" placeholder="t.ex. 2 år"/></div>
@@ -1595,6 +1611,10 @@ body{max-width:430px!important;margin:0 auto!important;}
             <button type="button" class="petlio-auth-tab on" id="auth-tab-create" data-auth-mode="create">Skapa konto</button>
             <button type="button" class="petlio-auth-tab" id="auth-tab-login" data-auth-mode="login">Logga in</button>
           </div>
+          <div class="petlio-auth-field" id="auth-owner-wrap">
+            <label for="auth-owner">Ditt namn</label>
+            <input id="auth-owner" type="text" autocomplete="name" placeholder="t.ex. Andree" />
+          </div>
           <div class="petlio-auth-field">
             <label for="auth-email">E-post</label>
             <input id="auth-email" type="email" autocomplete="email" placeholder="din@email.se" />
@@ -1603,6 +1623,7 @@ body{max-width:430px!important;margin:0 auto!important;}
             <label for="auth-pass">Lösenord</label>
             <input id="auth-pass" type="password" autocomplete="current-password" placeholder="Minst 6 tecken" />
           </div>
+          <button type="button" class="petlio-auth-forgot" id="auth-forgot" style="display:none">Gl&ouml;mt l&ouml;senord?</button>
           <button type="button" class="petlio-auth-primary" id="auth-primary">Skapa konto & profil</button>
           <button type="button" class="petlio-auth-ghost" id="auth-demo">Titta runt först</button>
           <div class="petlio-auth-note">Petlio sparar profilen tryggt med Firebase när du skapar konto.</div>
@@ -2125,7 +2146,7 @@ var S = {
   filter:"Alla", idx:0, dist:50,
   userLat:59.3293, userLng:18.0686, userCity:"Stockholm", locationMode:"default",
   matches:[], msgs:{}, likes:{}, matchDocs:{}, chatWith:null, pendingMatch:null,
-  mySpecies:"Hund", myGender:"Hane", myPhoto:null, myPurpose:"match",
+  mySpecies:"Hund", myGender:"Hane", myPhoto:null, myPhotos:[], myPurpose:"match", editingProfileId:null,
   mktCat:"Alla", mktSp:"Hund", mktPhoto:null,
   blocked:{}, reports:[],
 };
@@ -2475,13 +2496,24 @@ function firebaseProfilePayload(profile, user) {
 }
 async function saveProfileToFirebase(profile, email, pass) {
   if (!initPetlioFirebase()) return false;
-  var user = await ensurePetlioAccount(email, pass);
+  var user = PETLIO_FB.auth && PETLIO_FB.auth.currentUser ? PETLIO_FB.auth.currentUser : null;
+  if (!user) user = await ensurePetlioAccount(email, pass);
   profile.uid = user.uid;
-  if (petlioIsDataUrl(profile.photo)) {
+  var photos = profile.photos || (profile.photo ? [profile.photo] : []);
+  var uploaded = [];
+  for (var i = 0; i < photos.length; i++) {
+    uploaded.push(await petlioUploadDataUrl("profiles", String(profile.id) + "-" + i, photos[i]));
+  }
+  uploaded = uploaded.filter(Boolean);
+  if (uploaded.length) {
+    profile.photos = uploaded;
+    profile.photo = uploaded[0];
+  } else if (petlioIsDataUrl(profile.photo)) {
     profile.photo = await petlioUploadDataUrl("profiles", profile.id, profile.photo);
+    profile.photos = profile.photo ? [profile.photo] : [];
   }
   await PETLIO_FB.db.collection("profiles").doc(String(profile.id)).set(firebaseProfilePayload(profile, user), { merge:true });
-  await PETLIO_FB.db.collection("users").doc(user.uid).set({ email:email, profileId:String(profile.id), updatedAt:firebase.firestore.FieldValue.serverTimestamp() }, { merge:true });
+  await PETLIO_FB.db.collection("users").doc(user.uid).set({ email:email || user.email || "", profileId:String(profile.id), updatedAt:firebase.firestore.FieldValue.serverTimestamp() }, { merge:true });
   return true;
 }
 async function loadFirebaseProfiles() {
@@ -3170,12 +3202,57 @@ function petlioMyProfile(){
 }
 function fillProfileFormFromAnimal(a){
   if(!a) return;
-  if(el("f-email") && !el("f-email").value) el("f-email").value = (a.account && a.account.email) || petlioCurrentEmail() || "";
+  S.editingProfileId = a.id || null;
+  S.myPurpose = a.purpose || "match";
+  S.mySpecies = a.species || "Hund";
+  S.myGender = a.gender || "Hane";
+  S.myPhoto = a.photo || null;
+  S.myPhotos = (a.photos && a.photos.length) ? a.photos.slice(0) : (a.photo ? [a.photo] : []);
+  document.querySelectorAll("#purpose-row .purpose-btn").forEach(function(b){ b.classList.toggle("on", (b.getAttribute("data-purpose") || "match") === S.myPurpose); });
+  document.querySelectorAll("#sp-row .sp-btn").forEach(function(b){ b.classList.toggle("on", b.getAttribute("data-sp") === S.mySpecies); });
+  if(el("sb-h")) el("sb-h").classList.toggle("on", S.myGender !== "Hona");
+  if(el("sb-o")) el("sb-o").classList.toggle("on", S.myGender === "Hona");
+  if(el("f-email")) el("f-email").value = (a.account && a.account.email) || petlioCurrentEmail() || "";
+  if(el("f-pass")) el("f-pass").value = "";
   if(el("f-name")) el("f-name").value = a.name || "";
   if(el("f-breed")) el("f-breed").value = a.breed || "";
   if(el("f-age")) el("f-age").value = a.age || "";
   if(el("f-city")) el("f-city").value = a.location || "";
   if(el("f-bio")) el("f-bio").value = a.bio || "";
+  petlioSetProfileEditMode(true);
+  petlioRenderPhotoStrip();
+}
+function petlioSetProfileEditMode(editing){
+  var form = el("profile-form-card");
+  if(form) form.classList.toggle("is-editing", !!editing);
+  document.querySelectorAll(".account-field").forEach(function(node){ node.style.display = editing ? "none" : ""; });
+  var panel = el("profile-account-panel");
+  if(panel) panel.style.display = editing ? "flex" : "none";
+  var mail = el("profile-account-email");
+  if(mail) mail.textContent = petlioCurrentEmail() || "Inget konto";
+  var save = el("save-btn");
+  if(save) save.textContent = editing ? "Spara ändringar" : "Spara profil";
+}
+function petlioRenderPhotoStrip(){
+  var zone = el("pzone");
+  var strip = el("photo-strip");
+  var photos = (S.myPhotos || []).filter(Boolean);
+  if(zone){
+    if(photos.length){
+      zone.classList.add("has");
+      zone.style.backgroundImage = "url("+photoSrc(photos[0])+")";
+      zone.style.backgroundSize = "cover";
+      zone.style.backgroundPosition = "center";
+      zone.innerHTML = '<div class="photo-zone-overlay">Byt huvudfoto</div>';
+    } else {
+      zone.classList.remove("has");
+      zone.removeAttribute("style");
+      zone.innerHTML = '<div style="font-size:28px;color:var(--s3)">+</div><div class="pz-txt">Lägg till foto</div>';
+    }
+  }
+  if(strip){
+    strip.innerHTML = photos.map(function(photo, i){ return '<button type="button" class="photo-thumb'+(i===0?' on':'')+'" data-photo-idx="'+i+'"><img src="'+photoSrc(photo)+'" alt="Foto '+(i+1)+'"/></button>'; }).join("") + '<button type="button" class="photo-add" id="photo-add-more">+ Lägg till</button>';
+  }
 }
 function renderMyProfile(){
   var card = el("my-profile-card"), form = el("profile-form-card"), loading = el("profile-loading-card"), title = document.querySelector("#v-profile h2");
@@ -3193,6 +3270,9 @@ function renderMyProfile(){
     if(loading) loading.style.display = "none";
     card.style.display = "none";
     form.style.display = "block";
+    S.editingProfileId = null;
+    petlioSetProfileEditMode(false);
+    petlioRenderPhotoStrip();
     if(title) title.textContent = "Skapa profil";
     return;
   }
@@ -3249,56 +3329,77 @@ function loadMyProfiles() {
   } catch(e) {}
 }
 async function createMyProfile() {
-  var email = (el("f-email") ? el("f-email").value : "").trim();
+  var current = petlioMyProfile();
+  var editing = !!(S.editingProfileId && current);
+  var email = (el("f-email") ? el("f-email").value : "").trim() || petlioCurrentEmail();
   var pass = (el("f-pass") ? el("f-pass").value : "").trim();
   var name = (el("f-name").value || "").trim();
   var breed = (el("f-breed").value || "").trim();
   var age = (el("f-age").value || "").trim();
   var city = (el("f-city").value || "").trim() || S.userCity || "Stockholm";
   var bio = (el("f-bio").value || "").trim();
-  if (!email || email.indexOf("@") === -1) { showToast("Skriv en giltig e-post"); return; }
-  if (!pass || pass.length < 6) { showToast("Lösenord måste vara minst 6 tecken"); return; }
+  if (!editing && (!email || email.indexOf("@") === -1)) { showToast("Skriv en giltig e-post"); return; }
+  if (!editing && (!pass || pass.length < 6)) { showToast("Lösenord måste vara minst 6 tecken"); return; }
   if (!name) { showToast("Skriv namn på djuret"); return; }
   if (!breed) { showToast("Skriv ras"); return; }
   var coords = cityCoords(city) || {lat:S.userLat,lng:S.userLng};
+  var photos = (S.myPhotos || []).filter(Boolean);
+  if (!photos.length && S.myPhoto) photos = [S.myPhoto];
   var profile = {
-    id:"mine-" + Date.now(), mine:true,
-    account:{ email:email },
+    id: editing ? current.id : "mine-" + Date.now(), mine:true,
+    uid: editing ? current.uid : null,
+    account:{ email:email || (current.account && current.account.email) || "" },
     name:name, purpose:S.myPurpose || "match", species:S.mySpecies, breed:breed, age:age || "Okänd", gender:S.myGender,
-    location:city, coords:coords, owner:email.split("@")[0] || "Du", bio:bio || "Ny profil på Petlio.",
-    color:animalColor(S.mySpecies), photo:S.myPhoto, emoji:animalEmoji(S.mySpecies)
+    location:city, coords:coords, owner:(email || petlioCurrentEmail() || "du").split("@")[0] || "Du", bio:bio || "Ny profil på Petlio.",
+    color:animalColor(S.mySpecies), photo:photos[0] || null, photos:photos, emoji:animalEmoji(S.mySpecies)
   };
-  ANIMALS = ANIMALS.filter(function(a){ return !a.mine; });
+  ANIMALS = ANIMALS.filter(function(a){ return !a.mine || String(a.id) === String(profile.id); }).filter(function(a){ return String(a.id) !== String(profile.id); });
   ANIMALS.unshift(profile);
   var firebaseSaved = false;
   try { firebaseSaved = await saveProfileToFirebase(profile, email, pass); }
   catch(e) { console.warn("Firebase sparning misslyckades", e); showToast("Profil sparad lokalt - kontrollera Firebase"); }
-  try { localStorage.setItem("petlioAccount", JSON.stringify({email:email, uid:profile.uid || null})); } catch(e) {}
+  try { localStorage.setItem("petlioAccount", JSON.stringify({email:email || petlioCurrentEmail(), uid:profile.uid || petlioCurrentUserId() || null})); } catch(e) {}
   saveMyProfiles();
   S.idx = 0;
+  S.editingProfileId = null;
   var saved = el("psaved");
-  if(saved){ saved.textContent="Profilen är klar"; saved.style.display="block"; setTimeout(function(){ saved.style.display="none"; },1800); }
-  showToast(firebaseSaved ? "Profil skapad och sparad online" : "Profil skapad lokalt");
+  if(saved){ saved.textContent= editing ? "Ändringar sparade" : "Profilen är klar"; saved.style.display="block"; setTimeout(function(){ saved.style.display="none"; },1800); }
+  showToast(firebaseSaved ? "Profil sparad online" : "Profil sparad lokalt");
   renderMyProfile();
   showView("profile");
 }
 function handlePhoto(file, zoneId, innerTxt) {
-  if (!file) return;
-  var reader = new FileReader();
-  reader.onload = function(ev) {
-    var zone = el(zoneId);
-    zone.classList.add("has");
-    zone.style.backgroundImage = "url("+ev.target.result+")";
-    zone.style.backgroundSize = "cover";
-    zone.style.backgroundPosition = "center";
-    zone.innerHTML = '<div style="background:rgba(0,0,0,.55);width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:white;font-size:13px;font-weight:600">Byt foto</div>';
-    if (zoneId==="pzone") S.myPhoto = ev.target.result;
-    else S.mktPhoto = ev.target.result;
-  };
-  reader.readAsDataURL(file);
+  var input = el("photo-file");
+  var files = input && input.files && input.files.length ? Array.prototype.slice.call(input.files) : (file ? [file] : []);
+  if (!files.length) return;
+  var target = zoneId === "pzone" ? "profile" : "market";
+  var reads = files.map(function(f){
+    return new Promise(function(resolve){
+      var reader = new FileReader();
+      reader.onload = function(ev){ resolve(ev.target.result); };
+      reader.readAsDataURL(f);
+    });
+  });
+  Promise.all(reads).then(function(results){
+    if (target === "profile") {
+      S.myPhotos = (S.myPhotos || []).concat(results).slice(0, 6);
+      S.myPhoto = S.myPhotos[0] || null;
+      petlioRenderPhotoStrip();
+    } else {
+      S.mktPhoto = results[0];
+      var zone = el(zoneId);
+      if(zone){
+        zone.classList.add("has");
+        zone.style.backgroundImage = "url("+results[0]+")";
+        zone.style.backgroundSize = "cover";
+        zone.style.backgroundPosition = "center";
+        zone.innerHTML = '<div style="background:rgba(0,0,0,.55);width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:white;font-size:13px;font-weight:600">Byt foto</div>';
+      }
+    }
+    if(input) input.value = "";
+  });
 }
-
-// ─── BADGE ───────────────────────────────────────────────────────────────────
+// BADGE ───────────────────────────────────────────────────────────────────
 function updateBadge() {
   var nb = el("nb-matches") || document.querySelector(".nbtn[data-v='matches']");
   if (!nb) return;
@@ -3356,6 +3457,27 @@ document.querySelectorAll(".match-qr").forEach(function(btn){
 
 on("pzone","click",function(){ el("photo-file").click(); });
 on("photo-file","change",function(){ handlePhoto(this.files[0],"pzone"); });
+on("profile-reset-pass","click",function(){
+  var email = petlioCurrentEmail() || (el("f-email") ? el("f-email").value.trim() : "");
+  petlioSendPasswordReset(email);
+});
+document.addEventListener("click", function(e){
+  var add = e.target.closest ? e.target.closest("#photo-add-more") : null;
+  if(add){ e.preventDefault(); if(el("photo-file")) el("photo-file").click(); return; }
+  var thumb = e.target.closest ? e.target.closest(".photo-thumb[data-photo-idx]") : null;
+  if(thumb){
+    e.preventDefault();
+    var idx = parseInt(thumb.getAttribute("data-photo-idx"),10);
+    var arr = (S.myPhotos || []).filter(Boolean);
+    if(arr[idx]){
+      var chosen = arr.splice(idx,1)[0];
+      arr.unshift(chosen);
+      S.myPhotos = arr;
+      S.myPhoto = chosen;
+      petlioRenderPhotoStrip();
+    }
+  }
+});
 document.querySelectorAll(".sp-btn").forEach(function(btn){
   btn.addEventListener("click", function(){
     S.mySpecies=this.getAttribute("data-sp");
@@ -3403,15 +3525,18 @@ on("dist-apply","click",function(){
 
 function petlioSetAuthMode(mode){
   S.authMode = mode === "login" ? "login" : "create";
-  var create = el("auth-tab-create"), login = el("auth-tab-login"), primary = el("auth-primary"), pass = el("auth-pass");
+  var create = el("auth-tab-create"), login = el("auth-tab-login"), primary = el("auth-primary"), pass = el("auth-pass"), owner = el("auth-owner-wrap"), forgot = el("auth-forgot");
   if(create) create.classList.toggle("on", S.authMode === "create");
   if(login) login.classList.toggle("on", S.authMode === "login");
   if(primary) primary.textContent = S.authMode === "login" ? "Logga in" : "Skapa konto & profil";
   if(pass) pass.setAttribute("autocomplete", S.authMode === "login" ? "current-password" : "new-password");
+  if(owner) owner.style.display = S.authMode === "login" ? "none" : "block";
+  if(forgot) forgot.style.display = S.authMode === "login" ? "block" : "none";
 }
 async function petlioAuthPrimary(){
   var email = (el("auth-email") ? el("auth-email").value : "").trim();
   var pass = (el("auth-pass") ? el("auth-pass").value : "").trim();
+  var ownerName = (el("auth-owner") ? el("auth-owner").value : "").trim();
   if(!email || email.indexOf("@") === -1){ showToast("Skriv en giltig e-post"); return; }
   if(!pass || pass.length < 6){ showToast("Lösenord måste vara minst 6 tecken"); return; }
   if(S.authMode === "login"){
@@ -3429,6 +3554,7 @@ async function petlioAuthPrimary(){
   }
   if(el("f-email")) el("f-email").value = email;
   if(el("f-pass")) el("f-pass").value = pass;
+  try{ if(ownerName) localStorage.setItem("petlioOwnerName", ownerName); }catch(e){}
   try{ localStorage.setItem("petlioAccountDraft", JSON.stringify({email:email})); localStorage.setItem("petlioOnboarded","1"); localStorage.setItem("petlioAuthGateV1","1"); localStorage.removeItem("petlioGuest"); }catch(e){}
   var onboarding = el("onboarding"); if(onboarding) onboarding.classList.add("is-hidden");
   showView("profile");
@@ -3472,6 +3598,7 @@ function obSetup() {
     authPrimaryBound = true;
     document.querySelectorAll(".petlio-auth-tab").forEach(function(btn){ btn.addEventListener("click", function(){ petlioSetAuthMode(this.getAttribute("data-auth-mode")); }); });
     var primaryAuth = el("auth-primary"); if(primaryAuth) primaryAuth.addEventListener("click", petlioAuthPrimary);
+    var forgotAuth = el("auth-forgot"); if(forgotAuth) forgotAuth.addEventListener("click", function(){ var email=(el("auth-email")?el("auth-email").value:"").trim(); petlioSendPasswordReset(email); });
     var demoAuth = el("auth-demo"); if(demoAuth) demoAuth.addEventListener("click", obDone);
     var resetAuth = el("auth-reset"); if(resetAuth) resetAuth.addEventListener("click", function(){ petlioSendPasswordReset((el("auth-email") ? el("auth-email").value : "").trim()); });
     [el("auth-email"), el("auth-pass")].forEach(function(inp){ if(inp) inp.addEventListener("keydown", function(e){ if(e.key === "Enter") petlioAuthPrimary(); }); });
