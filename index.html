@@ -1203,6 +1203,60 @@ body{max-width:430px!important;margin:0 auto!important;}
   #v-swipe.active .card-actions{position:absolute!important;left:18px!important;right:18px!important;bottom:26px!important;z-index:20!important;padding:0!important;pointer-events:none!important}#v-swipe.active .card-actions>div{display:grid!important;grid-template-columns:92px 1fr 92px!important;align-items:end!important;gap:18px!important;width:100%!important}.card-action-wrap{display:flex!important;flex-direction:column!important;align-items:center!important;gap:9px!important;color:#fff!important;font-weight:900!important;font-size:14px!important;text-align:center!important;pointer-events:auto!important}.card-action-wrap span{display:block!important;text-shadow:0 2px 14px #000!important}.card-btn{position:relative!important;inset:auto!important;transform:none!important;display:flex!important;align-items:center!important;justify-content:center!important}.card-btn-nope,.card-btn-share{width:64px!important;height:64px!important;border-radius:50%!important;background:rgba(7,7,7,.58)!important;border:1px solid rgba(255,255,255,.52)!important;color:#fff!important;box-shadow:0 14px 34px rgba(0,0,0,.5)!important}.card-btn-like{width:118px!important;height:118px!important;border-radius:50%!important;background:linear-gradient(145deg,#ffe2b0,#e1a04e)!important;color:#110804!important;border:0!important;box-shadow:0 22px 60px rgba(232,184,122,.38),0 0 0 1px rgba(255,255,255,.35) inset!important}.card-btn svg{display:block!important;width:28px!important;height:28px!important}.card-btn-like svg{width:38px!important;height:38px!important;fill:#130703!important;stroke:#130703!important}.card-btn-share svg,.card-btn-nope svg{stroke:#fff!important}
   @media(max-height:820px) and (max-width:480px){#v-swipe.active #card-area{height:calc(100dvh - 220px)!important;min-height:560px!important}.card-name{font-size:56px!important}#v-swipe.active .card-info{padding-bottom:156px!important}.card-btn-like{width:104px!important;height:104px!important}.card-btn-nope,.card-btn-share{width:58px!important;height:58px!important}.card-action-wrap{font-size:12px!important}}
 </style>
+<style id="petlio-polish-v50">
+  /* v50: fix iPhone overlap/cropping after the large-card pass */
+  #v-swipe.active{padding:0 0 calc(env(safe-area-inset-bottom,0px) + 118px)!important;overflow-y:auto!important;overflow-x:hidden!important}
+  #v-swipe.active #card-area{height:min(620px,calc(100dvh - 310px))!important;min-height:510px!important;padding:0 16px 0!important;margin:0!important;overflow:visible!important}
+  #v-swipe.active .card-front{height:100%!important;min-height:0!important;max-height:620px!important;border-radius:26px!important}
+  #v-swipe.active .card-front::after{display:none!important;content:none!important}
+  #v-swipe.active .badge-loc{left:20px!important;top:20px!important;transform:none!important}
+  #v-swipe.active .fav{top:20px!important;right:20px!important}
+  #v-swipe.active .card-info{padding:0 20px 138px!important}
+  #v-swipe.active .card-name{font-size:clamp(48px,14vw,64px)!important;line-height:.9!important}
+  #v-swipe.active .card-sub{font-size:clamp(16px,4.5vw,19px)!important;line-height:1.3!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;max-width:96%!important}
+  #v-swipe.active .card-owner{font-size:clamp(15px,4vw,18px)!important;line-height:1.32!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;max-width:96%!important;margin-top:12px!important;padding-top:12px!important}
+  #v-swipe.active .card-actions{bottom:16px!important;left:18px!important;right:18px!important}
+  #v-swipe.active .card-actions>div{grid-template-columns:82px 1fr 82px!important;gap:14px!important}
+  #v-swipe.active .card-btn-like{width:104px!important;height:104px!important}
+  #v-swipe.active .card-btn-nope,#v-swipe.active .card-btn-share{width:58px!important;height:58px!important}
+  #v-swipe.active .card-action-wrap{font-size:12px!important;gap:7px!important}
+
+  #v-browse.active{padding:22px 22px calc(env(safe-area-inset-bottom,0px) + 150px)!important;overflow-y:auto!important}
+  #v-browse.active h2{font-size:42px!important;margin:0 0 18px!important}
+  #v-browse.active .search{height:58px!important;margin-bottom:18px!important}
+  #v-browse.active .bgrid{grid-template-columns:1fr!important;gap:18px!important;padding-bottom:24px!important}
+  #v-browse.active .bcard{min-height:0!important;height:auto!important;border-radius:28px!important;overflow:hidden!important}
+  #v-browse.active .bcard-img{height:330px!important;border-radius:28px 28px 0 0!important}
+  #v-browse.active .bcard-body{position:relative!important;bottom:auto!important;padding:18px 20px 22px!important;background:linear-gradient(180deg,rgba(15,15,15,.92),rgba(8,8,8,.98))!important}
+  #v-browse.active .bcard-name{font-size:42px!important;line-height:1!important}
+  #v-browse.active .bcard-sub{font-size:17px!important;line-height:1.28!important}
+
+  #v-profile.active{padding:18px 22px calc(env(safe-area-inset-bottom,0px) + 150px)!important;overflow-y:auto!important}
+  #v-profile.active h2{font-size:44px!important;line-height:1!important;margin:0 0 22px!important;position:relative!important;z-index:2!important}
+  #v-profile .my-profile-card{overflow:visible!important;margin-bottom:140px!important;border-radius:32px!important}
+  #v-profile .my-profile-shell{overflow:hidden!important;border-radius:32px!important}
+  #v-profile .my-profile-hero{height:340px!important;min-height:340px!important;max-height:340px!important}
+  #v-profile .my-profile-hero img{object-position:center 38%!important}
+  #v-profile .my-profile-info{position:relative!important;margin-top:-102px!important;padding:0 22px 16px!important;z-index:5!important;align-items:flex-end!important}
+  #v-profile .my-profile-name{font-size:52px!important;line-height:.92!important;max-width:100%!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  #v-profile .my-profile-kicker{font-size:13px!important;letter-spacing:.2em!important;margin-bottom:8px!important}
+  #v-profile .my-profile-body{padding:18px 20px 24px!important}
+  #v-profile .my-profile-row{grid-template-columns:1fr 1fr!important;gap:12px!important}
+  #v-profile .my-profile-stat{min-height:74px!important;padding:14px!important}
+
+  @media(max-height:780px) and (max-width:480px){
+    #v-swipe.active #card-area{height:min(560px,calc(100dvh - 295px))!important;min-height:475px!important}
+    #v-swipe.active .card-info{padding-bottom:124px!important}
+    #v-swipe.active .card-owner{display:none!important}
+    #v-swipe.active .card-btn-like{width:92px!important;height:92px!important}
+    #v-swipe.active .card-btn-nope,#v-swipe.active .card-btn-share{width:54px!important;height:54px!important}
+    #v-swipe.active .card-actions{bottom:12px!important}
+    #v-browse.active .bcard-img{height:300px!important}
+    #v-profile .my-profile-hero{height:300px!important;min-height:300px!important;max-height:300px!important}
+    #v-profile .my-profile-info{margin-top:-90px!important}
+    #v-profile .my-profile-name{font-size:46px!important}
+  }
+</style>
 </head>
 <body>
 
