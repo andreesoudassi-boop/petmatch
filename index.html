@@ -2090,6 +2090,7 @@ body{background:radial-gradient(circle at 50% -8%,rgba(240,196,141,.13),transpar
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-storage-compat.js"></script>
 <script>
 window.PETLIO_FIREBASE_CONFIG = {
   apiKey: "AIzaSyAvLJ21qMsUWij2fG83h4cb8c8na7yRSh4",
@@ -2407,7 +2408,7 @@ function showToast(message) {
   clearTimeout(showToast._timer);
   showToast._timer = setTimeout(function(){ t.classList.remove("show"); }, 2300);
 }
-var PETLIO_FB = { ready:false, auth:null, db:null };
+var PETLIO_FB = { ready:false, auth:null, db:null, storage:null };
 function firebaseConfigReady() {
   var c = window.PETLIO_FIREBASE_CONFIG || {};
   return !!(c.apiKey && c.authDomain && c.projectId && c.appId);
@@ -2419,11 +2420,35 @@ function initPetlioFirebase() {
     if (!firebase.apps.length) firebase.initializeApp(window.PETLIO_FIREBASE_CONFIG);
     PETLIO_FB.auth = firebase.auth();
     PETLIO_FB.db = firebase.firestore();
+    PETLIO_FB.storage = firebase.storage ? firebase.storage() : null;
     PETLIO_FB.ready = true;
     return true;
   } catch(e) {
     console.warn("Firebase startade inte", e);
     return false;
+  }
+}
+function petlioIsDataUrl(value) {
+  return typeof value === "string" && value.indexOf("data:image/") === 0;
+}
+async function petlioUploadDataUrl(folder, id, dataUrl) {
+  if (!petlioIsDataUrl(dataUrl)) return dataUrl || null;
+  if (!initPetlioFirebase() || !PETLIO_FB.storage || !PETLIO_FB.auth || !PETLIO_FB.auth.currentUser) return dataUrl;
+  var safeId = String(id || Date.now()).replace(/[^a-zA-Z0-9_-]/g, "-");
+  var path = folder + "/" + PETLIO_FB.auth.currentUser.uid + "/" + safeId + ".jpg";
+  var ref = PETLIO_FB.storage.ref().child(path);
+  await ref.putString(dataUrl, "data_url");
+  return await ref.getDownloadURL();
+}
+async function petlioSendPasswordReset(email) {
+  if (!email || email.indexOf("@") === -1) { showToast("Skriv din e-post först"); return; }
+  if (!initPetlioFirebase() || !PETLIO_FB.auth) { showToast("Firebase är inte redo ännu"); return; }
+  try {
+    await PETLIO_FB.auth.sendPasswordResetEmail(email);
+    showToast("Återställningsmail skickat");
+  } catch(e) {
+    console.warn("Kunde inte skicka lösenordsreset", e);
+    showToast("Kunde inte skicka reset-mail");
   }
 }
 async function ensurePetlioAccount(email, pass) {
@@ -2452,8 +2477,11 @@ async function saveProfileToFirebase(profile, email, pass) {
   if (!initPetlioFirebase()) return false;
   var user = await ensurePetlioAccount(email, pass);
   profile.uid = user.uid;
+  if (petlioIsDataUrl(profile.photo)) {
+    profile.photo = await petlioUploadDataUrl("profiles", profile.id, profile.photo);
+  }
   await PETLIO_FB.db.collection("profiles").doc(String(profile.id)).set(firebaseProfilePayload(profile, user), { merge:true });
-  await PETLIO_FB.db.collection("users").doc(user.uid).set({ email:email, updatedAt:firebase.firestore.FieldValue.serverTimestamp() }, { merge:true });
+  await PETLIO_FB.db.collection("users").doc(user.uid).set({ email:email, profileId:String(profile.id), updatedAt:firebase.firestore.FieldValue.serverTimestamp() }, { merge:true });
   return true;
 }
 async function loadFirebaseProfiles() {
@@ -2484,6 +2512,9 @@ async function loadFirebaseProfiles() {
 }
 async function saveListingToFirebase(listing) {
   if (!initPetlioFirebase()) return false;
+  if (petlioIsDataUrl(listing.photo)) {
+    listing.photo = await petlioUploadDataUrl("listings", listing.id, listing.photo);
+  }
   await PETLIO_FB.db.collection("listings").doc(String(listing.id)).set({
     id:String(listing.id), ownerUid:PETLIO_FB.auth && PETLIO_FB.auth.currentUser ? PETLIO_FB.auth.currentUser.uid : null, name:listing.name, species:listing.species, breed:listing.breed, age:listing.age,
     price:listing.price, city:listing.city, desc:listing.desc, owner:listing.owner,
@@ -3442,6 +3473,7 @@ function obSetup() {
     document.querySelectorAll(".petlio-auth-tab").forEach(function(btn){ btn.addEventListener("click", function(){ petlioSetAuthMode(this.getAttribute("data-auth-mode")); }); });
     var primaryAuth = el("auth-primary"); if(primaryAuth) primaryAuth.addEventListener("click", petlioAuthPrimary);
     var demoAuth = el("auth-demo"); if(demoAuth) demoAuth.addEventListener("click", obDone);
+    var resetAuth = el("auth-reset"); if(resetAuth) resetAuth.addEventListener("click", function(){ petlioSendPasswordReset((el("auth-email") ? el("auth-email").value : "").trim()); });
     [el("auth-email"), el("auth-pass")].forEach(function(inp){ if(inp) inp.addEventListener("keydown", function(e){ if(e.key === "Enter") petlioAuthPrimary(); }); });
     petlioSetAuthMode("create");
   }
