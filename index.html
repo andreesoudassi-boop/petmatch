@@ -1287,6 +1287,16 @@ body{max-width:430px!important;margin:0 auto!important;}
     #v-swipe.active .card-btn-like svg{width:29px!important;height:29px!important;}
   }
 </style>
+<style id="petlio-launch-v54">
+  /* v54: remove the top card favorite button */
+  #v-swipe.active #cb-fav,
+  #v-swipe.active .fav{
+    display:none!important;
+    visibility:hidden!important;
+    opacity:0!important;
+    pointer-events:none!important;
+  }
+</style>
 </head>
 <body>
 
