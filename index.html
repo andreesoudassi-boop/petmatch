@@ -1542,6 +1542,13 @@ body{max-width:430px!important;margin:0 auto!important;}
       </div>
       <div class="fwrap"><div class="flbl">Beskrivning</div><textarea class="finput" id="f-bio" rows="3" style="resize:none" placeholder="Berätta om ditt djur..."></textarea></div>
       <button class="save-btn" id="save-btn">Spara profil</button>
+      <div style="text-align:center;margin-top:14px;padding-bottom:4px">
+        <a href="mailto:support@petlio.se" style="display:block;color:var(--muted);font-size:12px;font-family:Inter,sans-serif;margin-bottom:10px">support@petlio.se</a>
+        <div style="display:flex;justify-content:center;gap:20px">
+          <button onclick="showView('privacy')" style="background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;font-family:Inter,sans-serif;text-decoration:underline">Integritetspolicy</button>
+          <button onclick="showView('terms')" style="background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;font-family:Inter,sans-serif;text-decoration:underline">Användarvillkor</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -4170,6 +4177,47 @@ setTimeout(loadPetlioMatchesFirebase, 1200);
 loadFirebaseListings();
 if ("serviceWorker" in navigator) { window.addEventListener("load", function(){ navigator.serviceWorker.register("./sw.js").catch(function(){}); }); }
 </script>
+
+
+<!-- PRIVACY VIEW -->
+<div class="view" id="v-privacy" style="overflow-y:auto;padding:20px;flex-direction:column">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+    <button onclick="showView('profile')" style="background:none;border:none;color:var(--gold);font-size:22px;cursor:pointer">←</button>
+    <h2 style="font-family:'Playfair Display',serif;font-size:20px">Integritetspolicy</h2>
+  </div>
+  <div style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.8">
+    <p style="margin-bottom:12px"><strong style="color:white">Senast uppdaterad:</strong> Maj 2026</p>
+    <h3 style="color:var(--gold);font-size:15px;margin:16px 0 8px">Vad vi samlar in</h3>
+    <p style="margin-bottom:12px">Petlio samlar in information du ger oss när du skapar en profil: namn på ditt djur, ras, ålder, stad, foto och beskrivning. Vi samlar även in din e-postadress för kontohantering.</p>
+    <h3 style="color:var(--gold);font-size:15px;margin:16px 0 8px">Hur vi använder datan</h3>
+    <p style="margin-bottom:12px">Din information används för att visa din djurprofil för andra användare och möjliggöra matchningar och chattfunktionen.</p>
+    <h3 style="color:var(--gold);font-size:15px;margin:16px 0 8px">Lagring</h3>
+    <p style="margin-bottom:12px">Din data lagras säkert i Firebase (Google Cloud) i enlighet med GDPR. Data lagras i EU (europe-west1).</p>
+    <h3 style="color:var(--gold);font-size:15px;margin:16px 0 8px">Dina rättigheter</h3>
+    <p style="margin-bottom:12px">Du har rätt att begära ut, ändra eller radera din data när som helst.</p>
+    <h3 style="color:var(--gold);font-size:15px;margin:16px 0 8px">Kontakt</h3>
+    <p>Frågor? <a href="mailto:support@petlio.se" style="color:var(--gold)">support@petlio.se</a></p>
+  </div>
+</div>
+
+<!-- TERMS VIEW -->
+<div class="view" id="v-terms" style="overflow-y:auto;padding:20px;flex-direction:column">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+    <button onclick="showView('profile')" style="background:none;border:none;color:var(--gold);font-size:22px;cursor:pointer">←</button>
+    <h2 style="font-family:'Playfair Display',serif;font-size:20px">Användarvillkor</h2>
+  </div>
+  <div style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.8">
+    <p style="margin-bottom:12px"><strong style="color:white">Senast uppdaterad:</strong> Maj 2026</p>
+    <h3 style="color:var(--gold);font-size:15px;margin:16px 0 8px">Om tjänsten</h3>
+    <p style="margin-bottom:12px">Petlio är en plattform för djurägare att hitta avelspartners. Tjänsten riktar sig till ansvarsfulla djurägare i Sverige.</p>
+    <h3 style="color:var(--gold);font-size:15px;margin:16px 0 8px">Krav</h3>
+    <p style="margin-bottom:12px">Du måste vara minst 18 år. Du ansvarar för att informationen om ditt djur är korrekt.</p>
+    <h3 style="color:var(--gold);font-size:15px;margin:16px 0 8px">Ansvar</h3>
+    <p style="margin-bottom:12px">Petlio ansvarar inte för möten som arrangeras via appen. Vi rekommenderar alltid offentliga platser.</p>
+    <h3 style="color:var(--gold);font-size:15px;margin:16px 0 8px">Kontakt</h3>
+    <p>Frågor? <a href="mailto:support@petlio.se" style="color:var(--gold)">support@petlio.se</a></p>
+  </div>
+</div>
 
 </body>
 </html>
