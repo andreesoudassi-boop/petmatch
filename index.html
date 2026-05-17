@@ -3073,7 +3073,7 @@ function renderMatches() {
 
   var sorted = petlioVisibleMatches().slice().sort(function(a,b){
     var am = S.msgs[a.id]||[], bm = S.msgs[b.id]||[];
-    return (bm[bm.length-1]?.t||0) - (am[am.length-1]?.t||0);
+    return (bm[bm.length-1].t||0) - (am[am.length-1].t||0);
   });
 
   mlist.innerHTML = sorted.map(function(a){
