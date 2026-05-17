@@ -1,0 +1,21 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function signedIn() { return request.auth != null; }
+    function isOwner(uid) { return signedIn() && request.auth.uid == uid; }
+    function isImage() { return request.resource.contentType.matches('image/.*'); }
+    function underLimit() { return request.resource.size < 8 * 1024 * 1024; }
+
+    match /profiles/{uid}/{fileName} {
+      allow read: if true;
+      allow create, update: if isOwner(uid) && isImage() && underLimit();
+      allow delete: if isOwner(uid);
+    }
+
+    match /listings/{uid}/{fileName} {
+      allow read: if true;
+      allow create, update: if isOwner(uid) && isImage() && underLimit();
+      allow delete: if isOwner(uid);
+    }
+  }
+}
