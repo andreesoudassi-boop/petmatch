@@ -1,4 +1,4 @@
-[PETLIO_JURIDIK.md](https://github.com/user-attachments/files/27899746/PETLIO_JURIDIK.md)
+
 # Petlio juridik - launchcheck
 
 Detta ar en praktisk checklista, inte juridisk radgivning.
