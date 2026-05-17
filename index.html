@@ -1387,7 +1387,25 @@ body{max-width:430px!important;margin:0 auto!important;}
 .profile-topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px}.profile-topbar h2{margin:0!important}.profile-settings-btn{width:54px;height:54px;border-radius:50%;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));color:#f0c48d;display:grid;place-items:center;box-shadow:0 18px 40px rgba(0,0,0,.36);font-size:22px}.my-profile-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.my-profile-actions .my-profile-edit-main{grid-column:1 / -1;margin:0!important}.profile-settings-action,.profile-logout-action{border-radius:999px;border:1px solid rgba(240,196,141,.28);background:rgba(255,255,255,.055);color:#f0c48d;font-weight:900;padding:14px 12px;font-family:'Inter',sans-serif}.profile-logout-action{border-color:rgba(255,120,120,.28);color:#ffb3a9;background:rgba(255,80,80,.055)}.profile-account-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.profile-account-actions button{min-height:44px;border-radius:999px;border:1px solid rgba(240,196,141,.28);background:rgba(255,255,255,.055);color:#f0c48d;font-weight:900;font-family:'Inter',sans-serif}.profile-account-actions .logout{border-color:rgba(255,120,120,.28);color:#ffb3a9;background:rgba(255,80,80,.055)}
 </style><style id="petlio-profile-market-v61">
 .market-profile-field{display:none}.pcard.market-mode .market-profile-field{display:block}.my-profile-tag.price-tag{background:rgba(240,196,141,.16)!important;color:#f0c48d!important;border-color:rgba(240,196,141,.36)!important}
-</style></head>
+</style><style id="petlio-browse-compact-v63">
+/* v63: Utforska ska vara lugnare, mindre och inte öppnas av minsta touch */
+#v-browse.active{padding:22px 20px calc(env(safe-area-inset-bottom,0px) + 142px)!important;overflow-y:auto!important;}
+#v-browse.active h2{font-size:36px!important;line-height:1!important;margin:0 0 16px!important;}
+#v-browse.active .search{height:56px!important;border-radius:22px!important;margin-bottom:18px!important;font-size:16px!important;}
+#v-browse.active .bgrid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important;padding-bottom:28px!important;align-items:start!important;}
+#v-browse.active .bcard{display:block!important;width:100%!important;min-height:0!important;height:auto!important;padding:0!important;border-radius:22px!important;overflow:hidden!important;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035))!important;border:1px solid rgba(255,255,255,.08)!important;box-shadow:0 16px 38px rgba(0,0,0,.36)!important;text-align:left!important;color:inherit!important;font:inherit!important;touch-action:pan-y!important;-webkit-tap-highlight-color:transparent!important;}
+#v-browse.active .bcard:active{transform:scale(.985)!important;}
+#v-browse.active .bcard-img{height:154px!important;min-height:154px!important;border-radius:22px 22px 0 0!important;position:relative!important;overflow:hidden!important;background:linear-gradient(180deg,#1a1a1a,#121212)!important;}
+#v-browse.active .bcard-img img{width:100%!important;height:100%!important;object-fit:cover!important;display:block!important;}
+#v-browse.active .bcard-img:after{content:""!important;position:absolute!important;inset:45% 0 0!important;background:linear-gradient(180deg,transparent,rgba(0,0,0,.58))!important;z-index:1!important;}
+#v-browse.active .bcard-body{position:relative!important;bottom:auto!important;padding:12px 12px 13px!important;background:linear-gradient(180deg,rgba(15,15,15,.95),rgba(8,8,8,.98))!important;}
+#v-browse.active .bcard-name{font-family:'Playfair Display',serif!important;font-size:26px!important;line-height:1!important;color:#fff!important;margin:0 0 6px!important;text-shadow:none!important;}
+#v-browse.active .bcard-sub{font-size:12px!important;line-height:1.32!important;color:rgba(255,255,255,.6)!important;margin:0!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
+#v-browse.active .bcard-tags{display:flex!important;gap:5px!important;flex-wrap:wrap!important;margin-top:9px!important;}
+#v-browse.active .btag{font-size:11px!important;line-height:1.1!important;padding:5px 8px!important;border-radius:9px!important;background:rgba(247,201,130,.13)!important;color:#f3c489!important;border:1px solid rgba(247,201,130,.14)!important;font-weight:900!important;}
+@media(max-width:380px){#v-browse.active{padding-left:16px!important;padding-right:16px!important}#v-browse.active .bgrid{gap:11px!important}#v-browse.active .bcard-img{height:132px!important}#v-browse.active .bcard-name{font-size:23px!important}#v-browse.active .bcard-sub{font-size:11px!important}}
+</style>
+</head>
 <body>
 
 <!-- HEADER -->
@@ -1480,7 +1498,7 @@ body{max-width:430px!important;margin:0 auto!important;}
 
   <!-- PROFILE VIEW -->
   <div class="view" id="v-profile">
-    <div class="profile-topbar"><h2>Min profil</h2><button type="button" class="profile-settings-btn" id="profile-settings-btn" aria-label="Inställningar">⚙</button></div>
+    <div class="profile-topbar"><h2>Min profil</h2><button type="button" class="profile-settings-btn" id="profile-settings-btn" aria-label="Inställningar">&#9881;</button></div>
     <div id="psaved" class="psaved">Profil sparad</div>
     <div id="profile-loading-card" class="profile-loading-card" style="display:none">
       <div class="profile-loading-orb" aria-hidden="true">♡</div>
@@ -2312,7 +2330,7 @@ function petlioReportProfile(a){
       PETLIO_FB.db.collection("reports").add({ profileId:String(a.id), profileName:a.name || "", reporterUid:PETLIO_FB.auth.currentUser.uid, createdAt:firebase.firestore.FieldValue.serverTimestamp() });
     }
   } catch(e) {}
-  showToast("Tack, profilen ar rapporterad");
+  showToast("Tack, profilen är rapporterad");
 }
 function petlioBlockProfile(a){
   if(!a || !a.id) return;
@@ -2323,7 +2341,7 @@ function petlioBlockProfile(a){
   persistPetlioSocial();
   closeDetail();
   renderSwipe(); renderBrowse(); renderMatches(); updateBadge();
-  showToast("Profilen ar blockerad");
+  showToast("Profilen är blockerad");
 }
 function petlioFindAnimalById(id) {
   var sid = String(id);
@@ -3022,7 +3040,7 @@ function renderBrowse(query) {
   if (!list.length) { grid.innerHTML = petlioEmptyHTML("search", "Inga djur hittades", "Testa ett annat filter eller sokord.", "Visa alla", "browse-reset"); var resetBtn = el("browse-reset"); if (resetBtn) resetBtn.addEventListener("click", function(){ var q=el("bsearch"); if(q) q.value=""; renderBrowse(""); }); return; }
   grid.innerHTML = list.map(function(a){
     var imgH = a.photo ? imgMarkup(a.photo, a.name) : '<span class="be">'+a.emoji+'</span>';
-    return '<button type="button" class="bcard" data-id="'+a.id+'" aria-label="Visa profil for '+a.name+'"><div class="bcard-img" style="background:linear-gradient(135deg,'+a.color+'22,#1c1c1c)">'+imgH+'</div><div class="bcard-body"><div class="bcard-name">'+a.name+'</div><div class="bcard-sub">'+a.breed+' · '+a.location+(distanceText(a)?' · '+distanceText(a):'')+'</div><div class="bcard-tags"><span class="btag">'+a.gender+'</span><span class="btag">'+a.species+'</span></div></div></button>';
+    return '<button type="button" class="bcard" data-id="'+a.id+'" aria-label="Visa profil för '+a.name+'"><div class="bcard-img" style="background:linear-gradient(135deg,'+a.color+'22,#1c1c1c)">'+imgH+'</div><div class="bcard-body"><div class="bcard-name">'+a.name+'</div><div class="bcard-sub">'+a.breed+' · '+a.location+(distanceText(a)?' · '+distanceText(a):'')+'</div><div class="bcard-tags"><span class="btag">'+a.gender+'</span><span class="btag">'+a.species+'</span></div></div></button>';
   }).join("");
 }
 // MATCHES ─────────────────────────────────────────────────────────────────
@@ -3111,7 +3129,6 @@ function renderMatches() {
     if(a) openDetail(a, false);
   }
   document.addEventListener("click", handle, true);
-  document.addEventListener("touchend", handle, true);
 })();
 // Robust iPhone tap handling for matches/profile/chat
 (function petlioMatchTapDelegation(){
@@ -3181,7 +3198,7 @@ function sendMsg() {
   inp.value=""; renderChat();
   if(!a.uid){
     setTimeout(function(){
-      S.msgs[a.id].push({from:"them",text:"Hej! Tack for meddelandet!",time:new Date().toLocaleTimeString("sv",{hour:"2-digit",minute:"2-digit"}),t:Date.now()});
+      S.msgs[a.id].push({from:"them",text:"Hej! Tack för meddelandet!",time:new Date().toLocaleTimeString("sv",{hour:"2-digit",minute:"2-digit"}),t:Date.now()});
       persistPetlioSocial();
       renderChat();
     }, 1200);
@@ -3430,9 +3447,9 @@ function renderMyProfile(){
       '</div>' +
       '<div class="my-profile-body">' +
         '<div class="my-profile-tags"><span class="my-profile-tag">'+purpose+'</span><span class="my-profile-tag">'+(a.species || "Djur")+'</span><span class="my-profile-tag">'+(a.gender || "")+'</span>'+(isMarketProfile ? '<span class="my-profile-tag price-tag">'+priceText+'</span>' : '')+'</div>' +
-        '<div class="my-profile-row"><div class="my-profile-stat"><span>Ras</span><b>'+(a.breed || "Ej angivet")+'</b></div><div class="my-profile-stat"><span>'+(isMarketProfile ? 'Pris' : 'Ålder')+'</span><b>'+(isMarketProfile ? priceText : (a.age || "Ej angivet"))+'</b></div><div class="my-profile-stat"><span>Stad</span><b>'+city+'</b></div><div class="my-profile-stat"><span>Agare</span><b>'+(a.owner || "Du")+'</b></div></div>' +
+        '<div class="my-profile-row"><div class="my-profile-stat"><span>Ras</span><b>'+(a.breed || "Ej angivet")+'</b></div><div class="my-profile-stat"><span>'+(isMarketProfile ? 'Pris' : 'Ålder')+'</span><b>'+(isMarketProfile ? priceText : (a.age || "Ej angivet"))+'</b></div><div class="my-profile-stat"><span>Stad</span><b>'+city+'</b></div><div class="my-profile-stat"><span>Ägare</span><b>'+(a.owner || "Du")+'</b></div></div>' +
         '<div class="my-profile-bio">'+bio+'</div>' +
-        '<div class="my-profile-actions"><button type="button" class="my-profile-edit my-profile-edit-main" id="my-profile-edit">Redigera profil</button><button type="button" class="profile-settings-action" id="my-profile-settings">Inställningar</button><button type="button" class="profile-logout-action" id="my-profile-logout">Logga ut</button></div><div class="my-profile-legal"><button type="button" class="profile-legal-btn legal-open" data-legal="privacy">Integritet</button><button type="button" class="profile-legal-btn legal-open" data-legal="account">Konto</button></div>' +
+        '<div class="my-profile-actions"><button type="button" class="my-profile-edit my-profile-edit-main" id="my-profile-edit">Redigera profil</button></div><div class="my-profile-legal"><button type="button" class="profile-legal-btn legal-open" data-legal="privacy">Integritet</button><button type="button" class="profile-legal-btn legal-open" data-legal="account">Konto</button></div>' +
       '</div>' +
     '</div>';
   function editProfile(){ fillProfileFormFromAnimal(a); card.style.display="none"; form.style.display="block"; if(title) title.textContent="Redigera profil"; }
@@ -3555,11 +3572,11 @@ function updateBadge() {
 // ─── EVENT LISTENERS ─────────────────────────────────────────────────────────
 function petlioLegalContent(tab){
   var contact = "kontakt@petlio.se";
-  var common = "<div class='legal-note'>Startversion for lansering. Komplettera med bolagsnamn, organisationsnummer och kontaktadress innan full publik lansering.</div>";
-  if(tab === "terms") return {title:"Villkor", html:common+"<h4>Regler</h4><ul><li>Du ansvarar for att information, bilder och annonser ar korrekt och laglig.</li><li>Hot, trakasserier, falska annonser, olagligt innehall och material utan rattigheter ar inte tillatet.</li><li>Petlio kan ta bort profiler, annonser och meddelanden som bryter mot reglerna.</li><li>Affarer och moten sker mellan anvandare. Kontrollera alltid djur, saljare och villkor innan betalning eller traff.</li></ul><h4>Rapportering</h4><p>Du kan rapportera och blockera profiler. Rapporter anvands for sakerhet och moderering.</p><h4>Kontakt</h4><p>Fragor: "+contact+".</p>"};
-  if(tab === "cookies") return {title:"Cookies", html:common+"<h4>Cookies och lokal lagring</h4><p>Petlio anvander lokal lagring for inloggning, filter, platsval, matchningar och appinstallningar.</p><ul><li>Nodvandig lagring: konto, session, sakerhet och appfunktion.</li><li>Preferenser: stad, avstand, filter och onboarding.</li><li>Analys/marknadsforing: inte aktiverat i denna version.</li></ul><p>Du kan rensa data via webblasaren eller Konto-fliken.</p>"};
-  if(tab === "account") return {title:"Konto", html:"<h4>Ditt konto</h4><p>Du kan begara losenordsbyte, radera lokal appdata och radera konto/profil.</p><button class='danger-btn' id='legal-reset-pass' type='button'>Skicka losenordslank</button><button class='danger-btn' id='legal-delete-account' type='button'>Radera konto och profil</button><div class='legal-note'>Radering kan krava att du nyligen har loggat in igen enligt Firebase sakerhetsregler.</div>"};
-  return {title:"Integritet", html:common+"<h4>Personuppgifter vi behandlar</h4><ul><li>Konto: e-post, Firebase UID och inloggningsstatus.</li><li>Profil: namn, djurinfo, stad/plats, bilder, beskrivning och preferenser.</li><li>Socialt: likes, matchningar, chattmeddelanden, rapporter och blockerade profiler.</li><li>Tekniskt: appinstallningar, cache och lokal lagring.</li></ul><h4>Varfor</h4><p>Uppgifterna anvands for konto, profiler, avstand, matchningar, meddelanden, annonser och trygghet.</p><h4>Dina rattigheter</h4><p>Du kan begara tillgang, rattelse, radering, begransning och invanda mot behandling. Du kan ocksa klaga hos IMY.</p><h4>Lagring</h4><p>Data sparas sa lange kontot finns eller sa lange det behovs for sakerhet, support och juridiska krav.</p><h4>Kontakt</h4><p>Integritetsfragor: "+contact+".</p>"};
+  var common = "";
+  if(tab === "terms") return {title:"Villkor", html:common+"<h4>Regler</h4><ul><li>Du ansvarar för att information, bilder och annonser är korrekt och laglig.</li><li>Hot, trakasserier, falska annonser, olagligt innehåll och material utan rättigheter är inte tillåtet.</li><li>Petlio kan ta bort profiler, annonser och meddelanden som bryter mot reglerna.</li><li>Affärer och möten sker mellan användare. Kontrollera alltid djur, säljare och villkor innan betalning eller träff.</li></ul><h4>Rapportering</h4><p>Du kan rapportera och blockera profiler. Rapporter används för säkerhet och moderering.</p><h4>Kontakt</h4><p>Frågor: "+contact+".</p>"};
+  if(tab === "cookies") return {title:"Cookies", html:common+"<h4>Cookies och lokal lagring</h4><p>Petlio använder lokal lagring för inloggning, filter, platsval, matchningar och appinställningar.</p><ul><li>Nödvändig lagring: konto, session, säkerhet och appfunktion.</li><li>Preferenser: stad, avstånd, filter och onboarding.</li><li>Analys/marknadsföring: inte aktiverat i denna version.</li></ul><p>Du kan rensa data via webbläsaren eller Konto-fliken.</p>"};
+  if(tab === "account") return {title:"Konto", html:"<h4>Ditt konto</h4><p>Du kan begära lösenordsbyte, radera lokal appdata och radera konto/profil.</p><button class='danger-btn' id='legal-reset-pass' type='button'>Skicka lösenordslänk</button><button class='danger-btn' id='legal-delete-account' type='button'>Radera konto och profil</button><div class='legal-note'>Radering kan kräva att du nyligen har loggat in igen enligt Firebase säkerhetsregler.</div>"};
+  return {title:"Integritet", html:common+"<h4>Personuppgifter vi behandlar</h4><ul><li>Konto: e-post, Firebase UID och inloggningsstatus.</li><li>Profil: namn, djurinfo, stad/plats, bilder, beskrivning och preferenser.</li><li>Socialt: likes, matchningar, chattmeddelanden, rapporter och blockerade profiler.</li><li>Tekniskt: appinställningar, cache och lokal lagring.</li></ul><h4>Varför</h4><p>Uppgifterna används för konto, profiler, avstånd, matchningar, meddelanden, annonser och trygghet.</p><h4>Dina rättigheter</h4><p>Du kan begära tillgång, rättelse, radering, begränsning och invända mot behandling. Du kan också klaga hos IMY.</p><h4>Lagring</h4><p>Data sparas så länge kontot finns eller så länge det behövs för säkerhet, support och juridiska krav.</p><h4>Kontakt</h4><p>Integritetsfrågor: "+contact+".</p>"};
 }
 function openLegal(tab){
   tab = tab || "privacy";
