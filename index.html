@@ -1381,7 +1381,13 @@ body{max-width:430px!important;margin:0 auto!important;}
 <style id="petlio-legal-v58">
   .legal-links{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:14px}.legal-link,.profile-legal-btn{border:0;background:transparent;color:rgba(255,216,166,.88);font-weight:850;font-size:12px;text-decoration:underline;text-underline-offset:3px;padding:4px 2px}.legal-panel{position:fixed;inset:0;z-index:10000;display:none;background:rgba(0,0,0,.72);backdrop-filter:blur(18px);align-items:flex-end}.legal-panel.open{display:flex}.legal-sheet{width:100%;max-width:520px;margin:0 auto;background:linear-gradient(180deg,#1b1a18,#080808);border:1px solid rgba(232,184,122,.22);border-radius:30px 30px 0 0;box-shadow:0 -22px 80px rgba(0,0,0,.65);max-height:88dvh;overflow:hidden;display:flex;flex-direction:column}.legal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 12px;border-bottom:1px solid rgba(255,255,255,.08)}.legal-head h3{font-family:'Playfair Display',serif;font-size:30px;margin:0;color:#fff}.legal-close{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#fff;font-size:24px}.legal-tabs{display:flex;gap:8px;overflow-x:auto;padding:12px 18px;border-bottom:1px solid rgba(255,255,255,.06)}.legal-tab{flex:0 0 auto;border:1px solid rgba(255,255,255,.12);border-radius:999px;background:rgba(255,255,255,.045);color:rgba(255,255,255,.72);font-weight:900;padding:9px 13px}.legal-tab.on{background:linear-gradient(135deg,#ffd8a6,#d8914c);color:#110804;border-color:transparent}.legal-body{overflow-y:auto;padding:18px 20px calc(env(safe-area-inset-bottom,0px) + 24px);color:rgba(255,255,255,.76);font-size:14px;line-height:1.58}.legal-body h4{font-size:18px;color:#fff;margin:18px 0 8px}.legal-body h4:first-child{margin-top:0}.legal-body ul{padding-left:19px;margin:8px 0 16px}.legal-body li{margin:6px 0}.legal-note{border:1px solid rgba(232,184,122,.24);background:rgba(232,184,122,.08);border-radius:18px;padding:13px 14px;margin:14px 0;color:rgba(255,235,212,.9)}.danger-btn{width:100%;border:1px solid rgba(255,110,110,.35);background:rgba(255,80,80,.12);color:#ffc5c5;border-radius:18px;min-height:50px;font-weight:1000;margin-top:12px}.my-profile-legal{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.my-profile-legal .profile-legal-btn{border:1px solid rgba(232,184,122,.22);border-radius:16px;text-decoration:none;background:rgba(232,184,122,.07);min-height:44px}.pd-safety-actions{display:flex;gap:10px;margin:14px 0 0}.pd-safety-actions button{flex:1;min-height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:rgba(255,255,255,.78);font-weight:900}.pd-safety-actions button:last-child{border-color:rgba(255,110,110,.24);color:#ffc5c5;background:rgba(255,80,80,.08)}
 </style>
-</head>
+<style id="petlio-legal-visible-v59">
+.profile-account-panel{flex-direction:column!important;align-items:stretch!important;gap:12px!important}.profile-account-row{display:flex;align-items:center;justify-content:space-between;gap:12px}.profile-legal-row{display:flex;gap:8px;flex-wrap:wrap}.profile-legal-row .profile-legal-btn{flex:1 1 90px;min-height:42px}.petlio-auth-note+.legal-links{margin-top:12px!important}
+</style><style id="petlio-settings-v60">
+.profile-topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px}.profile-topbar h2{margin:0!important}.profile-settings-btn{width:54px;height:54px;border-radius:50%;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));color:#f0c48d;display:grid;place-items:center;box-shadow:0 18px 40px rgba(0,0,0,.36);font-size:22px}.my-profile-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.my-profile-actions .my-profile-edit-main{grid-column:1 / -1;margin:0!important}.profile-settings-action,.profile-logout-action{border-radius:999px;border:1px solid rgba(240,196,141,.28);background:rgba(255,255,255,.055);color:#f0c48d;font-weight:900;padding:14px 12px;font-family:'Inter',sans-serif}.profile-logout-action{border-color:rgba(255,120,120,.28);color:#ffb3a9;background:rgba(255,80,80,.055)}.profile-account-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.profile-account-actions button{min-height:44px;border-radius:999px;border:1px solid rgba(240,196,141,.28);background:rgba(255,255,255,.055);color:#f0c48d;font-weight:900;font-family:'Inter',sans-serif}.profile-account-actions .logout{border-color:rgba(255,120,120,.28);color:#ffb3a9;background:rgba(255,80,80,.055)}
+</style><style id="petlio-profile-market-v61">
+.market-profile-field{display:none}.pcard.market-mode .market-profile-field{display:block}.my-profile-tag.price-tag{background:rgba(240,196,141,.16)!important;color:#f0c48d!important;border-color:rgba(240,196,141,.36)!important}
+</style></head>
 <body>
 
 <!-- HEADER -->
@@ -1474,7 +1480,7 @@ body{max-width:430px!important;margin:0 auto!important;}
 
   <!-- PROFILE VIEW -->
   <div class="view" id="v-profile">
-    <h2>Min profil</h2>
+    <div class="profile-topbar"><h2>Min profil</h2><button type="button" class="profile-settings-btn" id="profile-settings-btn" aria-label="Inställningar">⚙</button></div>
     <div id="psaved" class="psaved">Profil sparad</div>
     <div id="profile-loading-card" class="profile-loading-card" style="display:none">
       <div class="profile-loading-orb" aria-hidden="true">♡</div>
@@ -1504,12 +1510,12 @@ body{max-width:430px!important;margin:0 auto!important;}
       <div class="profile-section-title account-field">Personuppgifter</div>
       <div class="fwrap account-field"><div class="flbl">E-post</div><input class="finput" id="f-email" type="email" autocomplete="email" placeholder="din@email.se"/></div>
       <div class="fwrap account-field"><div class="flbl">L&ouml;senord</div><input class="finput" id="f-pass" type="password" autocomplete="new-password" placeholder="Minst 6 tecken"/></div>
-      <div class="profile-account-panel" id="profile-account-panel" style="display:none"><div><span>Konto</span><b id="profile-account-email">Inte inloggad</b></div><button type="button" id="profile-reset-pass">Byt l&ouml;senord</button></div>
+      <div class="profile-account-panel" id="profile-account-panel" style="display:none"><div class="profile-account-row"><div><span>Konto</span><b id="profile-account-email">Inte inloggad</b></div></div><div class="profile-account-actions"><button type="button" id="profile-reset-pass">Byt l&ouml;senord</button><button type="button" class="logout" id="profile-logout-form">Logga ut</button></div><div class="profile-legal-row"><button type="button" class="profile-legal-btn legal-open" data-legal="privacy">Integritet</button><button type="button" class="profile-legal-btn legal-open" data-legal="terms">Villkor</button><button type="button" class="profile-legal-btn legal-open" data-legal="cookies">Cookies</button><button type="button" class="profile-legal-btn legal-open" data-legal="account">Konto</button></div></div>
       <div class="profile-section-title">Djuruppgifter</div>
       <div class="fwrap"><div class="flbl">Namn</div><input class="finput" id="f-name" placeholder="t.ex. Bella"/></div>
       <div class="fwrap"><div class="flbl">Ras</div><input class="finput" id="f-breed" placeholder="t.ex. Golden Retriever"/></div>
       <div class="fwrap"><div class="flbl">Ålder</div><input class="finput" id="f-age" placeholder="t.ex. 2 år"/></div>
-      <div class="fwrap"><div class="flbl">Stad</div><input class="finput" id="f-city" placeholder="t.ex. Stockholm"/></div>
+      <div class="fwrap"><div class="flbl">Stad</div><input class="finput" id="f-city" placeholder="t.ex. Stockholm"/></div><div class="fwrap market-profile-field"><div class="flbl">Pris (kr)</div><input class="finput" id="f-price" type="number" inputmode="numeric" min="0" placeholder="t.ex. 8000"/></div>
       <div class="flbl">Kön</div>
       <div class="sex-row">
         <button class="sex-btn on" id="sb-h">Hane</button>
@@ -3341,9 +3347,14 @@ function fillProfileFormFromAnimal(a){
   if(el("f-breed")) el("f-breed").value = a.breed || "";
   if(el("f-age")) el("f-age").value = a.age || "";
   if(el("f-city")) el("f-city").value = a.location || "";
+  if(el("f-price")) el("f-price").value = a.price ? String(a.price) : "";
   if(el("f-bio")) el("f-bio").value = a.bio || "";
   petlioSetProfileEditMode(true);
   petlioRenderPhotoStrip();
+}
+function petlioUpdatePurposeFields(){
+  var form = el("profile-form-card");
+  if(form) form.classList.toggle("market-mode", (S.myPurpose || "match") === "market");
 }
 function petlioSetProfileEditMode(editing){
   var form = el("profile-form-card");
@@ -3355,6 +3366,7 @@ function petlioSetProfileEditMode(editing){
   if(mail) mail.textContent = petlioCurrentEmail() || "Inget konto";
   var save = el("save-btn");
   if(save) save.textContent = editing ? "Spara ändringar" : "Spara profil";
+  petlioUpdatePurposeFields();
 }
 function petlioRenderPhotoStrip(){
   var zone = el("pzone");
@@ -3404,9 +3416,11 @@ function renderMyProfile(){
   form.style.display = "none";
   card.style.display = "block";
   var img = a.photo ? imgMarkup(a.photo, a.name) : '<div class="my-profile-emoji">'+(a.emoji || "paw")+'</div>';
-  var purpose = (a.purpose || "match") === "market" ? "Kop & Salj" : "Djurtraff";
+  var isMarketProfile = (a.purpose || "match") === "market";
+  var purpose = isMarketProfile ? "Köp & Sälj" : "Djurträff";
   var city = a.location || "Inte angivet";
-  var bio = a.bio || "Ny profil pa Petlio.";
+  var priceText = a.price ? Number(a.price).toLocaleString("sv") + " kr" : "Pris ej angivet";
+  var bio = a.bio || (isMarketProfile ? "Annons på Petlio." : "Ny profil på Petlio.");
   card.innerHTML =
     '<div class="my-profile-shell">' +
       '<div class="my-profile-hero">'+img+'<button type="button" class="my-profile-edit my-profile-edit-float" id="my-profile-edit-top">Redigera</button></div>' +
@@ -3415,10 +3429,10 @@ function renderMyProfile(){
         '<button type="button" class="my-profile-view" id="my-profile-view">Visa kort</button>' +
       '</div>' +
       '<div class="my-profile-body">' +
-        '<div class="my-profile-tags"><span class="my-profile-tag">'+purpose+'</span><span class="my-profile-tag">'+(a.species || "Djur")+'</span><span class="my-profile-tag">'+(a.gender || "")+'</span></div>' +
-        '<div class="my-profile-row"><div class="my-profile-stat"><span>Ras</span><b>'+(a.breed || "Ej angivet")+'</b></div><div class="my-profile-stat"><span>Alder</span><b>'+(a.age || "Ej angivet")+'</b></div><div class="my-profile-stat"><span>Stad</span><b>'+city+'</b></div><div class="my-profile-stat"><span>Agare</span><b>'+(a.owner || "Du")+'</b></div></div>' +
+        '<div class="my-profile-tags"><span class="my-profile-tag">'+purpose+'</span><span class="my-profile-tag">'+(a.species || "Djur")+'</span><span class="my-profile-tag">'+(a.gender || "")+'</span>'+(isMarketProfile ? '<span class="my-profile-tag price-tag">'+priceText+'</span>' : '')+'</div>' +
+        '<div class="my-profile-row"><div class="my-profile-stat"><span>Ras</span><b>'+(a.breed || "Ej angivet")+'</b></div><div class="my-profile-stat"><span>'+(isMarketProfile ? 'Pris' : 'Ålder')+'</span><b>'+(isMarketProfile ? priceText : (a.age || "Ej angivet"))+'</b></div><div class="my-profile-stat"><span>Stad</span><b>'+city+'</b></div><div class="my-profile-stat"><span>Agare</span><b>'+(a.owner || "Du")+'</b></div></div>' +
         '<div class="my-profile-bio">'+bio+'</div>' +
-        '<button type="button" class="my-profile-edit my-profile-edit-main" id="my-profile-edit">Redigera profil</button><div class="my-profile-legal"><button type="button" class="profile-legal-btn legal-open" data-legal="privacy">Integritet</button><button type="button" class="profile-legal-btn legal-open" data-legal="account">Konto</button></div>' +
+        '<div class="my-profile-actions"><button type="button" class="my-profile-edit my-profile-edit-main" id="my-profile-edit">Redigera profil</button><button type="button" class="profile-settings-action" id="my-profile-settings">Inställningar</button><button type="button" class="profile-logout-action" id="my-profile-logout">Logga ut</button></div><div class="my-profile-legal"><button type="button" class="profile-legal-btn legal-open" data-legal="privacy">Integritet</button><button type="button" class="profile-legal-btn legal-open" data-legal="account">Konto</button></div>' +
       '</div>' +
     '</div>';
   function editProfile(){ fillProfileFormFromAnimal(a); card.style.display="none"; form.style.display="block"; if(title) title.textContent="Redigera profil"; }
@@ -3461,10 +3475,12 @@ async function createMyProfile() {
   var age = (el("f-age").value || "").trim();
   var city = (el("f-city").value || "").trim() || S.userCity || "Stockholm";
   var bio = (el("f-bio").value || "").trim();
+  var price = parseInt((el("f-price") ? el("f-price").value : "").trim(),10) || 0;
   if (!editing && (!email || email.indexOf("@") === -1)) { showToast("Skriv en giltig e-post"); return; }
   if (!editing && (!pass || pass.length < 6)) { showToast("Lösenord måste vara minst 6 tecken"); return; }
   if (!name) { showToast("Skriv namn på djuret"); return; }
   if (!breed) { showToast("Skriv ras"); return; }
+  if ((S.myPurpose || "match") === "market" && !price) { showToast("Skriv pris för annonsen"); return; }
   var coords = cityCoords(city) || {lat:S.userLat,lng:S.userLng};
   var photos = (S.myPhotos || []).filter(Boolean);
   if (!photos.length && S.myPhoto) photos = [S.myPhoto];
@@ -3473,7 +3489,7 @@ async function createMyProfile() {
     uid: editing ? current.uid : null,
     account:{ email:email || (current.account && current.account.email) || "" },
     name:name, purpose:S.myPurpose || "match", species:S.mySpecies, breed:breed, age:age || "Okänd", gender:S.myGender,
-    location:city, coords:coords, owner:(email || petlioCurrentEmail() || "du").split("@")[0] || "Du", bio:bio || "Ny profil på Petlio.",
+    location:city, coords:coords, owner:(email || petlioCurrentEmail() || "du").split("@")[0] || "Du", price:((S.myPurpose || "match") === "market" ? price : 0), bio:bio || "Ny profil på Petlio.",
     color:animalColor(S.mySpecies), photo:photos[0] || null, photos:photos, emoji:animalEmoji(S.mySpecies)
   };
   ANIMALS = ANIMALS.filter(function(a){ return !a.mine || String(a.id) === String(profile.id); }).filter(function(a){ return String(a.id) !== String(profile.id); });
@@ -3557,6 +3573,14 @@ function openLegal(tab){
   var del = el("legal-delete-account"); if(del) del.onclick=petlioDeleteAccount;
 }
 function closeLegal(){ var panel=el("legal-panel"); if(panel){ panel.classList.remove("open"); panel.setAttribute("aria-hidden","true"); } }
+function petlioOpenSettings(){ openLegal("account"); }
+async function petlioLogout(){
+  if(!confirm("Vill du logga ut från Petlio?")) return;
+  try{ if(initPetlioFirebase() && PETLIO_FB.auth && PETLIO_FB.auth.currentUser) await PETLIO_FB.auth.signOut(); }catch(e){ console.warn(e); }
+  ["petlioAccount","petlioAccountDraft","petlioAuthGateV1","petlioOnboarded","petlioGuest","petlioMyProfiles","petlioActiveProfile","petlioSocial","petlioMatches","petlioMessages","petlioBlocked","petlioReports"].forEach(function(k){ try{ localStorage.removeItem(k); }catch(e){} });
+  showToast("Du är utloggad");
+  setTimeout(function(){ location.reload(); }, 650);
+}
 async function petlioDeleteAccount(){
   if(!confirm("Vill du verkligen radera konto, profil och lokal appdata?")) return;
   if(!confirm("Sista kontrollen: detta kan inte ångras.")) return;
@@ -3651,12 +3675,14 @@ document.querySelectorAll("#purpose-row .purpose-btn").forEach(function(btn){
     S.myPurpose = this.getAttribute("data-purpose") || "match";
     document.querySelectorAll("#purpose-row .purpose-btn").forEach(function(b){ b.classList.remove("on"); });
     this.classList.add("on");
+    petlioUpdatePurposeFields();
   });
 });
 on("save-btn","click",createMyProfile);
 document.addEventListener("click", function(e){ var b=e.target.closest ? e.target.closest(".legal-open,.legal-tab") : null; if(b){ e.preventDefault(); openLegal(b.getAttribute("data-legal") || "privacy"); } });
 on("legal-close","click",closeLegal);
 on("legal-panel","click",function(e){ if(e.target && e.target.id === "legal-panel") closeLegal(); });
+document.addEventListener("click", function(e){ var settings=e.target.closest ? e.target.closest("#profile-settings-btn,#my-profile-settings") : null; if(settings){ e.preventDefault(); petlioOpenSettings(); return; } var logout=e.target.closest ? e.target.closest("#my-profile-logout,#profile-logout-form") : null; if(logout){ e.preventDefault(); petlioLogout(); return; } });
 
 on("mt-buy","click",function(){ switchMkt("buy"); });
 on("mt-sell","click",function(){ switchMkt("sell"); });
