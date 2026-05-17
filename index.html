@@ -1297,6 +1297,22 @@ body{max-width:430px!important;margin:0 auto!important;}
     pointer-events:none!important;
   }
 </style>
+<style id="petlio-launch-v55">
+  /* v55: extend bottom gradient so it reaches the action panel area */
+  #v-swipe.active .card-grad{
+    inset:-1px!important;
+    background:linear-gradient(to top,
+      rgba(0,0,0,1) 0%,
+      rgba(0,0,0,.96) 18%,
+      rgba(0,0,0,.82) 34%,
+      rgba(0,0,0,.52) 56%,
+      rgba(0,0,0,.16) 78%,
+      rgba(0,0,0,0) 100%)!important;
+  }
+  #v-swipe.active .card-info{
+    text-shadow:0 3px 18px rgba(0,0,0,.72)!important;
+  }
+</style>
 </head>
 <body>
 
