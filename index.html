@@ -2750,6 +2750,21 @@ function itemDistance(item) {
 }
 function saveLocationSettings() {
   try { localStorage.setItem("petlioLocation", JSON.stringify({lat:S.userLat,lng:S.userLng,city:S.userCity,dist:S.dist,mode:S.locationMode})); } catch(e) {}
+  // Also save to Firebase profile for cross-device sync
+  try {
+    if (PETLIO_FB && PETLIO_FB.db && PETLIO_FB.auth && PETLIO_FB.auth.currentUser) {
+      var myProfile = ANIMALS.find(function(a){ return a.mine; });
+      if (myProfile) {
+        PETLIO_FB.db.collection("profiles").doc(String(myProfile.id)).update({
+          userLat: S.userLat,
+          userLng: S.userLng,
+          userCity: S.userCity,
+          dist: S.dist,
+          locationMode: S.locationMode
+        }).catch(function(){});
+      }
+    }
+  } catch(e) {}
 }
 function cityNames() {
   var seen = {};
@@ -2854,6 +2869,18 @@ function restoreSavedLocation() {
     if (saved && saved.lat && saved.lng) {
       S.userLat = saved.lat; S.userLng = saved.lng; S.userCity = saved.city || nearestCity(saved.lat,saved.lng); S.dist = saved.dist || S.dist; S.locationMode = saved.mode || "gps";
     }
+    // Try to restore from Firebase profile (cross-device)
+    try {
+      var myProfile = ANIMALS.find(function(a){ return a.mine; });
+      if (myProfile && myProfile.userLat) {
+        S.userLat = myProfile.userLat;
+        S.userLng = myProfile.userLng;
+        S.userCity = myProfile.userCity || nearestCity(myProfile.userLat, myProfile.userLng);
+        S.dist = myProfile.dist || S.dist;
+        S.locationMode = myProfile.locationMode || S.locationMode;
+        saveLocationSettings();
+      }
+    } catch(e) {}
   } catch(e) {}
   updateLocationUI();
 }
