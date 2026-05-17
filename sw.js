@@ -1,4 +1,4 @@
-const CACHE_NAME = "petlio-v58";
+const CACHE_NAME = "petlio-v61";
 const APP_SHELL = [
   "./",
   "./index.html",
