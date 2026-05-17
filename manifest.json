@@ -2,7 +2,7 @@
   "id": "/",
   "name": "Petlio",
   "short_name": "Petlio",
-  "description": "Matcha, hitta och chatta kring djur på ett tryggt och modernt sätt.",
+  "description": "Svensk app för djurträffar, trygg matchning, chatt och köp & sälj för djurägare.",
   "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",
